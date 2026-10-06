@@ -1,0 +1,98 @@
+:root{
+  --maroon:#6E1C2B; --maroon-deep:#3F0D18; --maroon-ink:#2A0910;
+  --gold:#B48A3C; --gold-light:#DDBF78; --gold-dark:#8A6524;
+  --linen:#F6EDEA; --paper:#FFFBF9; --text:#2A1A1D; --muted:#6B5558;
+  --display:"Young Serif", Georgia, "Times New Roman", serif;
+  --body:"Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+*{box-sizing:border-box}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:5rem;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--linen);color:var(--text);font:400 1.0625rem/1.65 var(--body)}
+img{max-width:100%}
+a{color:var(--maroon)}
+a:hover{color:var(--gold-dark)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:2px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.15;color:var(--maroon-deep);margin:0 0 .6em}
+h2{font-size:clamp(1.9rem,4vw,2.6rem)}
+h3{font-size:1.3rem}
+.wrap{max-width:72rem;margin:0 auto;padding:0 1.25rem}
+.narrow{max-width:42rem}
+.skip{position:absolute;left:-999px}.skip:focus{left:1rem;top:1rem;background:var(--paper);padding:.5rem 1rem;z-index:20}
+
+/* header */
+.site-head{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--maroon-deep);border-bottom:1px solid var(--gold-dark)}
+.site-head .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:4rem;flex-wrap:wrap}
+.brand{font-family:var(--display);color:var(--gold-light);text-decoration:none;font-size:1.15rem}
+.brand:hover{color:#fff}
+.site-head nav ul{list-style:none;margin:0;padding:.5rem 0;display:flex;flex-wrap:wrap;gap:.25rem 1.25rem}
+.site-head nav a{color:#F3DDD3;text-decoration:none;font-size:.95rem}
+.site-head nav a:hover{color:var(--gold-light)}
+
+/* hero: the one bold moment */
+.hero{background:radial-gradient(ellipse at 30% 20%,#8A2638 0%,var(--maroon) 40%,var(--maroon-deep) 100%);color:#F3DDD3;padding:clamp(4rem,10vw,8rem) 0 clamp(3.5rem,8vw,6rem);border-bottom:6px double var(--gold)}
+.wordmark{font-family:var(--display);font-size:clamp(3.2rem,11vw,8.5rem);line-height:.95;margin:0 0 .3em;
+  background:linear-gradient(100deg,#8A6524 0%,#DDBF78 22%,#F6E4B0 34%,#B48A3C 52%,#E7CD8C 70%,#8A6524 100%);
+  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:burnish 9s ease-in-out 1 both}
+@keyframes burnish{from{background-position:100% 0}to{background-position:0 0}}
+.wordmark span{display:block;font-size:.34em;letter-spacing:.02em;margin-top:.35em}
+.hero p{max-width:36rem;font-size:1.2rem;margin:0 0 2rem}
+.btn{display:inline-block;background:var(--gold);color:var(--maroon-ink);font-weight:600;text-decoration:none;padding:.8rem 1.4rem;border-radius:3px;border:1px solid var(--gold-light)}
+.btn:hover{background:var(--gold-light);color:var(--maroon-ink)}
+.btn-ghost{background:transparent;color:var(--gold-light);margin-left:.75rem}
+.btn-ghost:hover{background:rgba(221,191,120,.12);color:#fff}
+
+section{padding:clamp(3.5rem,7vw,5.5rem) 0}
+.lede{color:var(--muted);max-width:40rem;margin:-.2em 0 2.2rem}
+.alt{background:var(--paper);border-top:1px solid #E7D6CF;border-bottom:1px solid #E7D6CF}
+
+/* shop */
+.shop{display:grid;grid-template-columns:1fr;gap:2.5rem}
+@media(min-width:900px){.shop{grid-template-columns:minmax(0,1fr) 20rem;align-items:start}}
+.cat{margin-bottom:2.25rem}
+.cat h3{border-bottom:2px solid var(--gold);padding-bottom:.35rem}
+.item{display:grid;grid-template-columns:1fr auto;gap:.4rem 1.5rem;padding:1.1rem 0;border-bottom:1px solid #E2CFC8}
+.item h4{margin:0;font-family:var(--display);font-weight:400;font-size:1.15rem;color:var(--maroon)}
+.item p{margin:0;color:var(--muted);grid-column:1;max-width:38rem}
+.buy{grid-column:2;grid-row:1/3;align-self:center;text-align:right;min-width:8rem}
+.price{font-weight:700;display:block}
+.soon{font-style:italic;color:var(--gold-dark)}
+.buy label{display:inline-flex;gap:.45rem;align-items:center;cursor:pointer;font-size:.95rem;margin-top:.3rem}
+.buy input{width:1.15rem;height:1.15rem;accent-color:var(--maroon)}
+@media(max-width:540px){.item{grid-template-columns:1fr}.buy{grid-column:1;grid-row:auto;text-align:left}}
+
+.order{background:var(--maroon-deep);color:#F3DDD3;padding:1.5rem;border-radius:4px;border:1px solid var(--gold-dark)}
+@media(min-width:900px){.order{position:sticky;top:calc(5rem + env(safe-area-inset-top,0px))}}
+.order h3{color:var(--gold-light)}
+.order ul{list-style:none;padding:0;margin:0 0 1rem}
+.order li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid rgba(221,191,120,.25);font-size:.95rem}
+.total{display:flex;justify-content:space-between;font-family:var(--display);font-size:1.35rem;color:var(--gold-light);margin:.5rem 0 1.2rem}
+.order .note{font-size:.88rem;color:#D9BFB6;margin:.8rem 0 0}
+.order .empty{color:#D9BFB6;font-size:.95rem}
+#paypal-buttons{background:var(--paper);border-radius:4px;padding:.75rem .75rem .25rem}
+#order-msg{font-size:.95rem;color:var(--gold-light)}
+.hidden{display:none!important}
+
+/* lists of entries (videos, resources) */
+.entries{list-style:none;padding:0;margin:0;display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))}
+.entries li{border-left:3px solid var(--gold);padding:.2rem 0 .2rem 1.1rem}
+.entries h3{font-size:1.2rem;margin-bottom:.3em}
+.entries p{margin:0;color:var(--muted)}
+
+.contact-line{font-family:var(--display);font-size:clamp(1.2rem,3vw,1.6rem)}
+
+footer{background:var(--maroon-ink);color:#CDB3AA;padding:2rem 0;font-size:.9rem}
+footer a{color:var(--gold-light)}
+
+/* articles */
+.article{padding:clamp(2.5rem,6vw,4.5rem) 0}
+.article h1{font-size:clamp(2.1rem,5vw,3.2rem)}
+.article ol{padding-left:1.4rem}
+.article li{margin:.45rem 0}
+.article li::marker{color:var(--gold-dark);font-weight:700}
+.callout{background:var(--paper);border:1px solid #E2CFC8;border-left:4px solid var(--maroon);padding:1.25rem 1.4rem;margin:2.2rem 0;border-radius:3px}
+.callout p{margin:0 0 .8rem}
+.crumb{font-size:.92rem;margin-bottom:1.5rem}
+#paypal-buttons:empty{display:none}
