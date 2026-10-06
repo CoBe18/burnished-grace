@@ -27,3 +27,7 @@ Turn on your free IONOS SSL certificate BEFORE uploading these files.
 The hidden file ".htaccess" in this folder sends every visitor to the secure
 https:// version of your site. If it is uploaded before SSL is active, the
 site will not load until SSL is turned on.
+
+LOGO
+Put your logo in the "images" folder, named logo.png. It appears large in the
+maroon banner on the homepage (the top bar keeps the gold text name). Upload the images folder to IONOS the same way as articles.

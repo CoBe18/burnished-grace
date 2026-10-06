@@ -96,3 +96,9 @@ footer a{color:var(--gold-light)}
 .callout p{margin:0 0 .8rem}
 .crumb{font-size:.92rem;margin-bottom:1.5rem}
 #paypal-buttons:empty{display:none}
+
+/* hero logo: shows images/logo.png when present; otherwise the gold text wordmark shows */
+.wordmark-wrap{margin:0 0 1.6rem}
+.wordmark-wrap .wordmark{display:block}
+.hero-logo{display:block;width:min(640px,100%);height:auto;filter:drop-shadow(0 0 18px rgba(246,228,176,.35))}
+.wordmark-wrap:has(.hero-logo) .wordmark{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
