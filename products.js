@@ -1,17 +1,14 @@
 /*
   BURNISHED GRACE — PRODUCT LIST
   ------------------------------
-  To start selling a product, change its price from null to a number.
-    price: null    -> shows "Coming soon" (can't be added to the order)
-    price: 24.99   -> shows $24.99 with an "Add to order" checkbox
-  Save the file and re-upload it to your host. Nothing else needs to change.
+  desc: "Track rental income and expenses by property, forecast five years of cash flow, and see your mortgage and depreciation schedules. Works offline on Windows and Mac, with a full installation and use guide.",
 */
 const PRODUCTS = [
   { id: "commercial-cleaning", category: "Apps", name: "Commercial Cleaning App",
     desc: "Price jobs, track expenses, and keep your cleaning business organized. Runs on Windows and Mac and comes with a step-by-step installation and use guide.",
     price: 37.00 },
-  { id: "real-estate-app", category: "Apps", name: "Rental Real Estate App",
-    desc: "A downloadable rental real estate app for Windows and Mac, with a full installation and use guide.",
+  { id: "real-estate-app", category: "Apps", name: "Rental Property Finances",
+    desc: "A downloadable Rental Property Finances app for Windows and Mac, with a full installation and use guide.",
     price: 77.00 },
   { id: "finance-apps", category: "Apps", name: "Finance Apps",
     desc: "Downloadable finance apps for Windows and Mac, each with a full installation and use guide.",

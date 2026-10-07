@@ -6,7 +6,7 @@ Upload everything in this folder to your web host, keeping the same layout:
 index.html is the homepage.
 
 ADDING PRICES (turns on the "Add to order" checkbox)
-Currently priced: Commercial Cleaning App $37.00, Rental Real Estate App $77.00.
+Currently priced: Commercial Cleaning App $37.00, Rental Property Finances app $77.00.
 1. Open products.js in any text editor (Notepad on Windows, TextEdit on Mac).
 2. Find the product and change   price: null   to a number, e.g.   price: 19.99
 3. Save and re-upload products.js.
