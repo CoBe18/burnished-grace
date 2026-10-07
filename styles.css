@@ -114,3 +114,7 @@ footer a{color:var(--gold-light)}
 .hero-center p{margin-left:auto;margin-right:auto}
 .hero-center .btn-ghost{margin-left:.75rem}
 @media(max-width:600px){.hero-center .btn{margin:.4rem .3rem}}
+
+/* download buttons shown after payment */
+#order-msg .downloads{display:flex;flex-direction:column;gap:.5rem;margin:.8rem 0}
+#order-msg .downloads .btn{text-align:center}

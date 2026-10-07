@@ -64,7 +64,7 @@
             amount: { currency_code: "USD", value,
               breakdown: { item_total: { currency_code: "USD", value } } },
             items: chosen.map(p => ({
-              name: p.name.slice(0, 127), quantity: "1", category: "DIGITAL_GOODS",
+              name: p.name.slice(0, 127), sku: p.id, quantity: "1", category: "DIGITAL_GOODS",
               unit_amount: { currency_code: "USD", value: p.price.toFixed(2) }
             }))
           }]
@@ -75,7 +75,19 @@
         selected.clear();
         catalog.querySelectorAll("input[type=checkbox]").forEach(b => (b.checked = false));
         render();
-        msg.textContent = "Thank you! Your payment went through. Your files will be sent to the email address on your PayPal account.";
+        msg.textContent = "Thank you! Your payment went through. Preparing your downloads…";
+        return fetch("api/verify.php", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ orderID: data.orderID })
+        }).then(r => r.json()).then(res => {
+          if (!res.ok) throw new Error(res.error);
+          msg.innerHTML = `<strong>Thank you! Your payment went through.</strong> Your downloads are ready:` +
+            `<span class="downloads">${res.links.map(l =>
+              `<a class="btn" href="${esc(l.url)}" download>Download ${esc(l.name)}</a>`).join("")}</span>` +
+            `These links work for ${res.hours} hours, and we've emailed a copy to the address on your PayPal account.`;
+        });
+      }).catch(() => {
+        msg.textContent = "Your payment went through. If your download links don't appear, email inquiry@BurnishedGraceStudio.com with your PayPal receipt and we'll send your files right away.";
       }),
       onError: () => {
         msg.textContent = "Your payment didn't go through, and you haven't been charged. Please try again or email inquiry@BurnishedGraceStudio.com.";
