@@ -100,5 +100,17 @@ footer a{color:var(--gold-light)}
 /* hero logo: shows images/logo.png when present; otherwise the gold text wordmark shows */
 .wordmark-wrap{margin:0 0 1.6rem}
 .wordmark-wrap .wordmark{display:block}
-.hero-logo{display:block;width:min(640px,100%);height:auto;filter:drop-shadow(0 0 18px rgba(246,228,176,.35))}
+.hero-logo{display:block;width:min(880px,100%);height:auto;filter:drop-shadow(0 0 18px rgba(246,228,176,.35))}
 .wordmark-wrap:has(.hero-logo) .wordmark{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* header logo: images/logo.png in the top bar; text name shows if the file is missing */
+.brand{display:inline-flex;align-items:center}
+.brand-logo{display:block;height:72px;width:auto;margin:.35rem 0;filter:drop-shadow(0 0 6px rgba(246,228,176,.25))}
+.brand:has(.brand-logo) .brand-text{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media(max-width:600px){.brand-logo{height:52px}}
+/* centered hero */
+.hero-center .wrap{text-align:center}
+.hero-center .hero-logo{margin:0 auto}
+.hero-center p{margin-left:auto;margin-right:auto}
+.hero-center .btn-ghost{margin-left:.75rem}
+@media(max-width:600px){.hero-center .btn{margin:.4rem .3rem}}
