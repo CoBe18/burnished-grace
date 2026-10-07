@@ -78,7 +78,7 @@
         msg.textContent = "Thank you! Your payment went through. Your files will be sent to the email address on your PayPal account.";
       }),
       onError: () => {
-        msg.textContent = "Your payment didn't go through, and you haven't been charged. Please try again or email inquiry@TheEchoesProject.net.";
+        msg.textContent = "Your payment didn't go through, and you haven't been charged. Please try again or email inquiry@BurnishedGraceStudio.com.";
       }
     }).render("#paypal-buttons");
   }
