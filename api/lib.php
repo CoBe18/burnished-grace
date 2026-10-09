@@ -5,6 +5,11 @@ $BG_PRIVATE = dirname(__DIR__, 2) . '/bg-private';
 $cfgFile = $BG_PRIVATE . '/config.php';
 if (!is_file($cfgFile)) { http_response_code(500); exit('Store setup is incomplete.'); }
 $CFG = require $cfgFile;
+// Products for sale (names, prices and files) live in api/catalog.php, next to the
+// website, so a price change needs only an upload. Entries there replace any with the
+// same id in the private settings file; other products in that file are unchanged.
+$catalogFile = __DIR__ . '/catalog.php';
+if (is_file($catalogFile)) $CFG['products'] = array_merge($CFG['products'] ?? [], require $catalogFile);
 $CFG['files_dir'] = $BG_PRIVATE . '/files';
 $CFG['api_base'] = $CFG['api_base'] ?? 'https://api-m.paypal.com';
 
