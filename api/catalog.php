@@ -8,7 +8,7 @@ return [
     'commercial-cleaning' => [
         'name'  => 'Commercial Cleaning App',
         'price' => 37.00,
-        'file'  => 'Commercial-Cleaning-App.zip',
+        'file'  => 'Cleaning-Budget-Quote-Planner.zip',
     ],
     'real-estate-app' => [
         'name'  => 'Rental Property Finances: Individual Edition',
