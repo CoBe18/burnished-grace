@@ -7,7 +7,7 @@
 }
 *{box-sizing:border-box}
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-html{scroll-padding-top:5rem;scroll-behavior:smooth}
+html{scroll-padding-top:7rem;scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 body{margin:0;background:var(--linen);color:var(--text);font:400 1.0625rem/1.65 var(--body)}
 img{max-width:100%}

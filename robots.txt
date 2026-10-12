@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://burnishedgracestudio.com/sitemap.xml

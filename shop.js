@@ -12,12 +12,11 @@
         <div class="item">
           <h4 id="t-${p.id}">${esc(p.name)}</h4>
           <p>${esc(p.desc)}</p>
-          ${p.page ? `<p class="more"><a href="${esc(p.page)}">See details and screenshots</a></p>` : ""}
+          ${p.page ? `<p class="more"><a href="${esc(p.page)}" aria-label="See details and screenshots: ${esc(p.name)}">See details and screenshots</a></p>` : ""}
           <div class="buy">${
             typeof p.price === "number"
               ? `<span class="price">${money(p.price)}</span>
-                 <label><input type="checkbox" data-id="${p.id}" aria-describedby="t-${p.id}"> Add to order</label>
-                 <span class="included hidden" id="inc-${p.id}"></span>`
+                 <label><input type="checkbox" data-id="${p.id}" aria-label="Add to order: ${esc(p.name)}" aria-describedby="t-${p.id} inc-${p.id}"> Add to order</label>                 <span class="included hidden" id="inc-${p.id}"></span>`
               : `<span class="soon">Coming soon</span>`
           }</div>
         </div>`).join("")}
@@ -52,19 +51,22 @@
   function render() {
     const chosen = items();
     list.innerHTML = chosen.map(p => `<li><span>${esc(p.name)}</span><span>${money(p.price)}</span></li>`).join("");
-    totalEl.textContent = money(total());
-    emptyEl.classList.toggle("hidden", chosen.length > 0);
+      totalEl.textContent = money(total());          
+      emptyEl.classList.toggle("hidden", chosen.length > 0);
     payWrap.classList.toggle("hidden", chosen.length === 0);
   }
 
-  catalog.addEventListener("change", e => {
-    const id = e.target.dataset && e.target.dataset.id;
-    if (!id) return;
-    e.target.checked ? selected.add(id) : selected.delete(id);
-    msg.textContent = "";
-    applyIncludes();
-    render();
-  });
+ catalog.addEventListener("change", e => {
+  const id = e.target.dataset && e.target.dataset.id;
+  if (!id) return;
+
+  e.target.checked ? selected.add(id) : selected.delete(id);
+  msg.textContent = "";
+  applyIncludes();
+  render();
+
+  msg.textContent = `Your order contains ${items().length} item${items().length === 1 ? "" : "s"}. Total: ${money(total())}.`;
+});
 
   // Links such as index.html?add=real-estate-app#shop start the order with that item.
   const wanted = new URLSearchParams(location.search).get("add");
@@ -78,6 +80,7 @@
       msg.textContent = "Checkout couldn't load. Check your connection and refresh the page.";
       return;
     }
+    
     paypal.Buttons({
       style: { color: "gold", shape: "rect", label: "pay" },
       createOrder: (data, actions) => {
