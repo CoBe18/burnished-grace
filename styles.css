@@ -169,3 +169,6 @@ footer a{color:var(--gold-light)}
 .faq summary{cursor:pointer;font-weight:600;color:var(--maroon-deep)}
 .faq details p{margin:.6rem 0 0;color:var(--muted)}
 .disclaimer{margin:2.5rem 0 0;color:var(--muted);font-size:.92rem;max-width:44rem}
+.entries li p {
+  line-height: 1.15;
+}
