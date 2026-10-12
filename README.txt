@@ -84,3 +84,32 @@ site will not load until SSL is turned on.
 LOGO
 Put your logo in the "images" folder, named logo.png. It appears large in the
 maroon banner on the homepage (the top bar keeps the gold text name). Upload the images folder to IONOS the same way as articles.
+
+
+
+
+
+
+/**
+
+key: ef0c95c5cff01c97d09c6c35a342b230.txt
+
+One-time setup: Upload ef0c95c5cff01c97d09c6c35a342b230.txt to the top 
+level of your site, next to your homepage index.html. You can use the 
+IONOS File Manager or push it to GitHub the usual way. 
+Don’t rename the file or change what’s inside it. Then confirm it’s live 
+by opening this address in your browser. It should show only the key:
+https://burnishedgracestudio.com/ef0c95c5cff01c97d09c6c35a342b230.txt
+
+Each time you add or change a page: Paste this into your browser’s 
+address bar, swap in your page’s address after url=, and press Enter:
+
+https://api.indexnow.org/indexnow?url=https://burnishedgracestudio.com/YOUR-PAGE.html&key=ef0c95c5cff01c97d09c6c35a342b230
+
+If the page comes back blank or says OK, it worked. You can save that 
+link as a bookmark and edit the page part each time.
+
+indexnow.mjs is optional. It’s for when you’ve added several pages at 
+once and want to send them all in one go. It runs from any terminal 
+on a computer with Node installed, not just VS Code. If you’d rather 
+keep it simple, the browser method is all you need. **/
