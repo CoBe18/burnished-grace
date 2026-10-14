@@ -25,10 +25,12 @@ const PRODUCTS = [
   { id: "rental-finances-plr", category: "PLR packages", name: "Rental Property Finances: PLR Edition",
     desc: "Rebrand the Rental Property Finances app completely, with your own name, logo, colors and guides, and sell it as your product. Includes a no-code Rebrand Tool, the source code, sales copy and the PLR terms. Includes everything in the Individual Edition. Minimum resale price $57 per copy.",
     price: 107.00, page: "apps/rental-property-finances.html#editions", includes: ["real-estate-app"] },
+  { id: "beatitudes", category: "Coloring books and planners", name: "The Beatitudes: A Devotional Coloring Book",
+    desc: "24 realistic illustrations with NIV text and space for reflection and journaling. 8.5 × 11 inches.",
+    price: null },
   { id: "echoes-unseen", category: "Books", name: "Echoes of the Unseen",
     desc: "Book one of the Echoes series: why cultures across oceans and millennia remember giants, floods, and a lost world, tested against Scripture.",
-    price: null },
-  { id: "beatitudes", category: "Books", name: "The Beatitudes: A Devotional Coloring Book",
-    desc: "24 realistic illustrations with NIV text and space for reflection and journaling. 8.5 × 11 inches.",
     price: null }
+
+    
 ];
