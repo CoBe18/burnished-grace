@@ -1,0 +1,5 @@
+# Lets copies of the Rental Cleaning Pricing Calculator on buyers' computers read rates.json
+<Files "rates.json">
+  Header set Access-Control-Allow-Origin "*"
+  Header set Cache-Control "no-cache"
+</Files>

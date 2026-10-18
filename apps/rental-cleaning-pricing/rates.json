@@ -1,0 +1,276 @@
+{
+ "app": "turnover-pricing",
+ "updated": "2026-10-15",
+ "latestVersion": "1.1",
+ "versionMessage": "",
+ "downloadUrl": "",
+ "regions": [
+  {
+   "id": "smoky",
+   "name": "Smoky Mountains, TN",
+   "area": "Gatlinburg, Pigeon Forge, Sevierville, Townsend",
+   "updated": "2026-10",
+   "sizes": {
+    "1": 125,
+    "2": 150,
+    "3": 175,
+    "4": 220,
+    "5": 275,
+    "6": 325,
+    "7": 375,
+    "8": 425
+   },
+   "perExtraBR": 45,
+   "minimum": 125,
+   "sources": [
+    {
+     "title": "Hero House Cleaning, Gatlinburg cabin cleaning",
+     "url": "https://herohousecleaning.com/services/cabin-cleaning/in/gatlinburg"
+    },
+    {
+     "title": "RedAwning, Airbnb cleaner Sevierville",
+     "url": "https://www.redawning.com/pm/post/airbnb-cleaner-sevierville"
+    }
+   ],
+   "note": "Company-published turnover prices.",
+   "hottub": 25
+  },
+  {
+   "id": "blueridge",
+   "name": "Blue Ridge, GA",
+   "area": "North Georgia mountain cabins",
+   "updated": "2026-10",
+   "sizes": {
+    "1": 110,
+    "2": 140,
+    "3": 180,
+    "4": 215,
+    "5": 250,
+    "6": 290,
+    "7": 325,
+    "8": 365
+   },
+   "perExtraBR": 40,
+   "minimum": 110,
+   "sources": [
+    {
+     "title": "VaultSTR, How to pick an Airbnb cleaner in Blue Ridge",
+     "url": "https://www.vaultstr.com/blog/airbnb-cleaner-blue-ridge/"
+    }
+   ],
+   "note": "Host-reported working ranges.",
+   "hottub": 35
+  },
+  {
+   "id": "branson",
+   "name": "Branson, MO",
+   "area": "Branson and Table Rock Lake",
+   "updated": "2026-10",
+   "sizes": {
+    "1": 100,
+    "2": 135,
+    "3": 165,
+    "4": 200,
+    "5": 240,
+    "6": 280,
+    "7": 315,
+    "8": 355
+   },
+   "perExtraBR": 40,
+   "minimum": 100,
+   "sources": [
+    {
+     "title": "VaultSTR, How to pick an Airbnb cleaner in Branson",
+     "url": "https://www.vaultstr.com/blog/airbnb-cleaner-branson/"
+    }
+   ],
+   "note": "Host-reported working ranges.",
+   "hottub": 35
+  },
+  {
+   "id": "scottsdale",
+   "name": "Scottsdale, AZ",
+   "area": "Scottsdale and the Phoenix area",
+   "updated": "2026-10",
+   "sizes": {
+    "1": 155,
+    "2": 195,
+    "3": 240,
+    "4": 290,
+    "5": 310,
+    "6": 340,
+    "7": 360,
+    "8": 390
+   },
+   "perExtraBR": 30,
+   "minimum": 155,
+   "sources": [
+    {
+     "title": "The Short Term Shop, Scottsdale STR expenses",
+     "url": "https://theshorttermshop.com/scottsdale-short-term-rental-expenses/"
+    },
+    {
+     "title": "VaultSTR, How to pick an Airbnb cleaner in Scottsdale",
+     "url": "https://www.vaultstr.com/blog/airbnb-cleaner-scottsdale/"
+    }
+   ],
+   "note": "Investor-guide cost table; pool service is usually a separate monthly contract.",
+   "hottub": 25
+  },
+  {
+   "id": "tahoe",
+   "name": "Lake Tahoe, CA",
+   "area": "South Lake Tahoe and the lake area",
+   "updated": "2026-10",
+   "sizes": {
+    "1": 125,
+    "2": 165,
+    "3": 200,
+    "4": 240,
+    "5": 285,
+    "6": 325,
+    "7": 370,
+    "8": 410
+   },
+   "perExtraBR": 40,
+   "minimum": 125,
+   "sources": [
+    {
+     "title": "VaultSTR, How to pick an Airbnb cleaner in South Lake Tahoe",
+     "url": "https://www.vaultstr.com/blog/airbnb-cleaner-south-lake-tahoe/"
+    }
+   ],
+   "note": "Host-reported working ranges.",
+   "hottub": 40
+  },
+  {
+   "id": "bigbear",
+   "name": "Big Bear, CA",
+   "area": "Big Bear Lake cabins",
+   "updated": "2026-10",
+   "sizes": {
+    "1": 115,
+    "2": 155,
+    "3": 190,
+    "4": 230,
+    "5": 270,
+    "6": 310,
+    "7": 350,
+    "8": 390
+   },
+   "perExtraBR": 40,
+   "minimum": 115,
+   "sources": [
+    {
+     "title": "VaultSTR, How to pick an Airbnb cleaner in Big Bear",
+     "url": "https://www.vaultstr.com/blog/airbnb-cleaner-big-bear/"
+    }
+   ],
+   "note": "Host-reported working ranges.",
+   "hottub": 35
+  },
+  {
+   "id": "joshuatree",
+   "name": "Joshua Tree, CA",
+   "area": "Joshua Tree and the high desert",
+   "updated": "2026-10",
+   "sizes": {
+    "1": 115,
+    "2": 160,
+    "3": 200,
+    "4": 245,
+    "5": 285,
+    "6": 325,
+    "7": 370,
+    "8": 410
+   },
+   "perExtraBR": 40,
+   "minimum": 115,
+   "sources": [
+    {
+     "title": "VaultSTR, How to pick an Airbnb cleaner in Joshua Tree",
+     "url": "https://www.vaultstr.com/blog/airbnb-cleaner-joshua-tree/"
+    }
+   ],
+   "note": "Host-reported working ranges; pool or soak-tub care priced as the hot tub extra.",
+   "hottub": 45
+  },
+  {
+   "id": "destin",
+   "name": "Destin & 30A, FL",
+   "area": "Destin, 30A and the Emerald Coast",
+   "updated": "2026-10",
+   "sizes": {
+    "1": 125,
+    "2": 175,
+    "3": 220,
+    "4": 290,
+    "5": 355,
+    "6": 420,
+    "7": 490,
+    "8": 560
+   },
+   "perExtraBR": 70,
+   "minimum": 125,
+   "sources": [
+    {
+     "title": "VaultSTR, How to pick an Airbnb cleaner in Destin",
+     "url": "https://www.vaultstr.com/blog/airbnb-cleaner-destin/"
+    }
+   ],
+   "note": "Host-reported working ranges; private pool care priced as the hot tub extra.",
+   "hottub": 55
+  },
+  {
+   "id": "myrtle",
+   "name": "Myrtle Beach, SC",
+   "area": "Myrtle Beach and the Grand Strand",
+   "updated": "2026-10",
+   "sizes": {
+    "1": 100,
+    "2": 135,
+    "3": 170,
+    "4": 210,
+    "5": 250,
+    "6": 290,
+    "7": 330,
+    "8": 370
+   },
+   "perExtraBR": 40,
+   "minimum": 100,
+   "sources": [
+    {
+     "title": "VaultSTR, How to pick an Airbnb cleaner in Myrtle Beach",
+     "url": "https://www.vaultstr.com/blog/airbnb-cleaner-myrtle-beach/"
+    }
+   ],
+   "note": "Host-reported working ranges."
+  },
+  {
+   "id": "obx",
+   "name": "Outer Banks, NC",
+   "area": "Outer Banks beach houses",
+   "updated": "2026-10",
+   "sizes": {
+    "1": 180,
+    "2": 180,
+    "3": 200,
+    "4": 260,
+    "5": 310,
+    "6": 380,
+    "7": 465,
+    "8": 550
+   },
+   "perExtraBR": 85,
+   "minimum": 180,
+   "sources": [
+    {
+     "title": "VaultSTR, How to pick an Airbnb cleaner in Outer Banks",
+     "url": "https://www.vaultstr.com/blog/airbnb-cleaner-outer-banks/"
+    }
+   ],
+   "note": "Host-reported working ranges. The smallest published tier starts at $180 (3\u20134 bedrooms), so 1\u20132 bedrooms start there too. Pool and hot tub combos are priced as the hot tub extra.",
+   "hottub": 70
+  }
+ ]
+}

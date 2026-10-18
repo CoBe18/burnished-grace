@@ -1,0 +1,924 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rental Cleaning Pricing Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Sora:wght@500;600;700&display=swap">
+<style>
+/* Layout: job sheet on the left, a floating "turnover ticket" on the right; stacks to one column on phones. */
+:root{
+  --bg:#eef3f8; --surface:#ffffff; --sunk:#e3ebf4; --line:#c9d6e5;
+  --ink:#12233a; --muted:#516680; --accent:var(--brand,#0b2b40); --accent-ink:#ffffff; --accent-soft:#d4e5ec;
+  --good:#1d7a4f; --good-soft:#dcf1e6; --warn:#a35c00; --warn-soft:#fbecd5; --bad:#b3261e; --bad-soft:#f8dedc;
+  --display:"Sora","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
+  --radius:10px;
+  --hi:rgb(255 255 255/.9);--lo:rgb(11 43 64/.10);
+  --float:0 1px 1px rgb(11 43 64/.06),0 4px 8px rgb(11 43 64/.07),0 14px 28px -6px rgb(11 43 64/.16);
+  --float-hi:0 2px 2px rgb(11 43 64/.08),0 10px 18px rgb(11 43 64/.10),0 28px 48px -10px rgb(11 43 64/.26);
+  --well:inset 0 2px 3px rgb(11 43 64/.10),inset 0 -1px 0 rgb(255 255 255/.7);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c1624; --surface:#132235; --sunk:#0f1c2d; --line:#26405e;
+  --ink:#e6eef8; --muted:#9db1c9; --accent:var(--brand-dark,#5cb3d1); --accent-ink:#06202c; --accent-soft:#123447;
+  --good:#5fd29a; --good-soft:#12352a; --warn:#f2b45c; --warn-soft:#3a2a12; --bad:#ff8a80; --bad-soft:#3d1a18;
+  --hi:rgb(255 255 255/.07);--lo:rgb(0 0 0/.35);
+  --float:0 1px 1px rgb(0 0 0/.3),0 4px 8px rgb(0 0 0/.3),0 14px 28px -6px rgb(0 0 0/.5);
+  --float-hi:0 2px 2px rgb(0 0 0/.35),0 10px 18px rgb(0 0 0/.35),0 28px 48px -10px rgb(0 0 0/.6);
+  --well:inset 0 2px 3px rgb(0 0 0/.35),inset 0 -1px 0 rgb(255 255 255/.05);
+  color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#0c1624; --surface:#132235; --sunk:#0f1c2d; --line:#26405e;
+  --ink:#e6eef8; --muted:#9db1c9; --accent:var(--brand-dark,#5cb3d1); --accent-ink:#06202c; --accent-soft:#123447;
+  --good:#5fd29a; --good-soft:#12352a; --warn:#f2b45c; --warn-soft:#3a2a12; --bad:#ff8a80; --bad-soft:#3d1a18;
+  --hi:rgb(255 255 255/.07);--lo:rgb(0 0 0/.35);
+  --float:0 1px 1px rgb(0 0 0/.3),0 4px 8px rgb(0 0 0/.3),0 14px 28px -6px rgb(0 0 0/.5);
+  --float-hi:0 2px 2px rgb(0 0 0/.35),0 10px 18px rgb(0 0 0/.35),0 28px 48px -10px rgb(0 0 0/.6);
+  --well:inset 0 2px 3px rgb(0 0 0/.35),inset 0 -1px 0 rgb(255 255 255/.05);
+  color-scheme:dark;}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+img{max-width:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
+.wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(1.5rem,3.5vw,2.1rem);margin:0;letter-spacing:-.01em;text-wrap:balance}
+.sub{margin:4px 0 0;color:var(--muted);max-width:60ch}
+.tabs{display:flex;flex-wrap:wrap;gap:4px;background:var(--sunk);border-radius:22px;padding:4px;box-shadow:var(--well)}
+.tabs button{border:0;background:transparent;color:var(--muted);font:700 .95rem var(--body);padding:8px 14px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgb(0 0 0/.12)}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,380px);gap:20px;align-items:start}
+@media (max-width:860px){.grid{grid-template-columns:minmax(0,1fr)}}
+section.card{border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:14px;min-width:0;
+  background:linear-gradient(180deg,var(--hi),transparent 40%),var(--surface);
+  box-shadow:inset 0 1px 0 var(--hi),inset 0 -1px 0 var(--lo),var(--float)}
+.stack{display:flex;flex-direction:column;gap:20px;min-width:0}
+h2{font-family:var(--display);font-size:1.05rem;font-weight:600;margin:0;display:flex;align-items:baseline;gap:10px}
+h2 .step{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.hint{color:var(--muted);font-size:.88rem;margin:0}
+.fields{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;align-items:end}
+label.f{display:flex;flex-direction:column;gap:4px;font-weight:700;font-size:.88rem;min-width:0}
+label.f span.u{font-weight:400;color:var(--muted)}
+input[type=number],input[type=text],input[type=time],input[type=email],input[type=tel],input[type=url],select,textarea{font:400 1rem var(--body);color:var(--ink);background:var(--bg);border:1px solid transparent;border-radius:8px;padding:9px 10px;width:100%;min-width:0;box-shadow:var(--well)}
+textarea{min-height:90px;resize:vertical}
+input[type=color]{width:100%;height:44px;border:0;border-radius:8px;padding:2px;background:var(--bg);box-shadow:var(--well);cursor:pointer}
+input:focus-visible,select:focus-visible,button:focus-visible,textarea:focus-visible,.filebtn:focus-within{outline:3px solid var(--accent);outline-offset:2px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg label{display:flex;align-items:center;gap:6px;border:1px solid transparent;border-radius:999px;padding:6px 12px;cursor:pointer;font-size:.92rem;background:var(--bg)}
+.seg input{accent-color:var(--accent)}
+.seg label:has(input:checked){background:var(--accent-soft);border-color:var(--accent);font-weight:700}
+.addons{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.addon{display:flex;gap:10px;align-items:flex-start;border:1px solid transparent;border-radius:8px;padding:10px;cursor:pointer;background:var(--bg)}
+.addon input{margin-top:3px;accent-color:var(--accent);width:18px;height:18px;flex:none}
+.addon:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.addon b{display:block;font-size:.95rem}
+.addon small{color:var(--muted)}
+.addon,.seg label{box-shadow:inset 0 1px 0 var(--hi),0 1px 2px var(--lo),0 3px 6px -2px var(--lo);transition:transform .15s ease,box-shadow .15s ease}
+.addon:hover,.seg label:hover{transform:translateY(-1px);box-shadow:inset 0 1px 0 var(--hi),0 2px 4px var(--lo),0 8px 14px -4px var(--lo)}
+.addon:has(input:checked),.seg label:has(input:checked){box-shadow:inset 0 1px 0 var(--hi),0 0 0 1px var(--accent),0 6px 12px -4px var(--lo)}
+.fee{font-weight:400;color:var(--accent);font-size:.85rem}
+/* ticket */
+.ticket{position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);background:var(--surface);border-radius:16px;overflow:hidden;min-width:0;box-shadow:inset 0 1px 0 var(--hi),var(--float-hi)}
+@media (max-width:860px){.ticket{position:static}}
+.ticket-head{color:#fff;padding:16px 18px;background:linear-gradient(160deg,var(--head1,#1a5470) 0%,var(--head2,#0b2b40) 55%);
+  box-shadow:inset 0 1px 0 rgb(255 255 255/.18),inset 0 -2px 0 rgb(0 0 0/.25)}
+.ticket-head .lbl{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;opacity:.85}
+.price{font-family:var(--display);font-weight:700;font-size:2.6rem;line-height:1.1;font-variant-numeric:tabular-nums;text-shadow:0 2px 6px rgb(0 0 0/.25)}
+.ticket-head .cab{font-weight:700;opacity:.95}
+.ticket-body{padding:16px 18px;display:flex;flex-direction:column;gap:14px}
+.status{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:8px;font-size:.92rem;box-shadow:inset 0 1px 0 var(--hi),0 1px 2px var(--lo)}
+.status.ok{background:var(--good-soft);color:var(--good)}
+.status.tight{background:var(--warn-soft);color:var(--warn)}
+.status.no{background:var(--bad-soft);color:var(--bad)}
+.status b{display:block}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kpi{background:var(--sunk);border-radius:10px;padding:10px;box-shadow:var(--well)}
+.kpi .k{font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700}
+.kpi .v{font-family:var(--display);font-weight:600;font-size:1.25rem;font-variant-numeric:tabular-nums}
+.timeline{position:relative;height:34px;background:var(--sunk);border-radius:6px;overflow:hidden;box-shadow:var(--well)}
+.timeline .work{position:absolute;top:0;bottom:0;left:0;background:var(--accent);opacity:.85}
+.timeline .insp{position:absolute;top:0;bottom:0;background:var(--good);opacity:.7}
+.timeline .over{position:absolute;top:0;bottom:0;left:0;background:var(--bad);opacity:.75}
+.tl-labels{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums;margin-top:4px}
+table.bd{width:100%;border-collapse:collapse;font-size:.92rem;font-variant-numeric:tabular-nums}
+table.bd td{padding:5px 0;border-bottom:1px solid var(--line)}
+table.bd td:last-child{text-align:right;padding-left:8px;white-space:nowrap}
+table.bd tr.tot td{font-weight:700;border-bottom:0;padding-top:8px}
+table.bd tr.sub td{color:var(--muted)}
+h3.sect{font-family:var(--display);font-size:.95rem;font-weight:600;margin:6px 0 0;padding-top:14px;border-top:1px dashed var(--line);display:flex;flex-wrap:wrap;gap:8px;align-items:baseline}
+h3.sect span{font-family:var(--body);font-weight:400;font-size:.82rem;color:var(--muted)}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+button.b,.filebtn{font:700 .95rem var(--body);border-radius:8px;padding:10px 14px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink);
+  box-shadow:inset 0 1px 0 var(--hi),0 1px 2px var(--lo),0 4px 8px -2px var(--lo);transition:transform .15s ease,box-shadow .15s ease;display:inline-flex;align-items:center}
+button.b.primary{border-color:var(--accent);color:var(--accent-ink);background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 80%,#4a8aa6),var(--accent));box-shadow:inset 0 1px 0 rgb(255 255 255/.2),0 2px 4px var(--lo),0 8px 16px -4px var(--lo)}
+button.b:hover,.filebtn:hover{transform:translateY(-1px)}
+button.b:active{transform:translateY(1px);box-shadow:var(--well)}
+.filebtn input{position:absolute;opacity:0;width:1px;height:1px}
+.toast{font-size:.88rem;color:var(--good);min-height:1.3em}
+.saved{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;background:var(--bg);padding:4px 4px 4px 12px;font-size:.9rem;box-shadow:inset 0 1px 0 var(--hi),0 1px 3px var(--lo)}
+.chip button{border:0;background:transparent;color:var(--muted);cursor:pointer;font:700 .9rem var(--body);padding:4px 8px;border-radius:999px}
+.chip button.load{color:var(--accent)}
+.note{font-size:.85rem;color:var(--muted);border-left:3px solid var(--line);padding-left:10px;margin:0}
+.settings-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.logo-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.logo-prev{width:120px;height:64px;border-radius:8px;background:var(--bg);box-shadow:var(--well);display:flex;align-items:center;justify-content:center;overflow:hidden;color:var(--muted);font-size:.8rem}
+.logo-prev img{max-height:56px;max-width:110px;object-fit:contain}
+.region-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:end}
+@media (max-width:560px){.region-row{grid-template-columns:minmax(0,1fr)}}
+.region-info{font-size:.88rem;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+.region-info a{color:var(--accent)}
+.notice{padding:10px 12px;border-radius:8px;background:var(--accent-soft);font-size:.92rem;box-shadow:inset 0 1px 0 var(--hi),0 1px 2px var(--lo)}
+.notice a{color:var(--accent);font-weight:700}
+footer.credit{max-width:1120px;margin:28px auto 0;color:var(--muted);font-size:.82rem;text-align:center}
+footer.credit a{color:inherit}
+/* modal */
+.modal{position:fixed;inset:0;z-index:20;background:rgb(6 18 28/.55);display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;
+  padding:max(24px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(24px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.modal-card{width:100%;max-width:560px;margin:auto 0;background:var(--surface);border-radius:16px;box-shadow:var(--float-hi);overflow:hidden}
+.modal-head{padding:18px 20px;color:#fff;background:linear-gradient(160deg,var(--head1,#1a5470) 0%,var(--head2,#0b2b40) 60%)}
+.modal-head h2{font-size:1.3rem;display:block}
+.modal-head p{margin:6px 0 0;opacity:.9}
+.modal-body{padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+.modal-body h3{margin:0;font:700 .92rem var(--body)}
+/* customer quote: a printed page, one fixed light look */
+.cq-wrap{position:fixed;inset:0;z-index:30;background:rgb(6 18 28/.6);overflow-y:auto;
+  padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(24px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.cq-bar{max-width:760px;margin:0 auto 12px;display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+.cq{max-width:760px;margin:0 auto;background:#fff;color:#14263a;border-radius:6px;box-shadow:0 20px 50px rgb(0 0 0/.4);padding:40px 44px;font-family:var(--body);color-scheme:light}
+@media (max-width:600px){.cq{padding:24px 18px}}
+.cq-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:flex-start;border-bottom:3px solid var(--head2,#0b2b40);padding-bottom:16px}
+.cq-biz{display:flex;gap:14px;align-items:center;min-width:0}
+.cq-biz img{max-height:64px;max-width:150px;object-fit:contain}
+.cq-biz h2{font-family:var(--display);font-size:1.35rem;margin:0;display:block;color:var(--head2,#0b2b40)}
+.cq-biz div{font-size:.88rem;color:#4b5f75;overflow-wrap:anywhere}
+.cq-meta{text-align:right;font-size:.88rem;color:#4b5f75}
+.cq-meta b{display:block;font-family:var(--display);font-size:1.15rem;color:#14263a;letter-spacing:.02em}
+.cq-two{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:20px 0}
+.cq-two h4{margin:0 0 4px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#6a7d92}
+.cq-two p{margin:0}
+.cq table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.cq th{text-align:left;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#6a7d92;border-bottom:1px solid #c9d3de;padding:6px 0}
+.cq th:last-child,.cq td:last-child{text-align:right;white-space:nowrap;padding-left:12px}
+.cq td{padding:9px 0;border-bottom:1px solid #e3e9ef}
+.cq tr.total td{border-bottom:0;font-weight:700;font-size:1.2rem;padding-top:14px}
+.cq ul{margin:6px 0 0;padding-left:20px}
+.cq .cq-note{margin-top:20px;padding:12px 14px;background:#f1f5f9;border-radius:6px;font-size:.92rem;white-space:pre-wrap}
+.cq .cq-foot{margin-top:24px;font-size:.82rem;color:#6a7d92;text-align:center}
+@media print{
+  body{background:#fff!important;padding:0!important}
+  .wrap,.modal,.cq-bar,footer.credit{display:none!important}
+  .cq-wrap{position:static;background:none;padding:0;overflow:visible}
+  .cq{box-shadow:none;border-radius:0;max-width:none;padding:0}
+  @page{margin:16mm}
+}
+@media (prefers-reduced-motion:no-preference){.timeline div{transition:width .25s ease,left .25s ease}}
+@media (prefers-reduced-motion:reduce){.addon,.seg label,button.b,.filebtn{transition:none}.addon:hover,.seg label:hover,button.b:hover,.filebtn:hover{transform:none}}
+</style>
+
+</head>
+<body>
+<script id="brand" type="application/json">{"product":"Rental Cleaning Pricing Calculator","tagline":"Price a vacation-rental turnover, and see how many cleaners it takes to finish between checkout and check-in.","accent":"#0b2b40","accentDark":"#5cb3d1","head1":"#1a5470","head2":"#0b2b40","credit":"Burnished Grace Creative Studio","creditUrl":"https://burnishedgracestudio.com","feed":"https://burnishedgracestudio.com/apps/rental-cleaning-pricing/rates.json","plr":false}</script>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1 id="b-product">Rental Cleaning Pricing Calculator</h1>
+      <p class="sub" id="b-tagline">Price a vacation-rental turnover, and see how many cleaners it takes to finish between checkout and check-in.</p>
+    </div>
+    <div class="tabs" role="tablist">
+      <button role="tab" id="tab-quote" aria-selected="true" aria-controls="view-quote">Quote a job</button>
+      <button role="tab" id="tab-rates" aria-selected="false" aria-controls="view-rates">My prices</button>
+      <button role="tab" id="tab-biz" aria-selected="false" aria-controls="view-biz">My business</button>
+      <button role="tab" id="tab-brand" aria-selected="false" aria-controls="view-brand" hidden>Rebrand</button>
+    </div>
+  </header>
+
+  <!-- QUOTE VIEW -->
+  <div id="view-quote" role="tabpanel" class="grid">
+    <div class="stack">
+      <section class="card" id="saved-card">
+        <h2>Saved cabins</h2>
+        <div class="saved" id="saved-list"></div>
+        <p class="hint" id="saved-empty">Save a cabin once and pull it back up for every turnover.</p>
+      </section>
+
+      <section class="card">
+        <h2><span class="step">Step 1</span>The cabin</h2>
+        <div class="fields">
+          <label class="f" style="grid-column:1/-1">Cabin or property name <input type="text" id="name"></label>
+          <label class="f" style="grid-column:1/-1">Quote for <span class="u">owner or management company</span><input type="text" id="client"></label>
+          <label class="f">Bedrooms <input type="number" id="bedrooms" min="0" step="1"></label>
+          <label class="f">Bathrooms <span class="u">half bath = .5</span><input type="number" id="baths" min="0" step="0.5"></label>
+          <label class="f">Living areas <span class="u">den, loft, sitting room</span><input type="number" id="living" min="0" step="1"></label>
+          <label class="f">Kitchens <input type="number" id="kitchens" min="0" step="1"></label>
+          <label class="f">Beds to strip &amp; make <span class="u">incl. bunks, sleepers</span><input type="number" id="beds" min="0" step="1"></label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2><span class="step">Step 2</span>Linens and condition</h2>
+        <div class="seg" role="radiogroup" aria-label="Laundry">
+          <label><input type="radio" name="laundry" value="onsite"> Laundry done at the cabin</label>
+          <label><input type="radio" name="laundry" value="service"> Linens go to a laundry service</label>
+          <label><input type="radio" name="laundry" value="none"> Owner handles linens</label>
+        </div>
+        <div class="seg" role="radiogroup" aria-label="Condition">
+          <label><input type="radio" name="cond" value="light"> Light use</label>
+          <label><input type="radio" name="cond" value="normal"> Normal</label>
+          <label><input type="radio" name="cond" value="heavy"> Heavy / large group</label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2><span class="step">Step 3</span>Extras at this cabin</h2>
+        <div class="addons" id="addons"></div>
+      </section>
+
+      <section class="card">
+        <h2><span class="step">Step 4</span>The turnover window</h2>
+        <div class="fields">
+          <label class="f">Guest checkout <input type="time" id="checkout"></label>
+          <label class="f">Next check-in <input type="time" id="checkin"></label>
+          <label class="f">Drive time <span class="u">minutes, one way</span><input type="number" id="drive" min="0" step="5"></label>
+          <label class="f">Distance <span class="u">miles, one way</span><input type="number" id="miles" min="0" step="1"></label>
+        </div>
+        <div class="seg">
+          <label><input type="checkbox" id="peak"> Holiday or peak-season date</label>
+        </div>
+      </section>
+    </div>
+
+    <!-- TICKET -->
+    <aside class="ticket" aria-live="polite">
+      <div class="ticket-head">
+        <div class="lbl">Price for this turnover</div>
+        <div class="price" id="o-price">$0</div>
+        <div class="cab" id="o-cab"></div>
+      </div>
+      <div class="ticket-body">
+        <div class="seg" role="radiogroup" aria-label="How to price this job">
+          <label><input type="radio" name="pricemode" value="size"> By cabin size</label>
+          <label><input type="radio" name="pricemode" value="hour"> By the hour</label>
+        </div>
+        <table class="bd" id="o-lines"></table>
+        <div class="btns">
+          <button class="b primary" id="open-cq">Customer quote</button>
+          <button class="b" id="copy">Copy as text</button>
+          <button class="b" id="save">Save this cabin</button>
+        </div>
+        <div class="toast" id="toast" role="status"></div>
+        <textarea id="quote-text" readonly aria-label="Quote text" hidden></textarea>
+        <h3 class="sect">Cost check <span>for you, not the customer</span></h3>
+        <div class="status" id="o-status"></div>
+        <div>
+          <div class="timeline" aria-hidden="true"><div class="work" id="tl-work"></div><div class="insp" id="tl-insp"></div><div class="over" id="tl-over"></div></div>
+          <div class="tl-labels"><span id="tl-start"></span><span id="tl-end"></span></div>
+        </div>
+        <div class="kpis">
+          <div class="kpi"><div class="k">Crew</div><div class="v" id="o-crew"></div></div>
+          <div class="kpi"><div class="k">Done by</div><div class="v" id="o-done"></div></div>
+          <div class="kpi"><div class="k">Paid time</div><div class="v" id="o-hours"></div></div>
+          <div class="kpi"><div class="k">Pay per cleaner</div><div class="v" id="o-pay"></div></div>
+        </div>
+        <table class="bd" id="o-cost"></table>
+        <div class="status" id="o-profit"></div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- PRICES VIEW -->
+  <div id="view-rates" role="tabpanel" hidden class="stack">
+    <section class="card">
+      <h2>Price region</h2>
+      <p class="hint">Fill your price list with current turnover prices from your market. Your extras, pay and times stay as they are.</p>
+      <div class="region-row">
+        <label class="f">Market <select id="region"></select></label>
+        <button class="b primary" id="apply-region">Use these prices</button>
+      </div>
+      <div class="region-info" id="region-info"></div>
+      <div class="btns"><button class="b" id="check-feed">Check for updated prices</button></div>
+      <div class="toast" id="toast-feed" role="status"></div>
+      <div class="notice" id="version-notice" hidden></div>
+    </section>
+    <p class="note">Market prices are a starting point drawn from published local rates, not a rule. Extras, surcharges and pay are starting placeholders. Change everything to what you actually charge and pay. Your changes save automatically on this device.</p>
+    <section class="card">
+      <h2>Your price list</h2>
+      <p class="hint">What you charge for a standard turnover, by number of bedrooms.</p>
+      <div class="settings-grid" id="set-sizes"></div>
+    </section>
+    <section class="card">
+      <h2>Extras</h2>
+      <p class="hint">What you charge for each extra, and how many minutes it adds to the job.</p>
+      <div class="settings-grid" id="set-addons"></div>
+    </section>
+    <section class="card">
+      <h2>Surcharges and hourly price</h2>
+      <div class="settings-grid" id="set-charges"></div>
+    </section>
+    <section class="card">
+      <h2>What the job costs you</h2>
+      <div class="seg" role="radiogroup" aria-label="How you pay cleaners">
+        <label><input type="radio" name="paymode" value="hour"> I pay cleaners by the hour</label>
+        <label><input type="radio" name="paymode" value="job"> I pay cleaners a share of each job</label>
+      </div>
+      <div class="settings-grid" id="set-costs"></div>
+    </section>
+    <section class="card">
+      <h2>How long each part takes</h2>
+      <p class="hint">Minutes for one cleaner working alone on a normal turnover. Used to check the crew size and finish time.</p>
+      <div class="settings-grid" id="set-time"></div>
+    </section>
+    <div class="btns"><button class="b" id="reset">Reset to starting prices</button></div>
+  </div>
+
+  <!-- BUSINESS VIEW -->
+  <div id="view-biz" role="tabpanel" hidden class="stack">
+    <section class="card">
+      <h2>Your business on quotes</h2>
+      <p class="hint">This prints at the top of every customer quote.</p>
+      <div class="fields">
+        <label class="f" style="grid-column:1/-1">Business name <input type="text" id="biz-name"></label>
+        <label class="f">Phone <input type="tel" id="biz-phone"></label>
+        <label class="f">Email <input type="email" id="biz-email"></label>
+        <label class="f" style="grid-column:1/-1">Website <input type="text" id="biz-web"></label>
+      </div>
+      <div class="logo-row">
+        <div class="logo-prev" id="logo-prev">No logo</div>
+        <label class="filebtn">Add your logo<input type="file" id="logo-file" accept="image/*"></label>
+        <button class="b" id="logo-remove" hidden>Remove logo</button>
+      </div>
+      <div class="fields">
+        <label class="f" style="grid-column:1/-1">Note at the bottom of each quote <textarea id="biz-note"></textarea></label>
+        <label class="f">Quotes are good for <span class="u">days</span><input type="number" id="biz-valid" min="1" step="1"></label>
+        <label class="f">Next quote number <input type="number" id="biz-seq" min="1" step="1"></label>
+      </div>
+    </section>
+    <section class="card">
+      <h2>Backup</h2>
+      <p class="hint">Your prices, saved cabins and business details live in this browser on this device. Save a backup file now and then, and use it to move everything to a new computer or browser.</p>
+      <div class="btns">
+        <button class="b primary" id="backup">Save a backup file</button>
+        <label class="filebtn">Restore from a backup<input type="file" id="restore" accept=".json,application/json"></label>
+      </div>
+      <div class="toast" id="toast-biz" role="status"></div>
+    </section>
+    <section class="card">
+      <h2>Setup</h2>
+      <div class="btns"><button class="b" id="rerun">Run the welcome setup again</button></div>
+    </section>
+  </div>
+
+  <!-- REBRAND VIEW (PLR edition only) -->
+  <div id="view-brand" role="tabpanel" hidden class="stack">
+    <section class="card">
+      <h2>Rebrand this tool</h2>
+      <p class="hint">Change the name, colors and credit line, then download your own branded copy. Your customers get a clean copy without this Rebrand tab.</p>
+      <div class="fields">
+        <label class="f" style="grid-column:1/-1">Product name <input type="text" id="rb-product"></label>
+        <label class="f" style="grid-column:1/-1">Tagline under the name <input type="text" id="rb-tagline"></label>
+        <label class="f">Main color <input type="color" id="rb-accent"></label>
+        <label class="f">Main color, dark mode <span class="u">pick a lighter shade</span><input type="color" id="rb-accentDark"></label>
+        <label class="f">Price header, light end <input type="color" id="rb-head1"></label>
+        <label class="f">Price header, dark end <input type="color" id="rb-head2"></label>
+        <label class="f" style="grid-column:1/-1">Credit line at the bottom <span class="u">your business name</span><input type="text" id="rb-credit"></label>
+        <label class="f" style="grid-column:1/-1">Credit link <span class="u">your website, or leave blank</span><input type="text" id="rb-creditUrl"></label>
+        <label class="f" style="grid-column:1/-1">Price update link <span class="u">your own rates.json web address, or leave blank to turn updates off</span><input type="text" id="rb-feed"></label>
+      </div>
+      <div class="seg"><label><input type="checkbox" id="rb-keep"> Keep the Rebrand tab in my copy</label></div>
+      <p class="hint">Check this only for your own working copy, so you can rebrand again later. Leave it unchecked for copies you sell.</p>
+      <div class="btns"><button class="b primary" id="rb-download">Download my branded copy</button><button class="b" id="rb-undo">Undo my changes</button></div>
+      <div class="toast" id="toast-rb" role="status"></div>
+      <p class="note">Private Label Rights edition. Designed with AI assistance.</p>
+    </section>
+  </div>
+</div>
+<footer class="credit" id="b-credit"></footer>
+
+<!-- WELCOME SETUP -->
+<div class="modal" id="setup" hidden role="dialog" aria-modal="true" aria-labelledby="setup-h">
+  <div class="modal-card">
+    <div class="modal-head"><h2 id="setup-h">Welcome! Let's set up your quotes</h2><p>One minute now saves you every time after. You can change all of this later.</p></div>
+    <div class="modal-body">
+      <div class="fields">
+        <label class="f" style="grid-column:1/-1">Your business name <input type="text" id="su-name"></label>
+        <label class="f" style="grid-column:1/-1">Phone for quotes <input type="tel" id="su-phone"></label>
+      </div>
+      <h3>How do you usually price a turnover?</h3>
+      <div class="seg">
+        <label><input type="radio" name="su-mode" value="size" checked> By the size of the cabin</label>
+        <label><input type="radio" name="su-mode" value="hour"> By the hour</label>
+      </div>
+      <label class="f">Where do you clean? <span class="u">we'll start you with that market's turnover prices</span><select id="su-region"></select></label>
+      <div class="btns"><button class="b primary" id="su-go">Start quoting</button><button class="b" id="su-skip">Skip for now</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- CUSTOMER QUOTE -->
+<div class="cq-wrap" id="cq" hidden role="dialog" aria-modal="true" aria-label="Customer quote">
+  <div class="cq-bar">
+    <button class="b primary" id="cq-print">Print or save as PDF</button>
+    <button class="b" id="cq-copy">Copy as text</button>
+    <button class="b" id="cq-close">Close</button>
+  </div>
+  <article class="cq" id="cq-doc"></article>
+</div>
+
+<script>
+(function(){
+/* Snapshot of the untouched file, used by the Rebrand tool to write a new copy. Must run before anything changes the page. */
+const PRISTINE="<!doctype html>\n"+document.documentElement.outerHTML;
+let B={};try{B=JSON.parse(document.getElementById("brand").textContent)}catch(e){}
+const slug=s=>String(s||"tool").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+const STORE="tpc:"+slug(B.product);
+const APP_VERSION="1.1";
+/* Built-in market prices (snapshot). "Check for updated prices" replaces these with the latest rates.json from the price update link. */
+const BUILTIN={updated:"2026-10-15",regions:[{"id":"smoky","name":"Smoky Mountains, TN","area":"Gatlinburg, Pigeon Forge, Sevierville, Townsend","updated":"2026-10","sizes":{"1":125,"2":150,"3":175,"4":220,"5":275,"6":325,"7":375,"8":425},"perExtraBR":45,"minimum":125,"sources":[{"title":"Hero House Cleaning, Gatlinburg cabin cleaning","url":"https://herohousecleaning.com/services/cabin-cleaning/in/gatlinburg"},{"title":"RedAwning, Airbnb cleaner Sevierville","url":"https://www.redawning.com/pm/post/airbnb-cleaner-sevierville"}],"note":"Company-published turnover prices.","hottub":25},{"id":"blueridge","name":"Blue Ridge, GA","area":"North Georgia mountain cabins","updated":"2026-10","sizes":{"1":110,"2":140,"3":180,"4":215,"5":250,"6":290,"7":325,"8":365},"perExtraBR":40,"minimum":110,"sources":[{"title":"VaultSTR, How to pick an Airbnb cleaner in Blue Ridge","url":"https://www.vaultstr.com/blog/airbnb-cleaner-blue-ridge/"}],"note":"Host-reported working ranges.","hottub":35},{"id":"branson","name":"Branson, MO","area":"Branson and Table Rock Lake","updated":"2026-10","sizes":{"1":100,"2":135,"3":165,"4":200,"5":240,"6":280,"7":315,"8":355},"perExtraBR":40,"minimum":100,"sources":[{"title":"VaultSTR, How to pick an Airbnb cleaner in Branson","url":"https://www.vaultstr.com/blog/airbnb-cleaner-branson/"}],"note":"Host-reported working ranges.","hottub":35},{"id":"scottsdale","name":"Scottsdale, AZ","area":"Scottsdale and the Phoenix area","updated":"2026-10","sizes":{"1":155,"2":195,"3":240,"4":290,"5":310,"6":340,"7":360,"8":390},"perExtraBR":30,"minimum":155,"sources":[{"title":"The Short Term Shop, Scottsdale STR expenses","url":"https://theshorttermshop.com/scottsdale-short-term-rental-expenses/"},{"title":"VaultSTR, How to pick an Airbnb cleaner in Scottsdale","url":"https://www.vaultstr.com/blog/airbnb-cleaner-scottsdale/"}],"note":"Investor-guide cost table; pool service is usually a separate monthly contract.","hottub":25},{"id":"tahoe","name":"Lake Tahoe, CA","area":"South Lake Tahoe and the lake area","updated":"2026-10","sizes":{"1":125,"2":165,"3":200,"4":240,"5":285,"6":325,"7":370,"8":410},"perExtraBR":40,"minimum":125,"sources":[{"title":"VaultSTR, How to pick an Airbnb cleaner in South Lake Tahoe","url":"https://www.vaultstr.com/blog/airbnb-cleaner-south-lake-tahoe/"}],"note":"Host-reported working ranges.","hottub":40},{"id":"bigbear","name":"Big Bear, CA","area":"Big Bear Lake cabins","updated":"2026-10","sizes":{"1":115,"2":155,"3":190,"4":230,"5":270,"6":310,"7":350,"8":390},"perExtraBR":40,"minimum":115,"sources":[{"title":"VaultSTR, How to pick an Airbnb cleaner in Big Bear","url":"https://www.vaultstr.com/blog/airbnb-cleaner-big-bear/"}],"note":"Host-reported working ranges.","hottub":35},{"id":"joshuatree","name":"Joshua Tree, CA","area":"Joshua Tree and the high desert","updated":"2026-10","sizes":{"1":115,"2":160,"3":200,"4":245,"5":285,"6":325,"7":370,"8":410},"perExtraBR":40,"minimum":115,"sources":[{"title":"VaultSTR, How to pick an Airbnb cleaner in Joshua Tree","url":"https://www.vaultstr.com/blog/airbnb-cleaner-joshua-tree/"}],"note":"Host-reported working ranges; pool or soak-tub care priced as the hot tub extra.","hottub":45},{"id":"destin","name":"Destin & 30A, FL","area":"Destin, 30A and the Emerald Coast","updated":"2026-10","sizes":{"1":125,"2":175,"3":220,"4":290,"5":355,"6":420,"7":490,"8":560},"perExtraBR":70,"minimum":125,"sources":[{"title":"VaultSTR, How to pick an Airbnb cleaner in Destin","url":"https://www.vaultstr.com/blog/airbnb-cleaner-destin/"}],"note":"Host-reported working ranges; private pool care priced as the hot tub extra.","hottub":55},{"id":"myrtle","name":"Myrtle Beach, SC","area":"Myrtle Beach and the Grand Strand","updated":"2026-10","sizes":{"1":100,"2":135,"3":170,"4":210,"5":250,"6":290,"7":330,"8":370},"perExtraBR":40,"minimum":100,"sources":[{"title":"VaultSTR, How to pick an Airbnb cleaner in Myrtle Beach","url":"https://www.vaultstr.com/blog/airbnb-cleaner-myrtle-beach/"}],"note":"Host-reported working ranges."},{"id":"obx","name":"Outer Banks, NC","area":"Outer Banks beach houses","updated":"2026-10","sizes":{"1":180,"2":180,"3":200,"4":260,"5":310,"6":380,"7":465,"8":550},"perExtraBR":85,"minimum":180,"sources":[{"title":"VaultSTR, How to pick an Airbnb cleaner in Outer Banks","url":"https://www.vaultstr.com/blog/airbnb-cleaner-outer-banks/"}],"note":"Host-reported working ranges. The smallest published tier starts at $180 (3\u20134 bedrooms), so 1\u20132 bedrooms start there too. Pool and hot tub combos are priced as the hot tub extra.","hottub":70}]};
+const SIZES={1:125,2:150,3:175,4:220,5:275,6:325,7:375,8:425};
+const DEFAULTS={
+  charges:{
+    perExtraBR:{label:"Each bedroom over 8",unit:"$",v:45,step:5},
+    billRate:{label:"Hourly price to customers",unit:"$ per cleaner-hour",v:45,step:1},
+    heavy:{label:"Heavy use / large group",unit:"% added",v:25,step:1},
+    rush:{label:"Same-day rush",unit:"% added",v:20,step:1},
+    rushHours:{label:"Rush applies when the window is under",unit:"hours",v:4,step:0.5},
+    peak:{label:"Holiday / peak date",unit:"% added",v:15,step:1},
+    laundrySvc:{label:"Laundry service, passed on",unit:"$ per bed",v:9,step:0.5},
+    mileage:{label:"Travel charge",unit:"$ per mile, round trip (0 = included)",v:0,step:0.05},
+    minimum:{label:"Minimum job price",unit:"$",v:125,step:5},
+    roundTo:{label:"Round prices up to the nearest",unit:"$",v:5,step:1}
+  },
+  costs:{
+    pay:{label:"Cleaner pay",unit:"$ per hour",v:17,step:0.5},
+    payShare:{label:"Cleaners' share of each job",unit:"% of the price",v:50,step:1},
+    overhead:{label:"Payroll taxes & insurance",unit:"% on top of pay",v:12,step:1},
+    supplies:{label:"Supplies per job",unit:"$",v:8,step:0.5},
+    suppliesBath:{label:"Extra supplies per bathroom",unit:"$",v:2,step:0.5},
+    gas:{label:"Your vehicle cost",unit:"$ per mile",v:0.70,step:0.05},
+    inspect:{label:"Final walk-through & photos",unit:"minutes",v:20,step:5},
+    teamEff:{label:"Team efficiency",unit:"% per extra cleaner",v:90,step:1},
+    goal:{label:"Profit you aim for",unit:"% of the price",v:25,step:1}
+  },
+  times:{
+    base:{label:"Arrive, trash, final floors",v:20},
+    bedroom:{label:"Bedroom (dust, vacuum, reset)",v:12},
+    bed:{label:"Strip & make one bed",v:10},
+    bath:{label:"Full bathroom",v:20},
+    living:{label:"Living area",v:15},
+    kitchen:{label:"Kitchen",v:35},
+    laundry:{label:"On-site laundry, per bed set (hands-on time)",v:5}
+  },
+  addons:{
+    hottub:{label:"Hot tub",desc:"Drain, clean, refill, cover",min:25,fee:25},
+    game:{label:"Game room",desc:"Pool table, games, arcade reset",min:15,fee:15},
+    fire:{label:"Fireplace",desc:"Clean out, restock firewood",min:15,fee:15},
+    grill:{label:"Grill",desc:"Scrape and wipe down",min:15,fee:10},
+    deck:{label:"Decks & porches",desc:"Sweep, wipe furniture",min:20,fee:15},
+    trash:{label:"Trash haul",desc:"Take bags to the dumpster site",min:10,fee:10},
+    restock:{label:"Restock guest supplies",desc:"Paper goods, soaps, coffee",min:10,fee:10},
+    pets:{label:"Pet stay",desc:"Hair removal, extra vacuuming",min:30,fee:35}
+  }
+};
+const EXAMPLE={name:"Bear Hollow (example)",client:"",bedrooms:4,baths:3.5,living:2,kitchens:1,beds:6,laundry:"onsite",cond:"normal",
+  addons:["hottub","game","trash","restock"],checkout:"10:00",checkin:"16:00",drive:25,miles:14,peak:false};
+const BIZ={name:"",phone:"",email:"",web:"",logo:"",note:"Price covers one turnover clean as described. Damage, missing items and extra laundry are billed separately.",valid:30,seq:1001};
+
+function fresh(){
+  const o={sizes:Object.assign({},SIZES),charges:{},costs:{},times:{},addons:{},paymode:"hour",pricemode:"size",
+    job:Object.assign({},EXAMPLE),saved:[],biz:Object.assign({},BIZ),setupDone:false,region:"smoky",feed:null,applied:null};
+  for(const g of ["charges","costs","times"])for(const k in DEFAULTS[g])o[g][k]=DEFAULTS[g][k].v;
+  for(const k in DEFAULTS.addons)o.addons[k]={min:DEFAULTS.addons[k].min,fee:DEFAULTS.addons[k].fee};
+  return o;
+}
+function merge(s){
+  const o=fresh();if(!s||typeof s!=="object")return o;
+  for(const g of ["sizes","charges","costs","times","biz"])Object.assign(o[g],s[g]||{});
+  for(const k in (s.addons||{}))if(o.addons[k])Object.assign(o.addons[k],s.addons[k]);
+  if(s.paymode)o.paymode=s.paymode;if(s.pricemode)o.pricemode=s.pricemode;
+  if(s.job)o.job=Object.assign({},EXAMPLE,s.job);if(Array.isArray(s.saved))o.saved=s.saved;
+  o.setupDone=!!s.setupDone;if(s.region)o.region=s.region;if(s.feed&&Array.isArray(s.feed.regions))o.feed=s.feed;if(s.applied)o.applied=s.applied;return o;
+}
+let state=(()=>{let s=null;try{s=JSON.parse(localStorage.getItem(STORE)||"null")}catch(e){}return merge(s)})();
+function persist(){try{const {last,...rest}=state;localStorage.setItem(STORE,JSON.stringify(rest))}catch(e){}}
+
+const $=id=>document.getElementById(id);
+const money=n=>(n<0?"-$":"$")+Math.abs(n).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+const money0=n=>"$"+Math.round(n).toLocaleString();
+const num=(v,f=0)=>{const n=parseFloat(v);return isFinite(n)?n:f};
+function toMin(t){if(!t)return null;const [h,m]=t.split(":").map(Number);return h*60+m}
+function clock(min){min=((Math.round(min)%1440)+1440)%1440;let h=Math.floor(min/60),m=min%60;const ap=h>=12?"pm":"am";h=h%12||12;return h+":"+String(m).padStart(2,"0")+" "+ap}
+function hrs(min){const h=Math.floor(min/60),m=Math.round(min%60);return h+"h "+String(m).padStart(2,"0")+"m"}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function download(name,text,type){
+  const blob=new Blob([text],{type});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;
+  document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500);
+}
+
+/* ---------- brand ---------- */
+function applyBrand(b){
+  const r=document.documentElement.style;
+  r.setProperty("--brand",b.accent||"#0b2b40");r.setProperty("--brand-dark",b.accentDark||"#5cb3d1");
+  r.setProperty("--head1",b.head1||"#1a5470");r.setProperty("--head2",b.head2||"#0b2b40");
+  document.title=b.product||"Rental Cleaning Pricing Calculator";
+  $("b-product").textContent=b.product||"";$("b-tagline").textContent=b.tagline||"";
+  const c=$("b-credit");
+  c.innerHTML=b.credit?(b.creditUrl?`Made by <a href="${esc(b.creditUrl)}" target="_blank" rel="noopener">${esc(b.credit)}</a>`:"Made by "+esc(b.credit)):"";
+}
+
+/* ---------- pure calculation ---------- */
+function calc(job,S){
+  const ch=S.charges,co=S.costs,t=S.times,a=S.addons;
+  let windowMin=null;const coT=toMin(job.checkout),ciT=toMin(job.checkin);
+  if(coT!=null&&ciT!=null){windowMin=ciT-coT;if(windowMin<=0)windowMin+=1440}
+  let extrasMin=0;for(const k of job.addons)if(a[k])extrasMin+=a[k].min;
+  const condMult={light:0.85,normal:1,heavy:1.35}[job.cond]||1;
+  let cleanMin=t.base+job.bedrooms*t.bedroom+job.beds*t.bed+job.baths*t.bath+job.living*t.living+job.kitchens*t.kitchen;
+  if(job.laundry==="onsite")cleanMin+=job.beds*t.laundry;
+  const laborMin=(cleanMin+extrasMin)*condMult;
+  const inspect=co.inspect,eff=co.teamEff/100,speed=c=>1+(c-1)*eff;
+  const workWindow=windowMin==null?null:windowMin-job.drive-inspect;
+  let crew=1;
+  if(workWindow!=null&&workWindow>0){while(laborMin/speed(crew)>workWindow&&crew<12)crew++}else if(workWindow!=null)crew=12;
+  const eachOnSite=laborMin/speed(crew);
+  const onSite=eachOnSite+inspect;
+  const finishAt=coT==null?null:coT+job.drive+onSite;
+  const slack=windowMin==null?null:windowMin-job.drive-onSite;
+  const paidMin=crew*eachOnSite+inspect+crew*job.drive*2;
+  const billMin=Math.ceil((crew*eachOnSite+inspect)/15)*15;
+  const byHour=S.pricemode==="hour";
+  const br=Math.max(1,Math.round(job.bedrooms));
+  const lines=[];
+  if(byHour){lines.push(["Cleaning, "+(billMin/60).toFixed(2).replace(/\.?0+$/,"")+" cleaner-hours at "+money0(ch.billRate)+"/hr",billMin/60*ch.billRate])}
+  else{
+    const sizePrice=br<=8?num(S.sizes[br]):num(S.sizes[8])+(br-8)*ch.perExtraBR;
+    lines.push([br+"-bedroom turnover",sizePrice]);
+    for(const k of job.addons)if(a[k]&&a[k].fee)lines.push([DEFAULTS.addons[k].label,a[k].fee]);
+  }
+  if(job.laundry==="service"&&ch.laundrySvc)lines.push(["Laundry service ("+job.beds+" beds)",job.beds*ch.laundrySvc]);
+  if(ch.mileage&&job.miles)lines.push(["Travel ("+job.miles*2+" mi)",job.miles*2*ch.mileage]);
+  const subtotal=lines.reduce((s,l)=>s+l[1],0);
+  const rush=windowMin!=null&&windowMin<ch.rushHours*60;
+  if(!byHour&&job.cond==="heavy"&&ch.heavy)lines.push(["Heavy use ("+ch.heavy+"%)",subtotal*ch.heavy/100]);
+  if(rush&&ch.rush)lines.push(["Same-day rush ("+ch.rush+"%)",subtotal*ch.rush/100]);
+  if(job.peak&&ch.peak)lines.push(["Peak date ("+ch.peak+"%)",subtotal*ch.peak/100]);
+  let raw=lines.reduce((s,l)=>s+l[1],0);
+  const minApplied=raw<ch.minimum;if(minApplied)raw=ch.minimum;
+  const step=Math.max(1,ch.roundTo);const price=Math.ceil(raw/step-1e-9)*step;
+  let payCost,perCleaner;
+  if(S.paymode==="job"){payCost=price*co.payShare/100;perCleaner=payCost/crew}
+  else{payCost=paidMin/60*co.pay*(1+co.overhead/100);perCleaner=(eachOnSite+inspect+job.drive*2)/60*co.pay}
+  const supplies=co.supplies+co.suppliesBath*Math.ceil(job.baths);
+  const laundryCost=job.laundry==="service"?job.beds*ch.laundrySvc:0;
+  const vehicle=job.miles*2*co.gas;
+  const cost=payCost+supplies+laundryCost+vehicle;
+  const profit=price-cost;
+  const pct=price?profit/price*100:0;
+  let goalPrice=null;
+  if(S.paymode==="hour")goalPrice=Math.ceil(cost/(1-Math.min(co.goal,95)/100)/step)*step;
+  else{const share=co.payShare/100,g=co.goal/100;if(1-share-g>0)goalPrice=Math.ceil((supplies+laundryCost+vehicle)/(1-share-g)/step)*step}
+  return {lines,price,minApplied,rush,windowMin,laborMin,paidMin,crew,onSite,finishAt,slack,payCost,perCleaner,supplies,laundryCost,vehicle,cost,profit,pct,goalPrice};
+}
+
+/* ---------- quote inputs ---------- */
+function buildAddons(){
+  const box=$("addons");box.innerHTML="";
+  for(const k in DEFAULTS.addons){const d=DEFAULTS.addons[k];
+    const l=document.createElement("label");l.className="addon";
+    l.innerHTML=`<input type="checkbox" id="ad-${k}" value="${k}"><span><b>${d.label} <span class="fee" id="fee-${k}"></span></b><small>${d.desc}</small></span>`;
+    box.appendChild(l);}
+}
+function feeTags(){for(const k in DEFAULTS.addons){const f=state.addons[k].fee;$("fee-"+k).textContent=state.pricemode==="hour"?"+"+state.addons[k].min+" min":(f?"+"+money0(f):"included")}}
+const JOBF=["name","client","bedrooms","baths","living","kitchens","beds","checkout","checkin","drive","miles"];
+function fillJob(){
+  const j=state.job;
+  for(const k of JOBF)$(k).value=j[k]==null?"":j[k];
+  document.querySelectorAll('input[name=laundry]').forEach(i=>i.checked=i.value===j.laundry);
+  document.querySelectorAll('input[name=cond]').forEach(i=>i.checked=i.value===j.cond);
+  for(const k in DEFAULTS.addons)$("ad-"+k).checked=j.addons.includes(k);
+  $("peak").checked=!!j.peak;
+  document.querySelectorAll('input[name=pricemode]').forEach(i=>i.checked=i.value===state.pricemode);
+}
+function readJob(){
+  return {name:$("name").value.trim(),client:$("client").value.trim(),bedrooms:num($("bedrooms").value),baths:num($("baths").value),living:num($("living").value),
+    kitchens:num($("kitchens").value),beds:num($("beds").value),checkout:$("checkout").value,checkin:$("checkin").value,
+    drive:num($("drive").value),miles:num($("miles").value),peak:$("peak").checked,
+    laundry:(document.querySelector('input[name=laundry]:checked')||{}).value||"onsite",
+    cond:(document.querySelector('input[name=cond]:checked')||{}).value||"normal",
+    addons:Object.keys(DEFAULTS.addons).filter(k=>$("ad-"+k).checked)};
+}
+
+/* ---------- output ---------- */
+function render(){
+  const j=state.job,res=calc(j,state);state.last=res;
+  feeTags();
+  $("o-price").textContent=money0(res.price);
+  $("o-cab").textContent=(j.name||"Unnamed cabin")+" · "+j.bedrooms+" BR / "+j.baths+" BA";
+  let h=res.lines.map(([a,b])=>`<tr><td>${esc(a)}</td><td>${money(b)}</td></tr>`).join("");
+  if(res.minApplied)h+=`<tr class="sub"><td>Minimum job price applies</td><td></td></tr>`;
+  h+=`<tr class="tot"><td>Price</td><td>${money0(res.price)}</td></tr>`;
+  $("o-lines").innerHTML=h;
+  $("o-crew").textContent=res.crew+(res.crew===1?" cleaner":" cleaners");
+  $("o-done").textContent=res.finishAt==null?"—":clock(res.finishAt);
+  $("o-hours").textContent=hrs(res.paidMin);
+  $("o-pay").textContent=money0(res.perCleaner);
+  const st=$("o-status");
+  if(res.windowMin==null){st.className="status tight";st.innerHTML="<span><b>Add checkout and check-in times</b>to check the crew size and finish time.</span>"}
+  else if(res.slack<0){st.className="status no";st.innerHTML=`<span><b>Can't be finished in time</b>Even ${res.crew} cleaners would run ${hrs(-res.slack)} past check-in. Ask for a later check-in or an earlier checkout.</span>`}
+  else if(res.slack<45){st.className="status tight";st.innerHTML=`<span><b>Tight: ${hrs(res.slack)} to spare</b>Send ${res.crew} cleaner${res.crew>1?"s":""} and start right at checkout.</span>`}
+  else{st.className="status ok";st.innerHTML=`<span><b>Ready ${hrs(res.slack)} before check-in</b>${res.crew} cleaner${res.crew>1?"s":""} can finish the clean and the photo walk-through in time.</span>`}
+  if(res.windowMin){
+    const W=res.windowMin,d=j.drive,we=d+res.onSite-state.costs.inspect,end=d+res.onSite,p=x=>Math.max(0,Math.min(100,x/W*100));
+    $("tl-work").style.left=p(d)+"%";$("tl-work").style.width=(p(we)-p(d))+"%";
+    $("tl-insp").style.left=p(we)+"%";$("tl-insp").style.width=(p(end)-p(we))+"%";
+    $("tl-over").style.width=end>W?"100%":"0";
+    $("tl-start").textContent="Checkout "+clock(toMin(j.checkout));$("tl-end").textContent="Check-in "+clock(toMin(j.checkin));
+  }else{["tl-work","tl-insp","tl-over"].forEach(id=>$(id).style.width="0");$("tl-start").textContent="";$("tl-end").textContent=""}
+  let c=`<tr><td>Cleaner pay${state.paymode==="hour"?" + payroll":" ("+state.costs.payShare+"% share)"}</td><td>${money(res.payCost)}</td></tr>`;
+  c+=`<tr><td>Supplies</td><td>${money(res.supplies)}</td></tr>`;
+  if(res.laundryCost)c+=`<tr><td>Laundry service</td><td>${money(res.laundryCost)}</td></tr>`;
+  if(res.vehicle)c+=`<tr><td>Vehicle (${j.miles*2} mi)</td><td>${money(res.vehicle)}</td></tr>`;
+  c+=`<tr class="tot"><td>Your cost</td><td>${money(res.cost)}</td></tr>`;
+  c+=`<tr class="tot"><td>Your profit</td><td>${money(res.profit)} (${Math.round(res.pct)}%)</td></tr>`;
+  $("o-cost").innerHTML=c;
+  const pr=$("o-profit"),goal=state.costs.goal;
+  if(res.profit<0){pr.className="status no";pr.innerHTML=`<span><b>This price loses money</b>${res.goalPrice?"Charging "+money0(res.goalPrice)+" would reach your "+goal+"% profit goal.":"Raise the price or lower the cleaners' share."}</span>`}
+  else if(res.pct<goal){pr.className="status tight";pr.innerHTML=`<span><b>Below your ${goal}% profit goal</b>${res.goalPrice?"Charging "+money0(res.goalPrice)+" would reach it.":""}</span>`}
+  else{pr.className="status ok";pr.innerHTML=`<span><b>Meets your ${goal}% profit goal</b>This price covers your crew, supplies and travel.</span>`}
+}
+
+/* ---------- customer quote ---------- */
+function fmtDate(d){return d.toLocaleDateString(undefined,{year:"numeric",month:"long",day:"numeric"})}
+let cqNumber=null;
+function quoteText(){
+  const j=state.job,res=state.last,b=state.biz;
+  return [b.name?b.name+(b.phone?" · "+b.phone:""):"",
+    `Turnover quote${cqNumber?" #"+cqNumber:""}: ${j.name||"Cabin"}`,
+    j.client?`For: ${j.client}`:"",
+    `${j.bedrooms} bedrooms, ${j.baths} baths, ${j.beds} beds`,
+    ...res.lines.map(([a,v])=>`  ${a}: ${money(v)}`),
+    res.minApplied?"  Minimum job price applies":"",
+    `Total: ${money0(res.price)}`,
+    res.finishAt!=null&&res.slack>=0?`Ready by ${clock(res.finishAt)}, with a photo walk-through`:""
+  ].filter(Boolean).join("\n");
+}
+function buildCQ(){
+  const j=state.job,res=state.last,b=state.biz,today=new Date(),until=new Date(today.getTime()+num(b.valid,30)*864e5);
+  const contact=[b.phone,b.email,b.web].filter(Boolean).map(esc).join("<br>");
+  const extras=j.addons.map(k=>DEFAULTS.addons[k].label.toLowerCase());
+  const linen={onsite:"Linens washed and dried at the property",service:"Linens sent to a laundry service",none:"Linens provided by the owner"}[j.laundry];
+  const details=[
+    res.windowMin?`Turnover window: guest checkout ${clock(toMin(j.checkout))}, next check-in ${clock(toMin(j.checkin))}`:"",
+    res.finishAt!=null&&res.slack>=0?`Cabin ready by about ${clock(res.finishAt)}`:"",
+    `${j.bedrooms} bedrooms, ${j.baths} bathrooms, ${j.beds} beds stripped and made`,
+    extras.length?"Includes: "+extras.join(", "):"",
+    linen,
+    "Room-by-room photo walk-through at the end of every clean"
+  ].filter(Boolean);
+  $("cq-doc").innerHTML=`
+    <div class="cq-top">
+      <div class="cq-biz">${b.logo?`<img src="${b.logo}" alt="">`:""}<div><h2>${esc(b.name||"Your business name")}</h2><div>${contact}</div></div></div>
+      <div class="cq-meta"><b>QUOTE</b>No. ${cqNumber}<br>${fmtDate(today)}<br>Good through ${fmtDate(until)}</div>
+    </div>
+    <div class="cq-two">
+      <div><h4>Prepared for</h4><p>${esc(j.client||"—")}</p></div>
+      <div><h4>Property</h4><p>${esc(j.name||"—")}</p></div>
+    </div>
+    <table><thead><tr><th>Turnover cleaning</th><th>Amount</th></tr></thead><tbody>
+      ${res.lines.map(([a,v])=>`<tr><td>${esc(a)}</td><td>${money(v)}</td></tr>`).join("")}
+      ${res.minApplied?`<tr><td>Minimum job price applies</td><td></td></tr>`:""}
+      <tr class="total"><td>Total per turnover</td><td>${money(res.price)}</td></tr>
+    </tbody></table>
+    <div class="cq-two"><div style="grid-column:1/-1"><h4>Service details</h4><ul>${details.map(d=>`<li>${esc(d)}</li>`).join("")}</ul></div></div>
+    ${b.note?`<div class="cq-note">${esc(b.note)}</div>`:""}
+    <div class="cq-foot">Thank you for your business.</div>`;
+}
+function openCQ(){
+  cqNumber=num(state.biz.seq,1001);state.biz.seq=cqNumber+1;$("biz-seq").value=state.biz.seq;persist();
+  buildCQ();$("cq").hidden=false;$("cq-close").focus();
+}
+
+/* ---------- saved cabins ---------- */
+function renderSaved(){
+  const box=$("saved-list");box.innerHTML="";
+  $("saved-empty").hidden=state.saved.length>0;box.hidden=state.saved.length===0;
+  state.saved.forEach((s,i)=>{const c=document.createElement("span");c.className="chip";
+    c.innerHTML=`${esc(s.name||"Unnamed")} <button class="load" data-i="${i}">Load</button><button class="del" data-i="${i}" aria-label="Remove ${esc(s.name)}">✕</button>`;
+    box.appendChild(c);});
+}
+
+/* ---------- prices view ---------- */
+function field(id,label,unit,val,step){return `<label class="f" id="w-${id}">${label} <span class="u">${unit}</span><input type="number" id="${id}" step="${step}" min="0" value="${val}"></label>`}
+function buildSettings(){
+  let h="";for(let b=1;b<=8;b++)h+=field("s-"+b,b+" bedroom"+(b>1?"s":""),"$",state.sizes[b],5);
+  h+=field("c-perExtraBR",DEFAULTS.charges.perExtraBR.label,"$",state.charges.perExtraBR,5);
+  $("set-sizes").innerHTML=h;
+  h="";for(const k in DEFAULTS.addons){const d=DEFAULTS.addons[k];
+    h+=field("af-"+k,d.label,"charge $ (0 = included)",state.addons[k].fee,1)+field("am-"+k,d.label,"minutes",state.addons[k].min,5)}
+  $("set-addons").innerHTML=h;
+  h="";for(const k in DEFAULTS.charges){if(k==="perExtraBR")continue;const d=DEFAULTS.charges[k];h+=field("c-"+k,d.label,d.unit,state.charges[k],d.step)}
+  $("set-charges").innerHTML=h;
+  h="";for(const k in DEFAULTS.costs){const d=DEFAULTS.costs[k];h+=field("k-"+k,d.label,d.unit,state.costs[k],d.step)}
+  $("set-costs").innerHTML=h;
+  h="";for(const k in DEFAULTS.times){const d=DEFAULTS.times[k];h+=field("t-"+k,d.label,"minutes",state.times[k],5)}
+  $("set-time").innerHTML=h;
+  document.querySelectorAll('input[name=paymode]').forEach(i=>i.checked=i.value===state.paymode);
+  payVis();
+}
+function payVis(){$("w-k-pay").hidden=state.paymode!=="hour";$("w-k-overhead").hidden=state.paymode!=="hour";$("w-k-payShare").hidden=state.paymode!=="job"}
+function readSettings(){
+  for(let b=1;b<=8;b++)state.sizes[b]=num($("s-"+b).value,SIZES[b]);
+  for(const k in DEFAULTS.charges)state.charges[k]=num($("c-"+k).value,DEFAULTS.charges[k].v);
+  for(const k in DEFAULTS.costs)state.costs[k]=num($("k-"+k).value,DEFAULTS.costs[k].v);
+  for(const k in DEFAULTS.times)state.times[k]=num($("t-"+k).value,DEFAULTS.times[k].v);
+  for(const k in DEFAULTS.addons){state.addons[k].min=num($("am-"+k).value);state.addons[k].fee=num($("af-"+k).value)}
+  state.paymode=(document.querySelector('input[name=paymode]:checked')||{}).value||"hour";payVis();
+}
+
+/* ---------- business view ---------- */
+function fillBiz(){
+  const b=state.biz;$("biz-name").value=b.name;$("biz-phone").value=b.phone;$("biz-email").value=b.email;$("biz-web").value=b.web;
+  $("biz-note").value=b.note;$("biz-valid").value=b.valid;$("biz-seq").value=b.seq;
+  $("logo-prev").innerHTML=b.logo?`<img src="${b.logo}" alt="Your logo">`:"No logo";$("logo-remove").hidden=!b.logo;
+}
+function readBiz(){
+  const b=state.biz;b.name=$("biz-name").value.trim();b.phone=$("biz-phone").value.trim();b.email=$("biz-email").value.trim();
+  b.web=$("biz-web").value.trim();b.note=$("biz-note").value;b.valid=num($("biz-valid").value,30);b.seq=num($("biz-seq").value,1001);
+}
+function shrinkImage(file,cb){
+  const fr=new FileReader();
+  fr.onload=()=>{const img=new Image();img.onload=()=>{
+      const scale=Math.min(1,400/img.width,200/img.height),c=document.createElement("canvas");
+      c.width=Math.round(img.width*scale);c.height=Math.round(img.height*scale);
+      c.getContext("2d").drawImage(img,0,0,c.width,c.height);cb(c.toDataURL("image/png"));};
+    img.onerror=()=>cb(null);img.src=fr.result;};
+  fr.onerror=()=>cb(null);fr.readAsDataURL(file);
+}
+
+/* ---------- market regions & price updates ---------- */
+function regionData(){const f=state.feed;return (f&&Array.isArray(f.regions)&&f.regions.length&&(f.updated||"")>=(BUILTIN.updated||""))?f:BUILTIN}
+function regionById(id){return regionData().regions.find(r=>r.id===id)}
+function fillRegionSelect(sel,withOwn){
+  const rs=regionData().regions;
+  sel.innerHTML=rs.map(r=>`<option value="${esc(r.id)}">${esc(r.name)} · ${esc(r.area)}</option>`).join("")+(withOwn?'<option value="own">Somewhere else: I\'ll enter my own prices</option>':"");
+}
+function renderRegion(){
+  fillRegionSelect($("region"),false);
+  if(regionById(state.region))$("region").value=state.region;
+  const r=regionById($("region").value);if(!r){$("region-info").textContent="";return}
+  const src=(r.sources||[]).map(x=>`<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a>`).join(" · ");
+  const pr=[1,2,3,4,5,6,7,8].map(b=>money0(num(r.sizes[b]))).join(" · ");
+  const applied=state.applied&&state.applied.id===r.id;
+  const newer=applied&&(r.updated||"")>(state.applied.updated||"");
+  $("region-info").innerHTML=`<span><b>1–8 bedrooms:</b> ${pr}</span><span>Prices as of ${esc(r.updated||"")}. ${esc(r.note||"")}</span>${src?`<span>Sources: ${src}</span>`:""}`+
+    (newer?`<span class="notice">Newer prices are available for ${esc(r.name)}. Tap <b>Use these prices</b> to apply them.</span>`:applied?`<span>Your price list uses these prices.</span>`:"");
+}
+function applyRegion(r){
+  for(let b=1;b<=8;b++)state.sizes[b]=num(r.sizes[b],state.sizes[b]);
+  if(r.perExtraBR!=null)state.charges.perExtraBR=num(r.perExtraBR);
+  if(r.minimum!=null)state.charges.minimum=num(r.minimum);
+  if(r.hottub!=null)state.addons.hottub.fee=num(r.hottub);
+  state.region=r.id;state.applied={id:r.id,updated:r.updated||""};
+}
+function versionNotice(f){
+  const n=$("version-notice");
+  if(f&&f.latestVersion&&f.latestVersion!==APP_VERSION&&cmpVer(f.latestVersion,APP_VERSION)>0){
+    n.innerHTML=`<b>Version ${esc(f.latestVersion)} is available.</b> ${esc(f.versionMessage||"")}${f.downloadUrl?` <a href="${esc(f.downloadUrl)}" target="_blank" rel="noopener">Get the new version</a>`:""}`;n.hidden=false;
+  }else n.hidden=true;
+}
+function cmpVer(a,b){const x=String(a).split(".").map(Number),y=String(b).split(".").map(Number);for(let i=0;i<Math.max(x.length,y.length);i++){const d=(x[i]||0)-(y[i]||0);if(d)return d}return 0}
+async function checkFeed(quiet){
+  if(!B.feed){if(!quiet)toastIn("toast-feed","Price updates aren't turned on in this copy.");return}
+  if(!quiet)toastIn("toast-feed","Checking…");
+  try{
+    const res=await fetch(B.feed+(B.feed.includes("?")?"&":"?")+"t="+Date.now(),{cache:"no-store"});
+    if(!res.ok)throw new Error("status "+res.status);
+    const f=await res.json();
+    if(f.app!=="turnover-pricing"||!Array.isArray(f.regions)||!f.regions.length)throw new Error("format");
+    state.feed=f;persist();renderRegion();versionNotice(f);
+    if(!quiet)toastIn("toast-feed","Up to date: market prices as of "+(f.updated||"today")+".");
+  }catch(e){if(!quiet)toastIn("toast-feed","Couldn't reach the price update service. Check your internet connection and try again.")}
+}
+
+/* ---------- rebrand (PLR) ---------- */
+const RBF=["product","tagline","accent","accentDark","head1","head2","credit","creditUrl","feed"];
+let brandEdit=Object.assign({},B);
+function fillRB(){for(const k of RBF)$("rb-"+k).value=brandEdit[k]||"";$("rb-keep").checked=false}
+function readRB(){for(const k of RBF)brandEdit[k]=$("rb-"+k).value.trim()}
+function exportBranded(){
+  readRB();
+  const out=Object.assign({},brandEdit,{plr:$("rb-keep").checked});
+  const json=JSON.stringify(out).replace(/</g,"\\u003c");
+  let html=PRISTINE.replace(/(<script id="brand" type="application\/json">)[\s\S]*?(<\/script>)/,(m,a,c)=>a+json+c);
+  html=html.replace(/<title>[\s\S]*?<\/title>/,"<title>"+esc(out.product||"Rental Cleaning Pricing Calculator")+"</title>");
+  download(slug(out.product||"rental-cleaning-pricing-calculator")+".html",html,"text/html");
+}
+
+/* ---------- toasts & tabs ---------- */
+function toastIn(id,msg){const t=$(id);t.textContent=msg;clearTimeout(t._t);t._t=setTimeout(()=>t.textContent="",3000)}
+const toast=m=>toastIn("toast",m);
+const TABS=[["tab-quote","view-quote"],["tab-rates","view-rates"],["tab-biz","view-biz"],["tab-brand","view-brand"]];
+function showTab(t){TABS.forEach(([t2,v2])=>{$(t2).setAttribute("aria-selected",t2===t);$(v2).hidden=t2!==t})}
+TABS.forEach(([t])=>$(t).addEventListener("click",()=>showTab(t)));
+
+/* ---------- events ---------- */
+function onJob(){state.job=readJob();state.pricemode=(document.querySelector('input[name=pricemode]:checked')||{}).value||"size";persist();render()}
+function onSet(){readSettings();persist();render()}
+function onBiz(){readBiz();persist()}
+function route(e){
+  if(e.target.closest("#view-quote"))onJob();
+  else if(e.target.id==="region"){renderRegionPreview()}
+  else if(e.target.closest("#view-rates"))onSet();
+  else if(e.target.closest("#view-biz")&&e.target.type!=="file")onBiz();
+  else if(e.target.closest("#view-brand")&&e.target.id!=="rb-keep"){readRB();applyBrand(brandEdit)}
+}
+document.addEventListener("input",route);document.addEventListener("change",route);
+
+$("copy").addEventListener("click",()=>copyText(toast));
+$("cq-copy").addEventListener("click",()=>copyText(m=>{const b=$("cq-copy"),o="Copy as text";b.textContent=m.startsWith("Quote copied")?"Copied":"Copy failed";setTimeout(()=>b.textContent=o,2000)}));
+function copyText(say){
+  const txt=quoteText(),ta=$("quote-text");ta.value=txt;
+  const fallback=()=>{$("cq").hidden=true;ta.hidden=false;ta.select();say("Select the text below and copy it.")};
+  try{navigator.clipboard.writeText(txt).then(()=>{ta.hidden=true;say("Quote copied. Paste it into a text or email.")},fallback)}catch(e){fallback()}
+}
+$("open-cq").addEventListener("click",openCQ);
+$("cq-close").addEventListener("click",()=>{$("cq").hidden=true;$("open-cq").focus()});
+$("cq-print").addEventListener("click",()=>{try{window.print()}catch(e){}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("cq").hidden){$("cq").hidden=true}});
+$("save").addEventListener("click",()=>{
+  const j=readJob();if(!j.name){toast("Give the cabin a name first.");$("name").focus();return}
+  const i=state.saved.findIndex(s=>s.name===j.name);if(i>=0)state.saved[i]=j;else state.saved.push(j);
+  persist();renderSaved();toast(i>=0?"Cabin updated.":"Cabin saved.");
+});
+$("saved-list").addEventListener("click",e=>{
+  const b=e.target.closest("button");if(!b)return;const i=+b.dataset.i;
+  if(b.classList.contains("load")){state.job=Object.assign({},EXAMPLE,state.saved[i]);fillJob();persist();render();toast("Loaded "+state.saved[i].name+".")}
+  else{state.saved.splice(i,1);persist();renderSaved()}
+});
+let armed=false;
+$("reset").addEventListener("click",()=>{
+  const btn=$("reset");
+  if(!armed){armed=true;btn.textContent="Tap again to reset your prices";setTimeout(()=>{armed=false;btn.textContent="Reset to starting prices"},4000);return}
+  const f=fresh();for(const g of ["sizes","charges","costs","times","addons"])state[g]=f[g];state.paymode=f.paymode;
+  const rr=regionById(state.region);if(rr)applyRegion(rr);renderRegion();
+  persist();buildSettings();render();armed=false;btn.textContent="Reset to starting prices";
+});
+$("logo-file").addEventListener("change",e=>{
+  const f=e.target.files&&e.target.files[0];if(!f)return;
+  shrinkImage(f,url=>{if(!url){toastIn("toast-biz","That file couldn't be read as an image. Try a PNG or JPG.");return}
+    state.biz.logo=url;persist();fillBiz();toastIn("toast-biz","Logo added.")});e.target.value="";
+});
+$("logo-remove").addEventListener("click",()=>{state.biz.logo="";persist();fillBiz()});
+$("backup").addEventListener("click",()=>{
+  const {last,...rest}=state;const d=new Date().toISOString().slice(0,10);
+  download(slug(B.product)+"-backup-"+d+".json",JSON.stringify({app:"turnover-pricing",version:2,savedAt:new Date().toISOString(),data:rest},null,1),"application/json");
+  toastIn("toast-biz","Backup file saved to your downloads.");
+});
+$("restore").addEventListener("change",e=>{
+  const f=e.target.files&&e.target.files[0];if(!f)return;const fr=new FileReader();
+  fr.onload=()=>{try{const o=JSON.parse(fr.result);if(o.app!=="turnover-pricing"||!o.data)throw 0;
+      state=merge(Object.assign({},o.data,{setupDone:true}));persist();fillJob();buildSettings();fillBiz();renderSaved();renderRegion();render();
+      toastIn("toast-biz","Backup restored: your prices, cabins and business details are back.")}
+    catch(err){toastIn("toast-biz","That file isn't a backup from this tool. Choose the .json file you saved with “Save a backup file.”")}};
+  fr.readAsText(f);e.target.value="";
+});
+function renderRegionPreview(){const v=$("region").value;const keep=state.region;state.region=v;renderRegion();state.region=keep;$("region").value=v}
+let armedR=false;
+$("apply-region").addEventListener("click",()=>{
+  const r=regionById($("region").value);if(!r)return;const btn=$("apply-region");
+  if(!armedR){armedR=true;btn.textContent="Tap again to replace your price list";setTimeout(()=>{armedR=false;btn.textContent="Use these prices"},4000);return}
+  armedR=false;btn.textContent="Use these prices";applyRegion(r);persist();buildSettings();renderRegion();render();toastIn("toast-feed",r.name+" prices are now in your price list.");
+});
+$("check-feed").addEventListener("click",()=>checkFeed(false));
+$("rerun").addEventListener("click",()=>openSetup());
+function openSetup(){fillRegionSelect($("su-region"),true);$("su-region").value=regionById(state.region)?state.region:"smoky";$("su-name").value=state.biz.name;$("su-phone").value=state.biz.phone;
+  document.querySelectorAll('input[name=su-mode]').forEach(i=>i.checked=i.value===state.pricemode);$("setup").hidden=false;$("su-name").focus()}
+$("su-go").addEventListener("click",()=>{
+  state.biz.name=$("su-name").value.trim();state.biz.phone=$("su-phone").value.trim();
+  state.pricemode=(document.querySelector('input[name=su-mode]:checked')||{}).value||"size";
+  const rv=$("su-region").value,own=rv==="own";const rr=regionById(rv);if(rr)applyRegion(rr);
+  state.setupDone=true;persist();$("setup").hidden=true;fillBiz();fillJob();buildSettings();renderRegion();render();
+  if(own){showTab("tab-rates");window.scrollTo(0,0)}else toast("You're set. Try a quote, or open My prices to adjust.");
+});
+$("su-skip").addEventListener("click",()=>{state.setupDone=true;persist();$("setup").hidden=true});
+$("rb-download").addEventListener("click",()=>{exportBranded();toastIn("toast-rb","Your branded copy is in your downloads.")});
+$("rb-undo").addEventListener("click",()=>{brandEdit=Object.assign({},B);fillRB();applyBrand(B)});
+
+/* ---------- start ---------- */
+window.__calc=calc;window.__state=()=>state;
+applyBrand(B);
+if(B.plr){$("tab-brand").hidden=false;fillRB()}
+buildAddons();fillJob();buildSettings();fillBiz();renderSaved();renderRegion();render();
+if(state.feed)versionNotice(state.feed);
+if(!state.setupDone)openSetup();
+/* quiet check for new prices at most once a week */
+try{const last=+localStorage.getItem(STORE+":feedcheck")||0;if(B.feed&&Date.now()-last>6048e5){localStorage.setItem(STORE+":feedcheck",String(Date.now()));checkFeed(true)}}catch(e){}
+})();
+</script>
+
+</body>
+</html>
