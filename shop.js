@@ -6,8 +6,15 @@
 
   // Build the catalog by category, in the order categories first appear
   const cats = [...new Set(PRODUCTS.map(p => p.category))];
-  catalog.innerHTML = cats.map(cat => `
-    <div class="cat"><h3>${esc(cat)}</h3>
+  const categoryId = cat => "category-" + cat.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  const jumpCategories = cats.filter(cat => cat.startsWith("Coloring books"));
+  const jumpNav = jumpCategories.length > 1
+    ? `<nav class="catalog-jumps" aria-label="Jump to a Beatitudes edition section">
+        ${jumpCategories.map(cat => `<a class="btn" href="#${categoryId(cat)}">${cat.includes("Spanish") ? "Ediciones en español" : "English editions"}</a>`).join("")}
+      </nav>`
+    : "";
+  catalog.innerHTML = jumpNav + cats.map(cat => `
+    <div class="cat" id="${categoryId(cat)}"><h3>${esc(cat)}</h3>
       ${PRODUCTS.filter(p => p.category === cat).map(p => `
         <div class="item">
           <h4 id="t-${p.id}">${esc(p.name)}</h4>
