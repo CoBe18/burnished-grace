@@ -52,6 +52,8 @@ section{padding:clamp(3.5rem,7vw,5.5rem) 0}
 .shop{display:grid;grid-template-columns:1fr;gap:2.5rem}
 @media(min-width:900px){.shop{grid-template-columns:minmax(0,1fr) 20rem;align-items:start}}
 .cat{margin-bottom:2.25rem}
+.catalog-jumps{display:flex;flex-wrap:wrap;gap:.65rem;margin:0 0 1.5rem}
+.catalog-jumps .btn{padding:.55rem .95rem;font-size:.95rem}
 .cat h3{border-bottom:2px solid var(--gold);padding-bottom:.35rem}
 .item{display:grid;grid-template-columns:1fr auto;gap:.4rem 1.5rem;padding:1.1rem 0;border-bottom:1px solid #E2CFC8}
 .item h4{margin:0;font-family:var(--display);font-weight:400;font-size:1.15rem;color:var(--maroon)}
