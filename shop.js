@@ -14,7 +14,9 @@
           <p>${esc(p.desc)}</p>
           ${p.page ? `<p class="more"><a href="${esc(p.page)}" aria-label="See details and screenshots: ${esc(p.name)}">See details and screenshots</a></p>` : ""}
           <div class="buy">${
-            typeof p.price === "number"
+            p.free
+              ? `<span class="price">Free</span><a class="btn btn-free" href="${esc(p.free)}" aria-label="Open the free ${esc(p.name)} app">Open free app</a>`
+              : typeof p.price === "number"
               ? `<span class="price">${money(p.price)}</span>
                  <label><input type="checkbox" data-id="${p.id}" aria-label="Add to order: ${esc(p.name)}" aria-describedby="t-${p.id} inc-${p.id}"> Add to order</label>                 <span class="included hidden" id="inc-${p.id}"></span>`
               : `<span class="soon">Coming soon</span>`

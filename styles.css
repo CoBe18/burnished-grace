@@ -180,3 +180,4 @@ dialog.notice p{margin:0 0 1.2rem;font-size:1.05rem}
 .notice-btns .btn{cursor:pointer;font:inherit;font-weight:600}
 .btn-outline{background:transparent;color:var(--maroon);border-color:var(--gold-dark)}
 .btn-outline:hover{background:var(--linen);color:var(--maroon)}
+.buy .btn-free{display:inline-block;margin-top:.4rem;padding:.55rem 1rem;font-size:.95rem}

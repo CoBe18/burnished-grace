@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0B2B40">
+<meta name="format-detection" content="telephone=no">
+<title>Free Budget Ledger App | Burnished Grace Creative Studio</title>
+<meta name="description" content="A free, private budget ledger for your phone, tablet, or computer. Track deposits, expenses, and upcoming bills, and see what is truly free to spend. No sign-up; your entries stay on your device.">
+<link rel="canonical" href="https://burnishedgracestudio.com/tools/budget-ledger/">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Budget">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta property="og:title" content="Free Budget Ledger App">
+<meta property="og:description" content="Track deposits, expenses, and upcoming bills, and see what is truly free to spend. Free and private: your entries stay on your device.">
+<meta property="og:image" content="https://burnishedgracestudio.com/tools/budget-ledger/icon-512.png">
+<meta property="og:url" content="https://burnishedgracestudio.com/tools/budget-ledger/">
+<style>
+:root{
+  color-scheme:light;
+  --teal:#0B2B40; --teal-2:#1A5470; --accent:#5CB3D1; --tint:#D4E5EC; --page:#EEF3F8;
+  --gold:#F2C76B; --gold-ink:#7A5A12; --ink:#0B2B40; --muted:#4F6676; --line:#D9E4EC;
+  --green:#1F7A4D; --red:#B3261E; --white:#fff;
+  --shadow:0 1px 0 rgba(255,255,255,.9) inset,0 10px 24px rgba(11,43,64,.10),0 2px 6px rgba(11,43,64,.08);
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--page);color:var(--ink);font:16px/1.55 var(--font);
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header{background:linear-gradient(135deg,var(--teal-2),var(--teal));color:#fff;padding:28px 0 64px;border-bottom:3px solid var(--gold)}
+header h1{margin:0;font-size:clamp(1.7rem,4vw,2.3rem);letter-spacing:-.01em}
+header p{margin:.2rem 0 1.2rem;color:var(--tint)}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px}
+main{margin-top:-44px;padding-bottom:40px}
+.panel{background:var(--white);border-radius:14px;box-shadow:var(--shadow);border:1px solid #E3ECF2;padding:22px;margin:0 0 20px}
+h2{margin:0 0 14px;font-size:1.25rem}
+button,.btn{font:inherit;font-weight:600;min-height:44px;padding:10px 16px;border-radius:10px;border:1px solid transparent;cursor:pointer;
+  background:var(--teal);color:#fff;box-shadow:0 2px 0 rgba(0,0,0,.12)}
+button:hover{filter:brightness(1.12)}
+button.light{background:#fff;color:var(--teal);border-color:#B8CCD8;box-shadow:none}
+header button.light{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.4)}
+header button.gold,button.gold{background:var(--gold);color:var(--teal);border-color:#E0B252}
+button.small{min-height:40px;padding:8px 12px;font-size:.9rem}
+button.danger{background:#fff;color:var(--red);border-color:#E7B9B6;box-shadow:none}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+input,select{font:inherit;font-size:16px;color:var(--ink);background:#fff;border:1px solid #A9BFCC;border-radius:10px;padding:10px 12px;min-height:46px;width:100%}
+input[type=date]{min-width:0}
+label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:.95rem}
+label .hint{font-weight:400;color:var(--muted);font-size:.85rem}
+.notice{min-height:1.4em;margin:0 0 12px;color:var(--teal-2);font-weight:600}
+/* backup banner */
+.backup{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-radius:12px;padding:12px 16px;margin:0 0 20px;background:#fff;box-shadow:var(--shadow);border-left:6px solid var(--accent)}
+.backup.warn{background:#FFF8E6;border-left-color:var(--gold)}
+.backup p{margin:0}
+/* summary */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:0 0 20px}
+.card{background:#fff;border-radius:14px;box-shadow:var(--shadow);border:1px solid #E3ECF2;padding:16px 18px;border-top:4px solid var(--accent)}
+.card.main{border-top-color:var(--gold)}
+.card span{display:block;color:var(--muted);font-size:.9rem;font-weight:600}
+.card strong{display:block;font-size:clamp(1.3rem,2.6vw,1.75rem);margin-top:4px;font-variant-numeric:tabular-nums}
+.card small{color:var(--muted)}
+.opening{display:flex;align-items:end;gap:12px;flex-wrap:wrap}
+.opening label{max-width:260px;flex:1}
+/* type picker */
+.types{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 16px;border:0;padding:0}
+.types legend{font-weight:600;margin-bottom:8px;font-size:.95rem}
+.types input{position:absolute;opacity:0;width:1px;height:1px}
+.types label{border:2px solid #B8CCD8;border-radius:12px;padding:12px;text-align:center;cursor:pointer;background:#fff;min-height:64px;justify-content:center}
+.types label small{font-weight:400;color:var(--muted)}
+.types input:checked+label{border-color:var(--teal);background:var(--tint);box-shadow:inset 0 0 0 1px var(--teal)}
+.types input:focus-visible+label{outline:3px solid var(--accent);outline-offset:2px}
+.fields{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.fields .wide{grid-column:span 2}
+.pay-fields{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;background:var(--page);border-radius:12px;padding:14px}
+.pay-fields p{grid-column:1/-1;margin:0;color:var(--muted);font-size:.9rem}
+.check{flex-direction:row;align-items:center;gap:10px;font-weight:600}
+.check input{width:24px;height:24px;min-height:0}
+.form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+[hidden]{display:none!important}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* tables */
+.table-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%}
+th,td{padding:12px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+th{background:var(--teal);color:#fff;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase}
+th:first-child{border-top-left-radius:10px}th:last-child{border-top-right-radius:10px}
+td.num,th.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+td.in{color:var(--green);font-weight:600}
+td.neg{color:var(--red);font-weight:600}
+td.actions{white-space:nowrap;text-align:right}
+td.actions button{margin-left:6px}
+tr.empty td{color:var(--muted);text-align:center;padding:22px}
+.tag{display:inline-block;font-size:.78rem;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--tint);color:var(--teal)}
+.tag.paid{background:#DDF1E6;color:var(--green)}
+.tag.late{background:#FBE3E1;color:var(--red)}
+.tag.part{background:#FFF1CC;color:var(--gold-ink)}
+.sub{color:var(--muted);font-size:.85rem;font-weight:400}
+.toggle{margin-top:12px}
+details{line-height:1.7}
+summary{cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center}
+/* pay dialog */
+dialog{border:0;border-radius:16px;padding:22px;max-width:420px;width:calc(100% - 32px);box-shadow:0 20px 50px rgba(11,43,64,.35);color:var(--ink)}
+dialog::backdrop{background:rgba(11,43,64,.55)}
+dialog h2{margin-bottom:4px}
+dialog .stack{display:grid;gap:14px;margin-top:14px}
+/* install + footer */
+.install{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-radius:12px;padding:12px 16px;margin:0 0 20px;background:#fff;box-shadow:var(--shadow);border-left:6px solid var(--teal-2)}
+.install p{margin:0}
+.install .x{background:none;color:var(--muted);box-shadow:none;min-height:44px;padding:8px 12px}
+.privacy{color:var(--tint);font-size:.9rem;margin:.9rem 0 0}
+footer.site{text-align:center;color:var(--muted);font-size:.95rem;padding:10px 20px 34px}
+footer.site a{color:var(--teal-2);font-weight:600}
+@media print{.install,footer.site,.privacy{display:none!important}}
+/* tablets */
+@media (max-width:980px){
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .fields{grid-template-columns:repeat(2,1fr)}
+  .pay-fields{grid-template-columns:repeat(2,1fr)}
+}
+/* phones: tables become cards */
+@media (max-width:760px){
+  .wrap{padding:0 14px}
+  header{padding:22px 0 56px}
+  .toolbar button{flex:1 1 calc(50% - 10px)}
+  .panel{padding:16px;border-radius:12px}
+  .fields,.pay-fields{grid-template-columns:1fr}
+  .fields .wide{grid-column:auto}
+  .types label{padding:10px 6px;font-size:.92rem}
+  .types label small{display:none}
+  .form-actions button{flex:1}
+  .table-wrap{overflow:visible}
+  table,tbody,tr,td{display:block;width:100%}
+  thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  tr{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;padding:6px 12px;margin:0 0 12px;background:#fff;box-shadow:0 2px 6px rgba(11,43,64,.06)}
+  td{display:flex;justify-content:space-between;gap:12px;border:0;padding:7px 0;text-align:right}
+  td::before{content:attr(data-label);font-weight:600;color:var(--muted);text-align:left}
+  td.num{text-align:right}
+  td.first{order:-1;font-weight:700;font-size:1.02rem;border-bottom:1px solid var(--line);padding-bottom:9px;margin-bottom:3px}
+  td.first::before{content:none}
+  td:empty{display:none}
+  td.actions{justify-content:flex-end;flex-wrap:wrap;gap:8px;padding-top:10px}
+  td.actions::before{content:none}
+  td.actions button{margin:0;flex:1}
+  tr.empty{box-shadow:none}
+  tr.empty td{justify-content:center;text-align:center}
+  tr.empty td::before{content:none}
+}
+@media (max-width:420px){.cards{grid-template-columns:1fr 1fr;gap:10px}.card{padding:12px}.card span{font-size:.8rem}}
+@media print{
+  header{background:none;color:var(--ink);padding:0;border:0}header p{color:var(--muted)}
+  .toolbar,.backup,#entryPanel,.opening button,td.actions,th.act,.toggle,#help,.notice{display:none!important}
+  main{margin:0}.panel,.card{box-shadow:none;border:1px solid #ccc}
+  th{background:#eee!important;color:#000}body{background:#fff;font-size:11px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Budget Ledger</h1>
+    <p>Your money today. Your plans for tomorrow.</p>
+    <div class="toolbar">
+      <button id="backup" class="gold" type="button">Download backup</button>
+      <button id="restore" class="light" type="button">Restore backup</button>
+      <button id="csv" class="light" type="button">Export CSV</button>
+      <button id="print" class="light" type="button">Print</button>
+      <input id="file" type="file" accept=".json,application/json" hidden>
+    </div>
+    <p class="privacy">Free and private. No sign-up. Your entries stay on this device and are never sent to us.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="installBox" class="install" hidden></div>
+  <div id="backupBanner" class="backup" role="region" aria-label="Backup status"></div>
+
+  <div class="cards" aria-live="polite">
+    <div class="card main"><span>Balance now</span><strong id="balance">$0.00</strong><small>Money actually in the account</small></div>
+    <div class="card"><span>Set aside for bills</span><strong id="unpaid">$0.00</strong><small>Unpaid bills still due</small></div>
+    <div class="card"><span>Free to spend</span><strong id="available">$0.00</strong><small>Balance minus bills</small></div>
+    <div class="card"><span>Total spent</span><strong id="spent">$0.00</strong><small>Expenses and bill payments</small></div>
+  </div>
+
+  <section class="panel">
+    <div class="opening">
+      <label>Opening balance <span class="hint">What was in the account when you started</span>
+        <input id="opening" type="number" inputmode="decimal" step="0.01" value="0"></label>
+    </div>
+  </section>
+
+  <section class="panel" id="entryPanel">
+    <h2 id="formtitle">Add an entry</h2>
+    <p class="notice" id="notice" role="status" aria-live="polite"></p>
+    <form id="entry" novalidate>
+      <fieldset class="types" id="typeSet">
+        <legend>What are you adding?</legend>
+        <input type="radio" name="type" id="t-deposit" value="deposit" checked><label for="t-deposit">Deposit<small>Money coming in</small></label>
+        <input type="radio" name="type" id="t-expense" value="expense"><label for="t-expense">Expense<small>Money you spent</small></label>
+        <input type="radio" name="type" id="t-budget" value="budget"><label for="t-budget">Upcoming bill<small>A bill to set aside for</small></label>
+      </fieldset>
+      <div class="fields">
+        <label><span id="dateLabel">Date</span><input id="date" type="date" required></label>
+        <label class="wide"><span id="itemLabel">Description</span><input id="item" maxlength="200" autocomplete="off" required></label>
+        <label>Category<input id="category" list="categories" autocomplete="off" required></label>
+        <label><span id="amountLabel">Amount</span><input id="amount" type="number" inputmode="decimal" min="0" max="999999999" step="0.01" required></label>
+        <div class="pay-fields" id="payFields" hidden>
+          <p>Payment on this bill</p>
+          <label>Total paid so far<input id="paid" type="number" inputmode="decimal" min="0" max="999999999" step="0.01" value="0"></label>
+          <label>Payment date<input id="paidDate" type="date"></label>
+          <label class="check"><input id="closed" type="checkbox"> Bill is fully paid</label>
+        </div>
+      </div>
+      <datalist id="categories"></datalist>
+      <div class="form-actions">
+        <button type="submit" id="saveBtn">Save entry</button>
+        <button type="button" class="light" id="cancel" hidden>Cancel edit</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="panel">
+    <h2>Upcoming bills</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Due</th><th>Bill</th><th>Category</th><th class="num">Planned</th><th class="num">Paid</th><th class="num">Still due</th><th>Status</th><th class="act"><span class="sr-only">Actions</span></th></tr></thead>
+        <tbody id="bills"></tbody>
+      </table>
+    </div>
+    <button type="button" class="light small toggle" id="showPaid" aria-expanded="false">Show paid bills</button>
+  </section>
+
+  <section class="panel">
+    <h2>Ledger</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Date</th><th>Item</th><th>Category</th><th class="num">Deposit</th><th class="num">Spent</th><th class="num">Balance</th><th class="act"><span class="sr-only">Actions</span></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel" id="help">
+    <details>
+      <summary>How to use your ledger</summary>
+      <p><strong>Start</strong> by entering your opening balance: what was in the account on the day you began.</p>
+      <p><strong>Deposits</strong> are money coming in. They show in angle brackets, like &lt;$1,200.00&gt;. <strong>Expenses</strong> are money you spent. Both change your balance right away.</p>
+      <p><strong>Upcoming bills</strong> are money you need to set aside. They do not lower your balance until you pay them, but they are subtracted from <em>Free to spend</em> so you know what is really yours to use. Add a new bill for each billing period.</p>
+      <p><strong>To pay a bill</strong>, tap <em>Pay</em> next to it. Enter the total you have paid and the date. Check <em>Bill is fully paid</em> when it's settled, even if the amount was different from what you planned. Leave it unchecked for a partial payment, and the rest stays set aside. The payment then appears in the Ledger on the date you paid.</p>
+      <p><strong>Use it like an app.</strong> On iPhone or iPad, open this page in Safari, tap the Share button, then <em>Add to Home Screen</em>. On Android, open it in Chrome, tap the menu (three dots), then <em>Add to Home screen</em> or <em>Install app</em>. On a computer, bookmark this page. Once added, it works without internet.</p>
+      <p><strong>Back up often.</strong> Your entries are saved in this browser on this device and are never sent to us. Clearing browser data, switching browsers, or moving the app file can make them unavailable. <em>Download backup</em> saves a file you can restore later or on another device. Restoring replaces what is here now, after you confirm.</p>
+      <p><strong>Export CSV</strong> makes a report for spreadsheets. It cannot be restored; use a backup for that. <strong>Print</strong> makes a paper copy of your bills and ledger.</p>
+    </details>
+  </section>
+</main>
+
+<footer class="site">
+  <p>Budget Ledger is a free tool from <a href="https://burnishedgracestudio.com/">Burnished Grace Creative Studio</a>.<br>
+  <a href="https://burnishedgracestudio.com/#shop">See more apps and resources</a></p>
+</footer>
+
+<dialog id="payDialog" aria-labelledby="payTitle">
+  <form method="dialog" id="payForm">
+    <h2 id="payTitle">Pay bill</h2>
+    <div class="sub" id="payInfo"></div>
+    <div class="stack">
+      <label>Total paid so far<input id="payAmount" type="number" inputmode="decimal" min="0" max="999999999" step="0.01" required></label>
+      <label>Payment date<input id="payDate" type="date" required></label>
+      <label class="check"><input id="payClosed" type="checkbox" checked> Bill is fully paid</label>
+    </div>
+    <p class="notice" id="payNotice" role="status" aria-live="polite"></p>
+    <div class="form-actions">
+      <button type="submit" value="save" id="paySave">Save payment</button>
+      <button type="button" class="light" id="payCancel">Cancel</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+const KEY = 'budget-ledger-v1', BACKUP_KEY = 'budget-ledger-v1-lastbackup';
+let state = {version: 1, opening: 0, entries: []}, editing = null, paying = null, showPaid = false;
+
+/* ---------- formatting ---------- */
+const usd = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'});
+const money = c => usd.format(c / 100);
+const plain = c => (c / 100).toFixed(2);
+const cents = v => Math.round(Number(v || 0) * 100);
+const today = () => new Date().toLocaleDateString('en-CA');
+const nice = d => { if (!d) return ''; const [y, m, day] = d.split('-').map(Number);
+  return new Date(y, m - 1, day).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}); };
+const tell = (s, el = 'notice') => { $(el).textContent = s; };
+
+/* ---------- storage (same format as before, so old data and backups still load) ---------- */
+function valid(s) {
+  return s && s.version === 1 && Number.isSafeInteger(s.opening) && Array.isArray(s.entries) &&
+    s.entries.every(e => typeof e.id === 'string' && typeof e.item === 'string' && typeof e.category === 'string' &&
+      /^\d{4}-\d{2}-\d{2}$/.test(e.date) && ['deposit', 'expense', 'budget'].includes(e.type) &&
+      Number.isSafeInteger(e.amount) && e.amount >= 0 && Number.isSafeInteger(e.paid) && e.paid >= 0 &&
+      ['open', 'closed'].includes(e.status) && (!e.paid || /^\d{4}-\d{2}-\d{2}$/.test(e.paidDate)));
+}
+let storageOk = true;
+try { const s = JSON.parse(localStorage.getItem(KEY)); if (valid(s)) state = s; }
+catch (e) { storageOk = false; }
+function getLastBackup() { try { return localStorage.getItem(BACKUP_KEY) || ''; } catch (e) { return ''; } }
+function setLastBackup() { try { localStorage.setItem(BACKUP_KEY, today()); } catch (e) {} }
+function save(msg) {
+  try { localStorage.setItem(KEY, JSON.stringify(state)); storageOk = true; tell(msg || 'Saved.'); }
+  catch (e) { storageOk = false; tell('This browser could not save. Download a backup now so you don’t lose your entries.'); }
+  render();
+}
+
+/* ---------- ledger math: real money only (deposits, expenses, bill payments) ---------- */
+function ledgerRows() {
+  const out = [];
+  state.entries.forEach((e, i) => {
+    if (e.type === 'budget') { if (e.paid) out.push({e, date: e.paidDate, dep: 0, out: e.paid, order: i, payment: true}); }
+    else out.push({e, date: e.date, dep: e.type === 'deposit' ? e.amount : 0, out: e.type === 'expense' ? e.amount : 0, order: i});
+  });
+  return out.sort((a, b) => a.date.localeCompare(b.date) || a.order - b.order);
+}
+function totals() {
+  let balance = state.opening, spent = 0;
+  ledgerRows().forEach(r => { balance += r.dep - r.out; spent += r.out; });
+  const unpaid = state.entries.filter(e => e.type === 'budget' && e.status === 'open').reduce((n, e) => n + Math.max(0, e.amount - e.paid), 0);
+  return {balance, spent, unpaid, available: balance - unpaid};
+}
+
+/* ---------- rendering ---------- */
+function cell(tr, label, text, cls) {
+  const td = document.createElement('td'); td.dataset.label = label; td.textContent = text; if (cls) td.className = cls; tr.append(td); return td;
+}
+function btn(td, label, fn, cls = 'light small', aria) {
+  const b = document.createElement('button'); b.type = 'button'; b.textContent = label; b.className = cls;
+  if (aria) b.setAttribute('aria-label', aria); b.onclick = fn; td.append(b); return b;
+}
+function emptyRow(body, cols, text) {
+  const tr = document.createElement('tr'), td = document.createElement('td'); tr.className = 'empty';
+  td.colSpan = cols; td.textContent = text; tr.append(td); body.append(tr);
+}
+function del(e) {
+  const what = e.type === 'budget' ? 'this bill and its payment' : 'this entry';
+  if (!confirm('Delete ' + what + ' (' + e.item + ')? This can’t be undone.')) return;
+  state.entries = state.entries.filter(x => x.id !== e.id); if (editing === e.id) reset(); save('Deleted.');
+}
+
+function render() {
+  const t = totals();
+  $('balance').textContent = money(t.balance);
+  $('unpaid').textContent = money(t.unpaid);
+  $('available').textContent = money(t.available);
+  $('spent').textContent = money(t.spent);
+  for (const id of ['balance', 'available']) $(id).style.color = t[id] < 0 ? 'var(--red)' : '';
+  if (document.activeElement !== $('opening')) $('opening').value = plain(state.opening);
+
+  /* bills */
+  const bills = $('bills'); bills.replaceChildren();
+  const all = state.entries.filter(e => e.type === 'budget').sort((a, b) => a.date.localeCompare(b.date));
+  const list = all.filter(e => showPaid || e.status === 'open');
+  const paidCount = all.length - all.filter(e => e.status === 'open').length;
+  list.forEach(e => {
+    const tr = document.createElement('tr'), left = e.status === 'open' ? Math.max(0, e.amount - e.paid) : 0;
+    cell(tr, 'Due', nice(e.date));
+    cell(tr, 'Bill', e.item, 'first');
+    cell(tr, 'Category', e.category);
+    cell(tr, 'Planned', money(e.amount), 'num');
+    cell(tr, 'Paid', e.paid ? money(e.paid) + (e.paidDate ? ' on ' + nice(e.paidDate) : '') : '', 'num');
+    cell(tr, 'Still due', e.status === 'open' ? money(left) : '', 'num');
+    const st = cell(tr, 'Status', ''), tag = document.createElement('span');
+    if (e.status === 'closed') { tag.className = 'tag paid'; tag.textContent = 'Paid'; }
+    else if (e.paid) { tag.className = 'tag part'; tag.textContent = 'Partly paid'; }
+    else if (e.date < today()) { tag.className = 'tag late'; tag.textContent = 'Past due'; }
+    else { tag.className = 'tag'; tag.textContent = 'Upcoming'; }
+    st.append(tag);
+    const act = document.createElement('td'); act.className = 'actions';
+    if (e.status === 'open') btn(act, 'Pay', () => openPay(e), 'small', 'Pay ' + e.item);
+    btn(act, 'Edit', () => edit(e), 'light small', 'Edit ' + e.item);
+    btn(act, 'Delete', () => del(e), 'danger small', 'Delete ' + e.item);
+    tr.append(act); bills.append(tr);
+  });
+  if (!list.length) emptyRow(bills, 8, all.length ? 'All bills are paid. 🎉' : 'No upcoming bills yet. Choose “Upcoming bill” above to add one.');
+  $('showPaid').hidden = !paidCount;
+  $('showPaid').textContent = showPaid ? 'Hide paid bills' : 'Show paid bills (' + paidCount + ')';
+  $('showPaid').setAttribute('aria-expanded', String(showPaid));
+
+  /* ledger */
+  const body = $('rows'); body.replaceChildren(); let bal = state.opening;
+  ledgerRows().forEach(r => {
+    bal += r.dep - r.out;
+    const tr = document.createElement('tr');
+    cell(tr, 'Date', nice(r.date));
+    cell(tr, 'Item', r.e.item + (r.payment ? ' (bill payment)' : ''), 'first');
+    cell(tr, 'Category', r.e.category);
+    cell(tr, 'Deposit', r.dep ? '<' + money(r.dep) + '>' : '', 'num in');
+    cell(tr, 'Spent', r.out ? money(r.out) : '', 'num');
+    cell(tr, 'Balance', money(bal), 'num' + (bal < 0 ? ' neg' : ''));
+    const act = document.createElement('td'); act.className = 'actions';
+    btn(act, 'Edit', () => edit(r.e), 'light small', 'Edit ' + r.e.item);
+    btn(act, 'Delete', () => del(r.e), 'danger small', 'Delete ' + r.e.item);
+    tr.append(act); body.append(tr);
+  });
+  if (!body.children.length) emptyRow(body, 7, 'Nothing here yet. Add your first deposit or expense above.');
+
+  /* categories you've used, plus a starter list */
+  const starter = ['Income', 'Groceries', 'Gas', 'Eating out', 'Household', 'Rent', 'Mortgage', 'Utilities', 'Phone', 'Internet', 'Insurance', 'Subscriptions', 'Medical', 'Car', 'Giving'];
+  const cats = [...new Set([...state.entries.map(e => e.category), ...starter])];
+  $('categories').replaceChildren(...cats.map(c => { const o = document.createElement('option'); o.value = c; return o; }));
+  renderBackup();
+}
+
+function renderBackup() {
+  const box = $('backupBanner'), last = getLastBackup(), has = state.entries.length > 0;
+  box.replaceChildren();
+  const p = document.createElement('p');
+  let warn = false;
+  if (!storageOk) { warn = true; p.textContent = 'This browser can’t save your entries. Download a backup after every change.'; }
+  else if (!has) { p.textContent = 'Tip: once you’ve added entries, download a backup about once a week.'; }
+  else if (!last) { warn = true; p.textContent = 'You haven’t made a backup yet. If this browser’s data is cleared, your entries are gone.'; }
+  else {
+    const days = Math.floor((new Date(today()) - new Date(last)) / 86400000);
+    if (days >= 7) { warn = true; p.textContent = 'Your last backup was ' + days + ' days ago (' + nice(last) + '). Time for a new one.'; }
+    else p.textContent = 'Last backup: ' + nice(last) + (days === 0 ? ' (today)' : '') + '.';
+  }
+  box.className = 'backup' + (warn ? ' warn' : '');
+  box.append(p);
+  if (warn || !has) { if (has || !storageOk) btn(box, 'Download backup', doBackup, 'gold small'); }
+}
+
+/* ---------- form: show only the boxes that fit the entry type ---------- */
+const typeVal = () => document.querySelector('input[name=type]:checked').value;
+function setType(t) { document.querySelector('input[name=type][value=' + t + ']').checked = true; applyType(); }
+function applyType() {
+  const t = typeVal();
+  $('dateLabel').textContent = t === 'budget' ? 'Due date' : 'Date';
+  $('itemLabel').textContent = t === 'deposit' ? 'Where it came from' : t === 'expense' ? 'What you bought' : 'Bill';
+  $('amountLabel').textContent = t === 'budget' ? 'Amount due' : 'Amount';
+  $('item').placeholder = t === 'deposit' ? 'Paycheck' : t === 'expense' ? 'Groceries at Kroger' : 'Electric bill';
+  $('payFields').hidden = !(t === 'budget' && editing);
+  if (t === 'deposit' && !editing && !$('category').value) $('category').value = 'Income';
+  if (t !== 'deposit' && !editing && $('category').value === 'Income') $('category').value = '';
+}
+document.querySelectorAll('input[name=type]').forEach(r => r.addEventListener('change', applyType));
+
+function reset() {
+  editing = null; $('entry').reset(); $('date').value = today();
+  $('formtitle').textContent = 'Add an entry'; $('saveBtn').textContent = 'Save entry'; $('cancel').hidden = true;
+  $('typeSet').disabled = false; $('category').value = ''; applyType();
+}
+function edit(e) {
+  editing = e.id; setType(e.type);
+  $('date').value = e.date; $('item').value = e.item; $('category').value = e.category;
+  $('amount').value = plain(e.amount); $('paid').value = plain(e.paid); $('paidDate').value = e.paidDate || '';
+  $('closed').checked = e.status === 'closed';
+  $('formtitle').textContent = 'Edit ' + (e.type === 'budget' ? 'bill' : e.type === 'deposit' ? 'deposit' : 'expense');
+  $('saveBtn').textContent = 'Save changes'; $('cancel').hidden = false; tell('');
+  applyType();
+  $('entryPanel').scrollIntoView({behavior: 'smooth', block: 'start'});
+  setTimeout(() => $('item').focus({preventScroll: true}), 300);
+}
+$('cancel').onclick = () => { reset(); tell(''); };
+
+$('entry').onsubmit = ev => {
+  ev.preventDefault();
+  const type = typeVal(), date = $('date').value, item = $('item').value.trim(), category = $('category').value.trim();
+  const amount = cents($('amount').value);
+  if (!date) { tell('Choose a date.'); $('date').focus(); return; }
+  if (!item) { tell('Describe the entry.'); $('item').focus(); return; }
+  if (!category) { tell('Choose or type a category.'); $('category').focus(); return; }
+  if (!(amount > 0) || !Number.isSafeInteger(amount)) { tell('Enter an amount greater than $0.00.'); $('amount').focus(); return; }
+  const old = editing ? state.entries.find(x => x.id === editing) : null;
+  let paid = 0, paidDate = '', status = 'open';
+  if (type === 'budget' && editing) {
+    paid = cents($('paid').value); paidDate = paid ? $('paidDate').value : ''; status = $('closed').checked ? 'closed' : 'open';
+    if (paid < 0 || !Number.isSafeInteger(paid)) { tell('Check the amount paid.'); $('paid').focus(); return; }
+    if (paid && !paidDate) { tell('Enter the date you paid this bill.'); $('paidDate').focus(); return; }
+  }
+  const e = {id: editing || String(Date.now()) + Math.random().toString(16).slice(2), date, item, category, type, amount, paid, paidDate, status};
+  if (old) state.entries = state.entries.map(x => x.id === editing ? e : x); else state.entries.push(e);
+  const word = type === 'budget' ? 'Bill' : type === 'deposit' ? 'Deposit' : 'Expense';
+  reset(); save(word + (old ? ' updated.' : ' saved.'));
+  if (!old && type !== 'deposit') setType(type);
+};
+
+$('opening').addEventListener('change', () => {
+  const v = cents($('opening').value);
+  if (Number.isSafeInteger(v)) { state.opening = v; save('Opening balance saved.'); }
+});
+
+/* ---------- pay a bill ---------- */
+function openPay(e) {
+  paying = e;
+  $('payTitle').textContent = 'Pay ' + e.item;
+  $('payInfo').textContent = 'Planned ' + money(e.amount) + ', due ' + nice(e.date) + (e.paid ? '. Paid so far: ' + money(e.paid) + '.' : '.');
+  $('payAmount').value = plain(e.paid || e.amount); $('payDate').value = e.paidDate || today(); $('payClosed').checked = true; tell('', 'payNotice');
+  if (typeof $('payDialog').showModal === 'function') $('payDialog').showModal(); else { edit(e); return; }
+  setTimeout(() => $('payAmount').select(), 50);
+}
+$('payCancel').onclick = () => { paying = null; $('payDialog').close(); };
+$('payForm').onsubmit = ev => {
+  ev.preventDefault();
+  const amt = cents($('payAmount').value), d = $('payDate').value;
+  if (!(amt > 0) || !Number.isSafeInteger(amt)) { tell('Enter the amount you paid.', 'payNotice'); $('payAmount').focus(); return; }
+  if (!d) { tell('Choose the payment date.', 'payNotice'); $('payDate').focus(); return; }
+  const id = paying.id;
+  state.entries = state.entries.map(x => x.id === id ? {...x, paid: amt, paidDate: d, status: $('payClosed').checked ? 'closed' : 'open'} : x);
+  paying = null; $('payDialog').close(); save('Payment saved.');
+};
+
+$('showPaid').onclick = () => { showPaid = !showPaid; render(); };
+
+/* ---------- backup, restore, CSV, print ---------- */
+function download(name, data, mime) {
+  const url = URL.createObjectURL(new Blob([data], {type: mime})), a = document.createElement('a');
+  a.href = url; a.download = name; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1500);
+}
+function doBackup() {
+  download('Budget-Ledger-Backup-' + today() + '.json', JSON.stringify(state, null, 2), 'application/json');
+  setLastBackup(); tell('Backup downloaded. Keep it somewhere safe, like your Documents folder or cloud storage.'); renderBackup();
+}
+$('backup').onclick = doBackup;
+$('restore').onclick = () => $('file').click();
+$('file').onchange = async () => {
+  try {
+    const f = $('file').files[0]; if (!f) return;
+    const s = JSON.parse(await f.text()); if (!valid(s)) throw Error();
+    if (confirm('Replace everything in this ledger with this backup? Your current entries will be replaced.')) { state = s; reset(); save('Backup restored.'); }
+  } catch (e) { tell('That file isn’t a Budget Ledger backup. Nothing was changed.'); }
+  $('file').value = '';
+};
+$('csv').onclick = () => {
+  const esc = v => '"' + String(v).replace(/^[=+@-]/, "'$&").replaceAll('"', '""') + '"';
+  let b = state.opening;
+  const lines = [['LEDGER'], ['DATE', 'ITEM', 'CATEGORY', 'DEPOSIT', 'SPENT', 'BALANCE'], ['', 'Opening balance', '', '', '', plain(state.opening)]];
+  ledgerRows().forEach(r => { b += r.dep - r.out; lines.push([r.date, r.e.item + (r.payment ? ' (bill payment)' : ''), r.e.category, r.dep ? plain(r.dep) : '', r.out ? plain(r.out) : '', plain(b)]); });
+  lines.push([], ['BILLS'], ['DUE', 'BILL', 'CATEGORY', 'PLANNED', 'PAID', 'PAYMENT DATE', 'STILL DUE', 'STATUS']);
+  state.entries.filter(e => e.type === 'budget').sort((a, c) => a.date.localeCompare(c.date)).forEach(e =>
+    lines.push([e.date, e.item, e.category, plain(e.amount), e.paid ? plain(e.paid) : '', e.paidDate || '', e.status === 'open' ? plain(Math.max(0, e.amount - e.paid)) : '0.00', e.status === 'closed' ? 'Paid' : 'Open']));
+  download('Budget-Ledger-' + today() + '.csv', lines.map(r => r.map(esc).join(',')).join('\r\n'), 'text/csv');
+  tell('CSV report downloaded.');
+};
+$('print').onclick = () => { const was = showPaid; showPaid = true; render(); window.print(); showPaid = was; render(); };
+
+/* ---------- add to home screen ---------- */
+const standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+let dismissed = false; try { dismissed = localStorage.getItem('budget-ledger-install-hide') === '1'; } catch (e) {}
+function showInstall(text, action) {
+  if (standalone || dismissed) return;
+  const box = $('installBox'); box.replaceChildren();
+  const p = document.createElement('p'); p.textContent = text; box.append(p);
+  const wrap = document.createElement('div');
+  if (action) btn(wrap, 'Add to home screen', action, 'small');
+  btn(wrap, 'Not now', () => { box.hidden = true; try { localStorage.setItem('budget-ledger-install-hide', '1'); } catch (e) {} }, 'x small');
+  box.append(wrap); box.hidden = false;
+}
+const ua = navigator.userAgent, isIOS = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+if (isIOS) showInstall('Keep Budget Ledger on your home screen: tap the Share button, then \u201cAdd to Home Screen.\u201d');
+window.addEventListener('beforeinstallprompt', ev => {
+  ev.preventDefault();
+  showInstall('Add Budget Ledger to your home screen so it opens like an app, even offline.', async () => { ev.prompt(); try { await ev.userChoice; } catch (e) {} $('installBox').hidden = true; });
+});
+if ('serviceWorker' in navigator && window.isSecureContext && location.protocol !== 'file:') navigator.serviceWorker.register('sw.js').catch(() => {});
+/* Ask the browser to keep this data instead of clearing it to free space. */
+if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
+
+reset(); render();
+if (!storageOk) tell('This browser can’t save entries here. Download a backup after every change.');
+</script>
+</body>
+</html>

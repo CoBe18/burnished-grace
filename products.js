@@ -4,6 +4,7 @@
   Each product needs: id, category, name, desc, price (a number, or null for "Coming soon").
   Optional:
     page:     a details page, shown as a "See details" link under the description.
+    free:     a link to a free tool; shows an "Open free app" button instead of a price.
     includes: ids of products this one already contains. Choosing it removes those
               from the order, so nobody pays twice (used by the PLR Edition).
     contains + notice: ids of products a bundle already holds, and the popup shown when
@@ -56,6 +57,9 @@ const PRODUCTS = [
     price: 16.99, contains: ["beatitudes-kids-es", "beatitudes-teen-es", "beatitudes-adult-es"],
     notice: { text: "Ya incluye las ediciones para niños, jóvenes y adultos. Agrega una edición individual solo si es un regalo para otro hogar.",
               keep: "Mantenerla, es un regalo", remove: "Quitar la edición individual" } },
+  { id: "budget-ledger", category: "Free tools", name: "Budget Ledger",
+    desc: "Track deposits, expenses and upcoming bills, and see what is truly free to spend. Works on phones, tablets and computers, even offline. Free, with no sign-up; your entries stay on your device.",
+    price: null, free: "tools/budget-ledger/" },
   { id: "echoes-unseen", category: "Books", name: "Echoes of the Unseen",
     desc: "Book one of the Echoes series: why cultures across oceans and millennia remember giants, floods, and a lost world, tested against Scripture.",
     price: null }
