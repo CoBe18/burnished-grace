@@ -20,6 +20,16 @@ return [
         'price' => 107.00,
         'file'  => 'Rental-Property-Finances-PLR-Edition.zip',
     ],
+    'rental-cleaning-calc' => [
+        'name'  => 'Rental Cleaning Pricing Calculator',
+        'price' => 17.00,
+        'file'  => 'Rental-Cleaning-Pricing-Calculator.zip',
+    ],
+    'rental-cleaning-calc-plr' => [
+        'name'  => 'Rental Cleaning Pricing Calculator: Private Label Rights Edition',
+        'price' => 47.00,
+        'file'  => 'Rental-Cleaning-Pricing-Calculator-PLR.zip',
+    ],
     'beatitudes-kids' => [
         'name'  => 'The Beatitudes: Kids Edition',
         'price' => 4.99,
