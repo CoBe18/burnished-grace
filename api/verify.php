@@ -50,7 +50,7 @@ if (!$seen) {
     if ($email && filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $body = "Thank you for your purchase from Burnished Grace Creative Studio!\n\nYour downloads (links work for $hours hours):\n\n";
         foreach ($links as $l) $body .= $l['name'] . ":\n" . $l['url'] . "\n\n";
-        $body .= "Each download includes an installation and use guide.\nQuestions? Reply to this email or write to " . $CFG['support_email'] . "\n\nOrder: $orderId\n";
+        $body .= "Questions? Reply to this email or write to " . $CFG['support_email'] . "\n\nOrder: $orderId\n";
         $from = $CFG['support_email'];
         @mail($email, 'Your Burnished Grace downloads', $body,
             "From: Burnished Grace Creative Studio <$from>\r\nReply-To: $from\r\nContent-Type: text/plain; charset=UTF-8", "-f$from");

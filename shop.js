@@ -48,6 +48,39 @@
   }
   const total = () => items().reduce((s, p) => s + p.price, 0);
 
+  // A bundle that "contains" single editions shows a popup when both are in the order.
+  // The buyer can keep both (a gift for another household) or remove the single edition.
+  const dlg = document.createElement("dialog");
+  dlg.className = "notice";
+  dlg.setAttribute("aria-labelledby", "notice-text");
+  dlg.innerHTML = `<p id="notice-text"></p><div class="notice-btns">
+    <button type="button" class="btn" data-act="keep"></button>
+    <button type="button" class="btn btn-outline" data-act="remove"></button></div>`;
+  document.body.appendChild(dlg);
+  let pending = null;
+  dlg.addEventListener("click", e => {
+    const act = e.target.dataset && e.target.dataset.act;
+    if (!act) return;
+    if (act === "remove" && pending) {
+      pending.forEach(id => { selected.delete(id); const b = box(id); if (b) b.checked = false; });
+      render();
+      msg.textContent = `Your order contains ${items().length} item${items().length === 1 ? "" : "s"}. Total: ${money(total())}.`;
+    }
+    pending = null;
+    dlg.close();
+  });
+  function checkBundles(changedId) {
+    const bundle = PRODUCTS.find(p => p.contains && selected.has(p.id) &&
+      (p.id === changedId || p.contains.includes(changedId)) && p.contains.some(id => selected.has(id)));
+    if (!bundle || !bundle.notice) return;
+    pending = bundle.contains.filter(id => selected.has(id));
+    dlg.querySelector("#notice-text").textContent = bundle.notice.text;
+    dlg.querySelector('[data-act="keep"]').textContent = bundle.notice.keep;
+    dlg.querySelector('[data-act="remove"]').textContent = bundle.notice.remove;
+    if (typeof dlg.showModal === "function") dlg.showModal();
+    else if (!confirm(bundle.notice.text + "\n\nOK = " + bundle.notice.keep)) dlg.querySelector('[data-act="remove"]').click();
+  }
+
   function render() {
     const chosen = items();
     list.innerHTML = chosen.map(p => `<li><span>${esc(p.name)}</span><span>${money(p.price)}</span></li>`).join("");
@@ -66,6 +99,7 @@
   render();
 
   msg.textContent = `Your order contains ${items().length} item${items().length === 1 ? "" : "s"}. Total: ${money(total())}.`;
+  if (e.target.checked) checkBundles(id);
 });
 
   // Links such as index.html?add=real-estate-app#shop start the order with that item.
