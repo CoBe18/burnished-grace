@@ -1,0 +1,818 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0A1A3D">
+<title>PLR Profit Check | Burnished Grace Creative Studio</title>
+<meta name="description" content="A free calculator for PLR buyers: your real profit per sale after fees, how many sales it takes to earn your PLR back, and whether your price and plans fit your license.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js): the same tag as burnishedgracestudio.com, so you can see visits -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4H5SPPZE8X"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4H5SPPZE8X');</script>
+<style>
+/* COLORS: dark navy, a lighter blue, and creme. EDIT HERE to change them. */
+:root{
+  color-scheme:light;
+  --navy:#0A1A3D; --navy-2:#102552; --navy-3:#1E3A72; --card-navy:#14295A; --ink:#06102A;
+  --blue:#8DB8E3; --blue-light:#B7D3EF; --blue-deep:#2E5A8A; --creme:#FAF5E9; --creme-line:#E8DDC4;
+  --page:#F5EFE1; --paper:#FFFDF8; --text:#1A2236; --muted:#55617A; --line:#D5DBE6; --soft:#E9EDF4;
+  --good:#1D7A4F; --good-tint:#E3F4EA; --warn:#7A5A1E; --warn-tint:#F8EEDA; --bad:#B3261E; --bad-tint:#FBE9E7;
+  --shadow:0 1px 0 rgba(255,255,255,.9) inset,0 12px 28px rgba(11,23,49,.10),0 2px 6px rgba(11,23,49,.08);
+  --font:"Figtree",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--page);color:var(--text);font:16px/1.55 var(--font);
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+a{color:var(--navy-3)}
+header.hero{background:radial-gradient(ellipse at 20% 10%,var(--navy-3) 0%,var(--navy-2) 45%,var(--navy) 100%);color:#D6DEEC;
+  padding:26px 0 70px;border-bottom:3px solid var(--blue)}
+.brandline{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-light);font-weight:700;margin:0 0 .5rem}
+header h1{margin:0;color:#fff;font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.12;letter-spacing:-.01em;font-weight:800}
+header .lede{margin:.6rem 0 0;max-width:46rem;font-size:1.06rem}
+.hero-points{display:flex;flex-wrap:wrap;gap:8px;margin:1rem 0 0;padding:0;list-style:none}
+.hero-points li{border:1px solid rgba(141,184,227,.6);border-radius:999px;padding:4px 12px;font-size:.88rem;color:#E6EBF4}
+main{margin-top:-46px;padding-bottom:30px}
+.layout{display:grid;gap:20px}
+@media(min-width:980px){.layout{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:start}.results{position:sticky;top:16px}}
+.panel{background:var(--paper);border-radius:14px;box-shadow:var(--shadow);border:1px solid #E3E8F0;padding:20px;margin:0 0 20px}
+.panel-h{display:flex;align-items:center;gap:12px;margin:0 0 4px}
+.badge{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--navy);color:var(--blue-light);font-weight:800;display:grid;place-items:center;font-size:.95rem}
+h2{margin:0;font-size:1.22rem;color:var(--navy);line-height:1.25}
+.panel-sub{margin:0 0 14px 42px;color:var(--muted);font-size:.94rem}
+.grid{display:grid;gap:14px}
+@media(min-width:560px){.grid.two{grid-template-columns:1fr 1fr}.grid.three{grid-template-columns:1fr 1fr 1fr}}
+label.f{display:block;font-weight:600;font-size:.95rem;margin-bottom:5px}
+.hint{display:block;font-weight:400;color:var(--muted);font-size:.84rem;margin-top:3px}
+input[type=text],input[type=number],select{width:100%;font:inherit;font-size:16px;min-height:46px;padding:10px 12px;border-radius:10px;border:1px solid #C3CCDA;background:#fff;color:var(--text)}
+input:focus,select:focus,button:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:1px;border-color:var(--blue)}
+.money{position:relative}
+.money span{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.money input{padding-left:26px}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:.95rem;cursor:pointer;padding:6px 0}
+.check input{width:22px;height:22px;margin:1px 0 0;accent-color:var(--navy);flex:0 0 auto}
+details.fees{margin-top:12px;border:1px solid var(--line);border-radius:10px;background:var(--creme)}
+details.fees summary{cursor:pointer;padding:12px 14px;font-weight:600;color:var(--navy);min-height:44px}
+details.fees .inner{padding:0 14px 14px}
+.note{font-size:.86rem;color:var(--muted);margin:10px 0 0}
+button,.btn{font:inherit;font-weight:700;min-height:46px;padding:10px 18px;border-radius:10px;border:1px solid transparent;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.btn-blue{background:var(--blue);border-color:var(--blue-light);color:var(--ink);box-shadow:0 2px 0 var(--blue-deep)}
+.btn-blue:hover{background:var(--blue-light)}
+.btn-navy{background:var(--navy);color:#fff}
+.btn-navy:hover{background:var(--card-navy)}
+.btn-ghost{background:#fff;border-color:#C3CCDA;color:var(--navy)}
+.btn-ghost:hover{border-color:var(--navy)}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+
+/* license questions */
+.lic{display:grid;gap:10px}
+.lic-row{display:grid;gap:8px;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--creme)}
+@media(min-width:620px){.lic-row{grid-template-columns:1fr auto;align-items:center}}
+.lic-q{font-weight:600;font-size:.95rem}
+.lic-q small{display:block;font-weight:400;color:var(--muted);font-size:.83rem}
+.seg{display:inline-flex;border:1px solid #C3CCDA;border-radius:10px;overflow:hidden;background:#fff}
+.seg label{position:relative}
+.seg input{position:absolute;opacity:0;inset:0}
+.seg span{display:block;padding:9px 14px;font-size:.9rem;font-weight:600;cursor:pointer;min-width:62px;text-align:center;color:var(--muted)}
+.seg label+label span{border-left:1px solid #C3CCDA}
+.seg input:checked+span{background:var(--navy);color:#fff}
+.seg input:focus-visible+span{outline:3px solid var(--blue);outline-offset:-3px}
+
+/* results */
+.results .panel{border-top:4px solid var(--blue)}
+.big{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0 14px}
+.stat{background:var(--navy);color:#D6DEEC;border-radius:12px;padding:12px 14px}
+.stat b{display:block;color:#fff;font-size:1.6rem;line-height:1.15;font-weight:800;font-variant-numeric:tabular-nums}
+.stat span{font-size:.84rem}
+.stat.light{background:var(--creme);color:var(--blue-deep);border:1px solid var(--creme-line)}
+.stat.light b{color:var(--ink)}
+.verdict{border-radius:12px;padding:12px 14px;margin:0 0 14px;font-weight:600;border:1px solid}
+.verdict.good{background:var(--good-tint);border-color:#A9D9BD;color:#13532F}
+.verdict.tight{background:var(--warn-tint);border-color:var(--creme-line);color:#6B4600}
+.verdict.bad{background:var(--bad-tint);border-color:#F0B8B2;color:#8C1D17}
+.verdict small{display:block;font-weight:400;margin-top:3px}
+table{width:100%;border-collapse:collapse;font-size:.93rem;font-variant-numeric:tabular-nums}
+th,td{padding:8px 6px;border-bottom:1px solid var(--soft);text-align:left;vertical-align:top}
+td.n,th.n{text-align:right;white-space:nowrap}
+tr.total td{font-weight:700;border-top:2px solid var(--line);border-bottom:none}
+tr.mine td{background:#E6F0FA}
+.flags{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.flags li{border-radius:10px;padding:10px 12px;font-size:.93rem;border-left:4px solid}
+.flags li.ok{background:var(--good-tint);border-color:var(--good)}
+.flags li.warn{background:var(--warn-tint);border-color:#C9A961}
+.flags li.stop{background:var(--bad-tint);border-color:var(--bad)}
+h3{font-size:1rem;color:var(--navy);margin:18px 0 8px}
+.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* plan */
+.plan{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.plan li{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--creme)}
+.plan li.done{background:var(--good-tint);border-color:#A9D9BD}
+.plan li.done .t{text-decoration:line-through;color:var(--muted)}
+.plan input{width:22px;height:22px;accent-color:var(--good);flex:0 0 auto;margin-top:1px}
+.plan .day{font-size:.78rem;font-weight:700;color:var(--blue-deep);text-transform:uppercase;letter-spacing:.06em;display:block}
+.progress{height:12px;border-radius:999px;background:var(--soft);overflow:hidden;margin:6px 0}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--blue-deep),var(--blue));border-radius:999px;transition:width .3s}
+
+/* saved */
+.saved{display:grid;gap:12px}
+.item{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff}
+.item-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;align-items:baseline}
+.item-name{font-weight:700;color:var(--navy);font-size:1.05rem}
+.pill{display:inline-block;font-size:.78rem;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--soft);color:var(--navy)}
+.pill.earning{background:var(--good-tint);color:var(--good)}
+.pill.stalled{background:var(--bad-tint);color:var(--bad)}
+.item-meta{color:var(--muted);font-size:.88rem;margin:4px 0 6px}
+.item-ctrl{display:grid;gap:10px;grid-template-columns:1fr 1fr;margin-top:8px}
+@media(min-width:620px){.item-ctrl{grid-template-columns:1fr 1fr auto auto;align-items:end}}
+.item-ctrl label{font-size:.82rem;font-weight:600;color:var(--muted)}
+.item-ctrl select,.item-ctrl input{min-height:42px}
+.small-btn{min-height:42px;padding:8px 12px;font-size:.9rem}
+.empty{color:var(--muted);text-align:center;padding:16px;border:1px dashed var(--line);border-radius:12px}
+.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(140%);background:var(--navy);color:#fff;padding:12px 18px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.25);transition:transform .25s;z-index:20;max-width:calc(100% - 32px);font-weight:600}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* footer */
+.promo{background:var(--navy);color:#D6DEEC;border-radius:14px;padding:20px;display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center;border-left:5px solid var(--blue);box-shadow:var(--shadow)}
+.promo p{margin:0;flex:1 1 20rem}
+.promo strong{color:var(--blue-light)}
+footer{color:var(--muted);font-size:.85rem;padding:18px 0 30px}
+footer p{margin:.4rem 0}
+/* import sales */
+dialog.imp{border:0;border-radius:16px;padding:0;width:min(640px,calc(100% - 24px));max-height:calc(100vh - 40px);box-shadow:0 24px 60px rgba(6,16,42,.35);color:var(--text);background:var(--paper)}
+dialog.imp::backdrop{background:rgba(6,16,42,.55)}
+.imp-h{background:var(--navy);color:#fff;padding:16px 20px}
+.imp-h h2{color:#fff;margin:0}
+.imp-h p{margin:4px 0 0;color:var(--blue-light);font-size:.9rem}
+.imp-b{padding:16px 20px;overflow:auto;max-height:calc(100vh - 230px)}
+.imp-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;margin-bottom:8px}
+.imp-row.matched{background:var(--good-tint);border-color:#A9D9BD}
+.imp-row .nm{font-weight:600}
+.imp-row .nm small{display:block;font-weight:400;color:var(--muted)}
+.imp-row select{min-height:42px;max-width:230px}
+.imp-row .ct{font-weight:800;font-size:1.1rem;color:var(--navy);text-align:right;white-space:nowrap}
+.imp-f{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;padding:14px 20px;border-top:1px solid var(--line);background:var(--creme)}
+.imp-mode{display:grid;gap:4px;margin:12px 0 0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+@media print{
+  header.hero{background:none;color:#000;padding:0 0 10px;border:none}
+  header h1{color:#000}.hero-points,.btn-row,.promo,details.fees,.item-ctrl,.toast,#planCard{display:none!important}
+  main{margin:0}.panel{box-shadow:none;border:1px solid #ccc;break-inside:avoid}.results{position:static}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="brandline">Free from Burnished Grace Creative Studio</p>
+    <h1>PLR Profit Check</h1>
+    <p class="lede">Find out if a PLR product will actually pay for itself before you spend another hour on it. See your real profit after fees, how many sales it takes to earn your money back, and whether your plans fit your license.</p>
+    <ul class="hero-points">
+      <li>Real profit after fees</li><li>Break-even in sales</li><li>License check</li><li>7-day launch plan</li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+<div class="wrap layout">
+
+<div class="inputs">
+
+  <!-- STEP 1 -->
+  <section class="panel" aria-labelledby="h1x">
+    <div class="panel-h"><span class="badge">1</span><h2 id="h1x">Your PLR product</h2></div>
+    <p class="panel-sub">What you paid, plus what it really costs to get it ready to sell.</p>
+    <div class="grid">
+      <div>
+        <label class="f" for="name">Product name</label>
+        <input type="text" id="name" placeholder="e.g. 30-Day Gratitude Journal" maxlength="80" autocomplete="off">
+      </div>
+      <div class="grid two">
+        <div>
+          <label class="f" for="cost">What you paid for it</label>
+          <div class="money"><span>$</span><input type="number" id="cost" inputmode="decimal" min="0" step="0.01" value="27"></div>
+        </div>
+        <div>
+          <label class="f" for="extras">Other costs to get it ready <span class="hint">Mockups, fonts, images, a design tool</span></label>
+          <div class="money"><span>$</span><input type="number" id="extras" inputmode="decimal" min="0" step="0.01" value="0"></div>
+        </div>
+      </div>
+      <div class="grid two">
+        <div>
+          <label class="f" for="hours">Hours to make it yours <span class="hint">Rewriting, rebranding, new cover. Buyers often say it takes longer than promised.</span></label>
+          <input type="number" id="hours" inputmode="decimal" min="0" step="0.5" value="3">
+        </div>
+        <div>
+          <label class="f" for="rate">What an hour of your time is worth <span class="hint">Leave at 0 to count cash only</span></label>
+          <div class="money"><span>$</span><input type="number" id="rate" inputmode="decimal" min="0" step="1" value="15"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section class="panel" aria-labelledby="h2x">
+    <div class="panel-h"><span class="badge">2</span><h2 id="h2x">Where and how you'll sell it</h2></div>
+    <p class="panel-sub">Fees are filled in for you. Every platform takes its cut differently, so this shows what actually reaches you.</p>
+    <div class="grid">
+      <div class="grid two">
+        <div>
+          <label class="f" for="platform">Platform</label>
+          <select id="platform"></select>
+        </div>
+        <div>
+          <label class="f" for="price">Your selling price</label>
+          <div class="money"><span>$</span><input type="number" id="price" inputmode="decimal" min="0" step="0.01" value="9"></div>
+        </div>
+      </div>
+      <div class="grid two">
+        <div>
+          <label class="f" for="perMonth">Sales you expect each month <span class="hint">A careful guess is fine</span></label>
+          <input type="number" id="perMonth" inputmode="numeric" min="0" step="1" value="4">
+        </div>
+        <div>
+          <label class="f" for="goal">Earn it back within how many sales? <span class="hint">Used to suggest a price</span></label>
+          <input type="number" id="goal" inputmode="numeric" min="1" step="1" value="5">
+        </div>
+      </div>
+      <label class="check" id="adsWrap"><input type="checkbox" id="offsite"> <span>Include an Etsy Offsite Ads fee <span class="hint">Etsy charges 15% (12% for shops over $10,000 a year) only when one of its ads brings the sale. Tick this to see your worst case.</span></span></label>
+    </div>
+    <details class="fees" id="feeBox">
+      <summary>See or change the fees for this platform</summary>
+      <div class="inner">
+        <div class="grid three">
+          <div><label class="f" for="feePct">Percent fees <span class="hint">All % fees added together</span></label><input type="number" id="feePct" inputmode="decimal" min="0" max="100" step="0.01"></div>
+          <div><label class="f" for="feeFixed">Fixed fee per sale</label><div class="money"><span>$</span><input type="number" id="feeFixed" inputmode="decimal" min="0" step="0.01"></div></div>
+          <div><label class="f" for="monthly">Monthly plan cost <span class="hint">Spread across your monthly sales</span></label><div class="money"><span>$</span><input type="number" id="monthly" inputmode="decimal" min="0" step="0.01"></div></div>
+        </div>
+        <p class="note" id="feeNote"></p>
+        <div class="btn-row"><button type="button" class="btn-ghost" id="resetFees">Reset to standard fees</button></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- STEP 3 -->
+  <section class="panel" aria-labelledby="h3x">
+    <div class="panel-h"><span class="badge">3</span><h2 id="h3x">What your license allows</h2></div>
+    <p class="panel-sub">Open the license that came with your PLR and answer what it says. "Not sure" is an honest answer, and the check will tell you what to look for.</p>
+    <div class="grid two" style="margin-bottom:14px">
+      <div>
+        <label class="f" for="minPrice">Lowest price the license allows <span class="hint">Leave at 0 if there's no minimum</span></label>
+        <div class="money"><span>$</span><input type="number" id="minPrice" inputmode="decimal" min="0" step="0.01" value="0"></div>
+      </div>
+      <div>
+        <label class="f" for="plan">How you plan to use it</label>
+        <select id="plan">
+          <option value="sell">Sell it to customers</option>
+          <option value="free">Give it away to grow my list</option>
+          <option value="bonus">Add it as a bonus to something I sell</option>
+          <option value="plr">Sell it with PLR rights to other sellers</option>
+        </select>
+      </div>
+    </div>
+    <div class="lic" id="lic"></div>
+  </section>
+
+  <!-- STEP 4 -->
+  <section class="panel" id="planCard" aria-labelledby="h4x">
+    <div class="panel-h"><span class="badge">4</span><h2 id="h4x">Don't let it sit in a folder: your 7-day plan</h2></div>
+    <p class="panel-sub">Most PLR loses money because it's never used. One small step a day gets this product listed within a week.</p>
+    <div class="progress" aria-hidden="true"><i id="planBar" style="width:0"></i></div>
+    <p class="note" id="planCount" style="margin:0 0 10px"></p>
+    <ul class="plan" id="planList"></ul>
+  </section>
+
+</div>
+
+<!-- RESULTS -->
+<aside class="results" aria-live="polite">
+  <section class="panel">
+    <h2 id="resTitle">Your profit check</h2>
+    <p class="note" style="margin:2px 0 12px" id="resSub">Updates as you type.</p>
+    <div id="verdict" class="verdict"></div>
+    <div class="big">
+      <div class="stat"><b id="rNet">$0.00</b><span>You keep per sale</span></div>
+      <div class="stat"><b id="rBE">0</b><span id="rBEsub">Sales to earn back your cash</span></div>
+      <div class="stat light"><b id="rTrue">$0.00</b><span>True cost with your time</span></div>
+      <div class="stat light"><b id="rBEtime">0</b><span>Sales to cover your time too</span></div>
+    </div>
+
+    <h3>Where your money goes on one sale</h3>
+    <table><tbody id="breakdown"></tbody></table>
+
+    <h3>Price check</h3>
+    <ul class="flags" id="priceFlags"></ul>
+
+    <h3>License check</h3>
+    <ul class="flags" id="licFlags"></ul>
+
+    <h3>Same price, every platform</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Platform</th><th class="n">You keep</th><th class="n">Break-even</th></tr></thead>
+      <tbody id="compare"></tbody>
+    </table></div>
+    <p class="note">Your current platform is highlighted. Gumroad Discover and Etsy's ads only apply when they bring you the buyer.</p>
+
+    <div class="btn-row">
+      <button type="button" class="btn-blue" id="saveBtn">Save this check</button>
+      <button type="button" class="btn-ghost" id="printBtn">Print</button>
+      <button type="button" class="btn-ghost" id="newBtn">Start a new one</button>
+    </div>
+  </section>
+</aside>
+
+<!-- SAVED -->
+<section class="panel" style="grid-column:1/-1" aria-labelledby="h5x">
+  <div class="panel-h"><span class="badge">★</span><h2 id="h5x">My PLR shelf</h2></div>
+  <p class="panel-sub">Every product you save lands here. Update its status and sales so you can see which ones have earned their keep, and which are still sitting unused.</p>
+  <div id="shelfSummary"></div>
+  <div class="saved" id="saved"></div>
+  <div class="btn-row">
+    <button type="button" class="btn-blue" id="importBtn">Import sales (CSV)</button>
+    <button type="button" class="btn-ghost" id="exportBtn">Download my shelf (CSV)</button>
+    <input type="file" id="importFile" accept=".csv,text/csv" multiple hidden>
+  </div>
+  <p class="note">Import sales: download your sales file from Gumroad (Sales page) or Etsy (Shop Manager → Settings → Options → Download Data, the <b>Order Items</b> file), then choose it here. It's read on this device only.</p>
+  <p class="note">Everything stays in this browser on this device. Nothing is sent anywhere. Download your shelf now and then as a backup.</p>
+</section>
+
+<div style="grid-column:1/-1">
+  <div class="promo">
+    <p><strong>Tired of PLR that only lets you change the name?</strong> Burnished Grace PLR editions are built to be rebranded completely, with clear license terms and a set minimum price, so you know exactly what you can do with them.</p>
+    <a class="btn btn-blue" href="https://burnishedgracestudio.com/#shop" target="_blank" rel="noopener">See the PLR editions</a>
+  </div>
+  <footer>
+    <p>Fees are the standard U.S. rates as of October 2026. Platforms change their fees, so check yours and adjust them under "See or change the fees." This tool gives estimates, not tax, legal or licensing advice. Your PLR seller's license terms always decide what you may do.</p>
+    <p>© 2026 Burnished Grace Creative Studio · <a href="https://burnishedgracestudio.com" target="_blank" rel="noopener">burnishedgracestudio.com</a></p>
+  </footer>
+</div>
+
+</div>
+</main>
+
+<div class="toast" id="toast" role="status"></div>
+
+<dialog class="imp" id="impDlg" aria-labelledby="impTitle">
+  <div class="imp-h"><h2 id="impTitle">Import sales</h2><p id="impSub"></p></div>
+  <div class="imp-b">
+    <div id="impList"></div>
+    <div class="imp-mode" id="impMode">
+      <label class="check"><input type="radio" name="impMode" value="replace" checked> <span>Replace “Sales so far” with these totals <span class="hint">Best when the file covers all your sales</span></span></label>
+      <label class="check"><input type="radio" name="impMode" value="add"> <span>Add these to what's already there <span class="hint">For a file with only new sales since your last import</span></span></label>
+    </div>
+  </div>
+  <div class="imp-f">
+    <button type="button" class="btn-ghost" id="impCancel">Cancel</button>
+    <button type="button" class="btn-navy" id="impApply">Update my shelf</button>
+  </div>
+</dialog>
+
+<script>
+(function(){
+"use strict";
+
+/* ===== PLATFORM FEES (U.S., October 2026). EDIT HERE when fees change. =====
+   pct: all percentage fees added together; fixed: dollars per sale; monthly: plan cost */
+var PLATFORMS = [
+  {id:"etsy",    name:"Etsy", pct:9.5, fixed:0.45, monthly:0,
+   note:"6.5% transaction fee + 3% and $0.25 payment processing + the $0.20 listing fee, which renews each time the item sells."},
+  {id:"gumroad", name:"Gumroad (your own link)", pct:12.9, fixed:0.80, monthly:0,
+   note:"Gumroad's 10% + $0.50, plus card processing of 2.9% + $0.30. PayPal payments cost a little more (3.49% + $0.49)."},
+  {id:"gumdisc", name:"Gumroad (Discover marketplace)", pct:30, fixed:0, monthly:0,
+   note:"A flat 30% when a buyer finds you through Gumroad Discover. Processing is included."},
+  {id:"payhip",  name:"Payhip (Free plan)", pct:7.9, fixed:0.30, monthly:0,
+   note:"Payhip's 5% + Stripe's 2.9% + $0.30. PayPal payments cost a little more."},
+  {id:"payhipplus", name:"Payhip (Plus plan)", pct:4.9, fixed:0.30, monthly:29,
+   note:"Payhip's 2% + Stripe's 2.9% + $0.30, plus $29 a month for the plan."},
+  {id:"paypal",  name:"My own site (PayPal)", pct:3.49, fixed:0.49, monthly:0,
+   note:"PayPal Checkout: 3.49% + $0.49. Add your hosting cost under Monthly plan cost if you like."},
+  {id:"stripe",  name:"My own site (Stripe)", pct:2.9, fixed:0.30, monthly:0,
+   note:"Stripe card payments: 2.9% + $0.30."},
+  {id:"custom",  name:"Somewhere else (enter fees)", pct:0, fixed:0, monthly:0,
+   note:"Enter that platform's fees below."}
+];
+var OFFSITE = 15; // Etsy Offsite Ads, percent
+
+/* ===== LICENSE QUESTIONS =====
+   need: which plans require a "yes". bad: what to say if the answer is "no". */
+var LIC = [
+  {id:"sell",   q:"Can you sell it to customers?", s:"Often called resell or personal-use rights", need:["sell","bonus","plr"], ask:"Find out whether your license lets you sell it.",
+   no:"Your license doesn't allow selling it. Use it for your own business only."},
+  {id:"edit",   q:"Can you change it and put your own name on it?", s:"The heart of PLR. Some \"PLR\" only allows a name swap", need:["sell","free","bonus","plr"], ask:"Find out whether you can rebrand it as your own. If you can't, it isn't true PLR.",
+   no:"You can't rebrand it, so customers would see someone else's work. Check whether this is really PLR."},
+  {id:"free",   q:"Can you give it away free?", s:"For list building, freebies and bonuses", need:["free","bonus"], ask:"Find out whether you can give it away free.",
+   no:"Your license doesn't allow giving it away. Sell it, or pick a different freebie."},
+  {id:"pass",   q:"Can you pass PLR rights on to your buyers?", s:"Lets your customers rebrand and resell it too", need:["plr"], ask:"Find out whether you can pass PLR rights on to your buyers.",
+   no:"You can't sell it with PLR rights. Sell it to end customers only."},
+  {id:"must",   q:"Does the license say you must change it before selling?", s:"Some sellers require a new title or a certain amount of changes", need:[], flagYes:true},
+  {id:"where",  q:"Does it limit where you can sell it?", s:"Some ban Amazon, marketplaces or auction sites", need:[], flagYes:true}
+];
+
+var PLAN = [
+  ["Day 1","Read the license and fill in step 3 above."],
+  ["Day 2","Choose who it's for and give it a new title of your own."],
+  ["Day 3","Rewrite the introduction and add one section only you could write."],
+  ["Day 4","Make a new cover in your own colors and fonts."],
+  ["Day 5","Set your price using the check on this page."],
+  ["Day 6","Write the listing and upload it."],
+  ["Day 7","Share it: one email, one pin and one social post."]
+];
+
+var STORE = "plrProfitCheck.v1";
+var $ = function(id){ return document.getElementById(id); };
+var state = { lic:{}, plan:[] , platform:"etsy", fees:null, editing:null };
+var shelf = [];
+
+function load(){
+  try{
+    var d = JSON.parse(localStorage.getItem(STORE) || "{}");
+    shelf = Array.isArray(d.shelf) ? d.shelf : [];
+    if (d.draft) applyDraft(d.draft);
+  }catch(e){ shelf = []; }
+}
+function persist(){
+  try{ localStorage.setItem(STORE, JSON.stringify({shelf:shelf, draft:readForm()})); }catch(e){}
+}
+
+function num(id){ var v = parseFloat($(id).value); return isFinite(v) && v > 0 ? v : 0; }
+function money(v){
+  var neg = v < 0; v = Math.abs(v);
+  return (neg ? "−$" : "$") + v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+function esc(s){ return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];}); }
+function plat(id){ for (var i=0;i<PLATFORMS.length;i++) if (PLATFORMS[i].id===id) return PLATFORMS[i]; return PLATFORMS[0]; }
+
+/* ---------- build controls ---------- */
+function buildPlatforms(){
+  $("platform").innerHTML = PLATFORMS.map(function(p){ return '<option value="'+p.id+'">'+esc(p.name)+'</option>'; }).join("");
+}
+function setFees(p){
+  $("feePct").value = p.pct; $("feeFixed").value = p.fixed.toFixed(2); $("monthly").value = p.monthly;
+  $("feeNote").textContent = p.note;
+}
+function buildLicense(){
+  $("lic").innerHTML = LIC.map(function(l){
+    var opts = [["yes","Yes"],["no","No"],["unsure","Not sure"]].map(function(o){
+      return '<label><input type="radio" name="lic_'+l.id+'" value="'+o[0]+'"'+((state.lic[l.id]||"unsure")===o[0]?" checked":"")+'><span>'+o[1]+'</span></label>';
+    }).join("");
+    return '<div class="lic-row"><div class="lic-q" id="q_'+l.id+'">'+esc(l.q)+'<small>'+esc(l.s)+'</small></div>'+
+           '<div class="seg" role="radiogroup" aria-labelledby="q_'+l.id+'">'+opts+'</div></div>';
+  }).join("");
+  LIC.forEach(function(l){
+    document.querySelectorAll('input[name="lic_'+l.id+'"]').forEach(function(r){
+      r.addEventListener("change",function(){ state.lic[l.id]=r.value; update(); });
+    });
+  });
+}
+function buildPlan(){
+  $("planList").innerHTML = PLAN.map(function(p,i){
+    var done = !!state.plan[i];
+    return '<li class="'+(done?"done":"")+'"><input type="checkbox" id="p'+i+'"'+(done?" checked":"")+'>'+
+           '<label for="p'+i+'"><span class="day">'+p[0]+'</span><span class="t">'+esc(p[1])+'</span></label></li>';
+  }).join("");
+  PLAN.forEach(function(_,i){
+    $("p"+i).addEventListener("change",function(e){ state.plan[i]=e.target.checked; buildPlan(); update(); });
+  });
+  var n = state.plan.filter(Boolean).length;
+  $("planBar").style.width = Math.round(n/PLAN.length*100)+"%";
+  $("planCount").textContent = n===PLAN.length ? "All seven done. It's out in the world now." : n+" of 7 steps done";
+}
+
+/* ---------- math ---------- */
+function calcFor(price, pct, fixed, monthly, perMonth, extraPct){
+  var p = pct + (extraPct||0);
+  var monthlyPer = (monthly>0 && perMonth>0) ? monthly/perMonth : (monthly>0 ? monthly : 0);
+  var fees = price*p/100 + fixed;
+  var net = price - fees - monthlyPer;
+  return {fees:fees, monthlyPer:monthlyPer, net:net, pctTotal:p};
+}
+function beSales(cost, net){ if (cost<=0) return 0; if (net<=0) return Infinity; return Math.ceil(cost/net - 1e-9); }
+function priceFor(cost, sales, pct, fixed, monthlyPer){
+  if (pct >= 100) return Infinity;
+  return (cost/Math.max(sales,1) + fixed + monthlyPer) / (1 - pct/100);
+}
+function fmtSales(n){ return n===Infinity ? "Never" : n.toLocaleString("en-US"); }
+
+/* ---------- read / apply ---------- */
+function readForm(){
+  return {
+    name:$("name").value.trim(), cost:num("cost"), extras:num("extras"), hours:num("hours"), rate:num("rate"),
+    platform:$("platform").value, price:num("price"), perMonth:num("perMonth"), goal:Math.max(1,Math.round(num("goal"))||1),
+    offsite:$("offsite").checked, pct:num("feePct"), fixed:num("feeFixed"), monthly:num("monthly"),
+    minPrice:num("minPrice"), plan:$("plan").value, lic:Object.assign({},state.lic), steps:state.plan.slice()
+  };
+}
+function applyDraft(d){
+  ["name","cost","extras","hours","rate","price","perMonth","goal","minPrice"].forEach(function(k){ if (d[k]!==undefined) $(k).value = d[k]; });
+  if (d.platform){ $("platform").value = d.platform; }
+  $("offsite").checked = !!d.offsite;
+  if (d.pct!==undefined){ $("feePct").value=d.pct; $("feeFixed").value=Number(d.fixed||0).toFixed(2); $("monthly").value=d.monthly||0; $("feeNote").textContent = plat(d.platform).note; }
+  if (d.plan) $("plan").value = d.plan;
+  state.lic = d.lic || {}; state.plan = d.steps || [];
+}
+
+/* ---------- render ---------- */
+function update(){
+  var f = readForm();
+  var isEtsy = f.platform==="etsy";
+  $("adsWrap").style.display = isEtsy ? "" : "none";
+  var extra = (isEtsy && f.offsite) ? OFFSITE : 0;
+  var r = calcFor(f.price, f.pct, f.fixed, f.monthly, f.perMonth, extra);
+  var cash = f.cost + f.extras;
+  var timeCost = f.hours * f.rate;
+  var total = cash + timeCost;
+  var be = beSales(cash, r.net), beT = beSales(total, r.net);
+
+  $("resTitle").textContent = f.name ? f.name : "Your profit check";
+  $("rNet").textContent = money(r.net);
+  $("rBE").textContent = fmtSales(be);
+  $("rTrue").textContent = money(total);
+  $("rBEtime").textContent = fmtSales(beT);
+  var months = (be!==Infinity && f.perMonth>0) ? Math.ceil(be/f.perMonth) : null;
+  $("rBEsub").textContent = months ? "Sales to earn back your cash (about "+months+" month"+(months===1?"":"s")+")" : "Sales to earn back your cash";
+
+  // verdict
+  var v = $("verdict"), cls, msg, sub;
+  if (f.price<=0){ cls="tight"; msg="Enter your selling price to see your numbers."; sub=""; }
+  else if (r.net<=0){ cls="bad"; msg="At this price you lose money on every sale."; sub="Fees take more than the price. Raise the price or choose a platform with lower fees."; }
+  else if (be===0 && beT===0){ cls="good"; msg="Every sale is profit."; sub="There's no cost to earn back."; }
+  else if (beT<=f.goal){ cls="good"; msg="Worth it. This pays for itself in "+fmtSales(beT)+" sale"+(beT===1?"":"s")+", your time included."; sub="That's within your goal of "+f.goal+"."; }
+  else if (be<=f.goal*2){ cls="tight"; msg="It can pay off, but it's tight."; sub="Your cash comes back in "+fmtSales(be)+" sales, your time in "+fmtSales(beT)+". See the price check below."; }
+  else { cls="bad"; msg="This will be hard to earn back."; sub="It takes "+fmtSales(be)+" sales just to cover what you paid. Raise the price, cut the hours, or bundle it with something else."; }
+  v.className = "verdict "+cls; v.innerHTML = esc(msg)+(sub?'<small>'+esc(sub)+'</small>':"");
+
+  // breakdown
+  var rows = [["Your price", money(f.price)]];
+  var p = plat(f.platform);
+  rows.push([(p.id==="custom"?"Platform":p.name)+" fees ("+(+f.pct.toFixed(2))+"% + "+money(f.fixed)+")", "−"+money(f.price*f.pct/100+f.fixed).slice(1)]);
+  if (extra) rows.push(["Etsy Offsite Ads (15%)", "−"+money(f.price*extra/100).slice(1)]);
+  if (r.monthlyPer>0) rows.push(["Monthly plan, spread over "+(f.perMonth||1)+" sale"+((f.perMonth||1)===1?"":"s"), "−"+money(r.monthlyPer).slice(1)]);
+  var keepPct = f.price>0 ? Math.round(r.net/f.price*100) : 0;
+  $("breakdown").innerHTML = rows.map(function(x){ return '<tr><td>'+esc(x[0])+'</td><td class="n">'+x[1]+'</td></tr>'; }).join("") +
+    '<tr class="total"><td>You keep'+(f.price>0?" ("+keepPct+"% of the price)":"")+'</td><td class="n">'+money(r.net)+'</td></tr>';
+
+  // price flags
+  var pf = [];
+  var need = priceFor(total>0?total:cash, f.goal, r.pctTotal, f.fixed, r.monthlyPer);
+  var needCash = priceFor(cash, f.goal, r.pctTotal, f.fixed, r.monthlyPer);
+  if (f.minPrice>0){
+    if (f.price < f.minPrice) pf.push(["stop","Your price is below the license minimum of "+money(f.minPrice)+". Selling under it can break your license. Raise it to at least "+money(f.minPrice)+"."]);
+    else pf.push(["ok","Your price meets the license minimum of "+money(f.minPrice)+"."]);
+  } else {
+    pf.push(["warn","No minimum price entered. Many PLR licenses set one, so check yours before you list."]);
+  }
+  if (cash>0 && isFinite(needCash)){
+    var t = "To earn back your cash in "+f.goal+" sale"+(f.goal===1?"":"s")+", price it at "+money(needCash)+" or more";
+    if (timeCost>0 && isFinite(need)) t += ", or "+money(need)+" to cover your time too";
+    pf.push([f.price>= (timeCost>0?need:needCash) ? "ok" : "warn", t+"."]);
+  }
+  if (f.price>0 && f.price<3 && r.net>0) pf.push(["warn","Very low prices lose a big share to fixed fees. Here, fees take "+(100-keepPct)+"% of each sale."]);
+  if (f.perMonth>0 && be!==Infinity && be>0){
+    var m = Math.ceil(be/f.perMonth);
+    if (m>6) pf.push(["warn","At "+f.perMonth+" sales a month, earning back your cash takes about "+m+" months."]);
+  }
+  $("priceFlags").innerHTML = pf.map(function(x){ return '<li class="'+x[0]+'">'+esc(x[1])+'</li>'; }).join("");
+
+  // license flags
+  var lf = [], unsure = 0;
+  LIC.forEach(function(l){
+    var a = state.lic[l.id] || "unsure";
+    if (l.need.indexOf(f.plan)>=0){
+      if (a==="no") lf.push(["stop", l.no]);
+      else if (a==="unsure"){ unsure++; lf.push(["warn",l.ask+" Your plan depends on it."]); }
+    }
+    if (l.flagYes && a==="yes"){
+      if (l.id==="must") lf.push(["warn","Your license requires changes before selling. Budget the hours for it in step 1."]);
+      if (l.id==="where") lf.push(["warn","Your license limits where you can sell. Make sure "+plat(f.platform).name.replace(/ \(.*\)/,"")+" is allowed."]);
+    }
+  });
+  if (isEtsy && (f.plan==="sell"||f.plan==="plr")){
+    lf.push(["warn","Etsy expects sellers to have made or designed what they sell. Unchanged PLR can be removed there, so make real changes first."]);
+  }
+  if (f.plan==="free" && (state.lic.free==="yes")) lf.push(["ok","Giving it away fits your license. Ask for an email address in return so it builds your list."]);
+  if (!lf.some(function(x){return x[0]!=="ok";})){
+    lf.unshift(["ok","Nothing in your answers stops this plan. Keep a copy of the license with your files."]);
+  }
+  $("licFlags").innerHTML = lf.map(function(x){ return '<li class="'+x[0]+'">'+esc(x[1])+'</li>'; }).join("");
+
+  // compare
+  $("compare").innerHTML = PLATFORMS.filter(function(q){return q.id!=="custom";}).map(function(q){
+    var c = q.id===f.platform && f.platform!=="custom" ? {pct:f.pct,fixed:f.fixed,monthly:f.monthly} : q;
+    var rr = calcFor(f.price, c.pct, c.fixed, c.monthly, f.perMonth, 0);
+    var b = beSales(cash, rr.net);
+    return '<tr class="'+(q.id===f.platform?"mine":"")+'"><td>'+esc(q.name)+'</td><td class="n">'+money(rr.net)+'</td><td class="n">'+fmtSales(b)+(b!==Infinity&&b>0?" sales":"")+'</td></tr>';
+  }).join("");
+
+  persist();
+}
+
+/* ---------- shelf ---------- */
+var STATUSES = ["Not started","Customizing","Listed","Earning"];
+function snapshot(){
+  var f = readForm();
+  var extra = (f.platform==="etsy" && f.offsite) ? OFFSITE : 0;
+  var r = calcFor(f.price, f.pct, f.fixed, f.monthly, f.perMonth, extra);
+  return {id: state.editing || ("p"+Date.now()), name: f.name || "Untitled PLR", cost: f.cost+f.extras, price: f.price,
+          platform: f.platform, net: Math.round(r.net*100)/100, saved: new Date().toISOString().slice(0,10),
+          status: "Not started", sold: 0, form: f};
+}
+function renderShelf(){
+  var el = $("saved");
+  if (!shelf.length){
+    el.innerHTML = '<p class="empty">Nothing saved yet. Fill in a product and choose “Save this check.”</p>';
+    $("shelfSummary").innerHTML = ""; return;
+  }
+  var spent=0, earned=0, idle=0;
+  el.innerHTML = shelf.map(function(s){
+    var made = s.sold * s.net; spent += s.cost; earned += Math.max(0,made);
+    if (s.status==="Not started") idle++;
+    var pctBack = s.cost>0 ? Math.min(100, Math.max(0, made/s.cost*100)) : 100;
+    var paid = s.cost>0 && made>=s.cost;
+    var days = Math.floor((Date.now()-new Date(s.saved+"T12:00:00").getTime())/86400000);
+    var stalled = s.status==="Not started" && days>=14;
+    var pill = paid ? '<span class="pill earning">Paid for itself</span>' : stalled ? '<span class="pill stalled">Unused '+days+' days</span>' : '<span class="pill">'+esc(s.status)+'</span>';
+    var opts = STATUSES.map(function(t){ return '<option'+(t===s.status?" selected":"")+'>'+t+'</option>'; }).join("");
+    return '<div class="item" data-id="'+esc(s.id)+'">'+
+      '<div class="item-top"><span class="item-name">'+esc(s.name)+'</span>'+pill+'</div>'+
+      '<div class="item-meta">Cost '+money(s.cost)+' · Price '+money(s.price)+' on '+esc(plat(s.platform).name)+' · Keeps '+money(s.net)+' a sale · Saved '+esc(s.saved)+'</div>'+
+      '<div class="progress" title="Earned back"><i style="width:'+pctBack.toFixed(0)+'%"></i></div>'+
+      '<div class="item-meta" style="margin:0">'+(s.cost<=0 ? 'No cost to earn back' : paid ? 'Earned back all '+money(s.cost)+', plus '+money(made-s.cost)+' profit' : 'Earned back '+money(Math.max(0,made))+' of '+money(s.cost))+'</div>'+
+      '<div class="item-ctrl">'+
+        '<div><label for="st_'+esc(s.id)+'">Status</label><select id="st_'+esc(s.id)+'" data-act="status">'+opts+'</select></div>'+
+        '<div><label for="so_'+esc(s.id)+'">Sales so far</label><input type="number" min="0" step="1" inputmode="numeric" id="so_'+esc(s.id)+'" data-act="sold" value="'+(s.sold||0)+'"></div>'+
+        '<button type="button" class="btn-ghost small-btn" data-act="open">Open</button>'+
+        '<button type="button" class="btn-ghost small-btn" data-act="del" aria-label="Remove '+esc(s.name)+'">Remove</button>'+
+      '</div></div>';
+  }).join("");
+  $("shelfSummary").innerHTML = '<p class="note" style="margin:0 0 12px"><b>'+shelf.length+'</b> product'+(shelf.length===1?"":"s")+' · spent '+money(spent)+' · earned back '+money(earned)+(idle?' · <b>'+idle+'</b> not started yet':'')+'</p>';
+}
+function findItem(id){ for (var i=0;i<shelf.length;i++) if (shelf[i].id===id) return i; return -1; }
+$("saved").addEventListener("change",function(e){
+  var it = e.target.closest(".item"); if(!it) return; var i = findItem(it.dataset.id); if (i<0) return;
+  if (e.target.dataset.act==="status") shelf[i].status = e.target.value;
+  if (e.target.dataset.act==="sold"){ var n=parseInt(e.target.value,10); shelf[i].sold = isFinite(n)&&n>0?n:0; if (shelf[i].sold>0 && shelf[i].status!=="Earning") shelf[i].status="Earning"; }
+  persist(); setTimeout(renderShelf,0);
+});
+$("saved").addEventListener("click",function(e){
+  var b = e.target.closest("button"); if(!b) return;
+  var it = b.closest(".item"); var i = findItem(it.dataset.id); if (i<0) return;
+  if (b.dataset.act==="del"){
+    if (confirm("Remove “"+shelf[i].name+"” from your shelf?")){ shelf.splice(i,1); persist(); renderShelf(); toast("Removed"); }
+  }
+  if (b.dataset.act==="open"){
+    applyDraft(shelf[i].form); state.editing = shelf[i].id; buildLicense(); buildPlan(); update();
+    window.scrollTo({top:0,behavior:"smooth"}); toast("Opened “"+shelf[i].name+"”");
+  }
+});
+$("saveBtn").addEventListener("click",function(){
+  var s = snapshot(), i = findItem(s.id);
+  if (i>=0){ s.status = shelf[i].status; s.sold = shelf[i].sold; s.saved = shelf[i].saved; shelf[i] = s; toast("Updated on your shelf"); }
+  else { shelf.unshift(s); state.editing = s.id; toast("Saved to your PLR shelf"); }
+  persist(); renderShelf();
+});
+$("newBtn").addEventListener("click",function(){
+  state.editing = null; state.lic = {}; state.plan = [];
+  $("name").value=""; $("cost").value=27; $("extras").value=0; $("hours").value=3; $("price").value=9; $("minPrice").value=0; $("offsite").checked=false;
+  buildLicense(); buildPlan(); update(); window.scrollTo({top:0,behavior:"smooth"}); $("name").focus();
+});
+$("printBtn").addEventListener("click",function(){ window.print(); });
+$("exportBtn").addEventListener("click",function(){
+  if (!shelf.length){ toast("Nothing to download yet"); return; }
+  var head = ["Product","Status","Cost","Price","Platform","Keeps per sale","Sales so far","Earned back","Saved"];
+  var lines = [head].concat(shelf.map(function(s){ return [s.name,s.status,s.cost,s.price,plat(s.platform).name,s.net,s.sold,(s.sold*s.net).toFixed(2),s.saved]; }));
+  var csv = lines.map(function(r){ return r.map(function(c){ c=String(c); return /[",\n]/.test(c) ? '"'+c.replace(/"/g,'""')+'"' : c; }).join(","); }).join("\r\n");
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([csv],{type:"text/csv"}));
+  a.download = "my-plr-shelf-"+new Date().toISOString().slice(0,10)+".csv";
+  document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },500);
+});
+
+
+/* ---------- import sales from a platform's CSV (read on this device only) ---------- */
+function parseCSV(text){
+  text = text.replace(/^﻿/,"");
+  var rows=[], row=[], f="", q=false;
+  for (var i=0;i<text.length;i++){
+    var c=text[i];
+    if (q){ if (c==='"'){ if (text[i+1]==='"'){ f+='"'; i++; } else q=false; } else f+=c; }
+    else if (c==='"') q=true;
+    else if (c===','){ row.push(f); f=""; }
+    else if (c==='\n'||c==='\r'){ if (c==='\r'&&text[i+1]==='\n') i++; row.push(f); f=""; if (row.length>1||row[0]!=="") rows.push(row); row=[]; }
+    else f+=c;
+  }
+  if (f!==""||row.length){ row.push(f); rows.push(row); }
+  return rows;
+}
+var NAME_COLS = ["item name","product name","product title","listing title","product","item","title","name of item"];
+var QTY_COLS = ["quantity","qty","number of items"];
+var REFUND_COLS = ["refunded?","refunded","fully refunded?","status","order status"];
+function findCol(head, list){
+  var h = head.map(function(x){ return String(x).trim().toLowerCase(); });
+  for (var i=0;i<list.length;i++){ var k=h.indexOf(list[i]); if (k>=0) return k; }
+  return -1;
+}
+function norm(s){ return String(s).toLowerCase().replace(/&/g," and ").replace(/[^a-z0-9]+/g," ").trim(); }
+function words(s){ return norm(s).split(" ").filter(function(w){ return w.length>2; }); }
+function bestMatch(item){
+  var n = norm(item), best=-1, score=0;
+  shelf.forEach(function(s,i){
+    var m = norm(s.name); if (!m) return;
+    var sc = 0;
+    if (n===m) sc = 1;
+    else if (n.indexOf(m)>=0 || m.indexOf(n)>=0) sc = .9;
+    else { var a=words(s.name), b=words(item); if (a.length){ var hit=a.filter(function(w){ return b.indexOf(w)>=0; }).length; sc = hit/a.length*.8; } }
+    if (sc>score){ score=sc; best=i; }
+  });
+  return score>=.6 ? best : -1;
+}
+var pending = [];
+function readSales(texts){
+  var counts = {}, problems = [];
+  texts.forEach(function(t){
+    var rows = parseCSV(t.text); if (rows.length<2){ problems.push(t.name+" is empty."); return; }
+    var head = rows[0], ni = findCol(head, NAME_COLS), qi = findCol(head, QTY_COLS), ri = findCol(head, REFUND_COLS);
+    if (ni<0){ problems.push(t.name+" has no product name column."+(findCol(head,["order id"])>=0?" On Etsy, download the Order Items file, not Orders.":"")); return; }
+    rows.slice(1).forEach(function(r){
+      var name = (r[ni]||"").trim(); if (!name) return;
+      if (ri>=0 && /^(true|yes|refunded|fully refunded|canceled|cancelled)$/i.test((r[ri]||"").trim())) return;
+      var q = qi>=0 ? parseInt(r[qi],10) : 1; if (!isFinite(q) || q<1) q = 1;
+      counts[name] = (counts[name]||0) + q;
+    });
+  });
+  return {counts:counts, problems:problems};
+}
+function openImport(res){
+  var names = Object.keys(res.counts);
+  pending = names.map(function(n){ return {name:n, count:res.counts[n], to:bestMatch(n)}; })
+    .sort(function(a,b){ return (b.to>=0)-(a.to>=0) || b.count-a.count; });
+  var total = pending.reduce(function(n,p){ return n+p.count; },0);
+  $("impSub").textContent = total ? total+" sale"+(total===1?"":"s")+" of "+names.length+" product"+(names.length===1?"":"s")+" found. Check the matches, then update your shelf." : "No sales found in that file.";
+  var opts = function(sel){ return '<option value="-1">Skip this one</option>'+shelf.map(function(s,i){ return '<option value="'+i+'"'+(i===sel?" selected":"")+'>'+esc(s.name)+'</option>'; }).join(""); };
+  $("impList").innerHTML = res.problems.map(function(p){ return '<p class="verdict tight">'+esc(p)+'</p>'; }).join("") +
+    pending.map(function(p,k){
+      return '<div class="imp-row'+(p.to>=0?" matched":"")+'" data-k="'+k+'"><div class="nm">'+esc(p.name)+'<small>'+(p.to>=0?"Matched to your shelf":"Not on your shelf. Choose one or skip it.")+'</small></div>'+
+        '<div class="ct">'+p.count+' sale'+(p.count===1?"":"s")+'</div>'+
+        '<div style="grid-column:1/-1"><label class="sr" for="imp_'+k+'">Shelf product for '+esc(p.name)+'</label><select id="imp_'+k+'" data-k="'+k+'">'+opts(p.to)+'</select></div></div>';
+    }).join("");
+  $("impApply").disabled = !pending.length;
+  document.querySelector('input[name="impMode"][value="replace"]').checked = true;
+  $("impDlg").showModal();
+}
+$("impList").addEventListener("change",function(e){
+  var k = e.target.dataset.k; if (k===undefined) return;
+  pending[k].to = parseInt(e.target.value,10);
+  e.target.closest(".imp-row").classList.toggle("matched", pending[k].to>=0);
+});
+$("importBtn").addEventListener("click",function(){
+  if (!shelf.length){ toast("Save a product to your shelf first"); return; }
+  $("importFile").click();
+});
+$("importFile").addEventListener("change",function(){
+  var files = Array.prototype.slice.call(this.files||[]); this.value = "";
+  if (!files.length) return;
+  Promise.all(files.map(function(f){ return f.text().then(function(t){ return {name:f.name, text:t}; }); }))
+    .then(function(texts){ openImport(readSales(texts)); })
+    .catch(function(){ toast("That file couldn't be read"); });
+});
+$("impCancel").addEventListener("click",function(){ $("impDlg").close(); });
+$("impApply").addEventListener("click",function(){
+  var add = document.querySelector('input[name="impMode"]:checked').value==="add", totals = {};
+  pending.forEach(function(p){ if (p.to>=0) totals[p.to] = (totals[p.to]||0) + p.count; });
+  var n = 0;
+  Object.keys(totals).forEach(function(i){
+    var s = shelf[i]; s.sold = (add ? (s.sold||0) : 0) + totals[i];
+    if (s.sold>0) s.status = "Earning"; n++;
+  });
+  persist(); renderShelf(); $("impDlg").close();
+  toast(n ? "Sales updated for "+n+" product"+(n===1?"":"s") : "Nothing was matched, so nothing changed");
+});
+
+var tt;
+function toast(m){ var t=$("toast"); t.textContent=m; t.classList.add("show"); clearTimeout(tt); tt=setTimeout(function(){t.classList.remove("show");},2200); }
+
+/* ---------- wire up ---------- */
+buildPlatforms();
+setFees(PLATFORMS[0]);
+load();
+buildLicense(); buildPlan(); renderShelf();
+$("platform").addEventListener("change",function(){ setFees(plat(this.value)); if(this.value==="custom") $("feeBox").open=true; update(); });
+$("resetFees").addEventListener("click",function(){ setFees(plat($("platform").value)); update(); });
+["name","cost","extras","hours","rate","price","perMonth","goal","feePct","feeFixed","monthly","minPrice"].forEach(function(id){ $(id).addEventListener("input",update); });
+["offsite","plan"].forEach(function(id){ $(id).addEventListener("change",update); });
+update();
+
+if ("serviceWorker" in navigator && window.isSecureContext && location.protocol!=="file:") navigator.serviceWorker.register("sw.js").catch(function(){});
+})();
+</script>
+</body>
+</html>
