@@ -1,6 +1,6 @@
 // Budget Ledger offline support. Keeps the app working without internet.
 // Your entries are never sent anywhere; they stay in this browser on this device.
-const CACHE = 'budget-ledger-v3';
+const CACHE = 'budget-ledger-v4';
 const FILES = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './favicon.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => {

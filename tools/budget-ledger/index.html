@@ -110,9 +110,12 @@ dialog::backdrop{background:rgba(11,43,64,.55)}
 dialog h2{margin-bottom:4px}
 dialog .stack{display:grid;gap:14px;margin-top:14px}
 /* install + footer */
-.video{border-radius:12px;padding:0;margin:0 0 20px;background:#fff;box-shadow:var(--shadow);border-left:6px solid var(--teal-2);overflow:hidden}
-.video summary{cursor:pointer;padding:14px 16px;font-weight:700;min-height:44px;list-style-position:inside}
-.video video{display:block;width:100%;height:auto;background:#0b2b40}
+.video{border-radius:12px;margin:0 0 18px;max-width:640px;background:var(--teal);color:#fff;border:1px solid rgba(255,255,255,.28);box-shadow:0 2px 0 rgba(0,0,0,.12);overflow:hidden}
+.video summary{cursor:pointer;padding:12px 16px;font-weight:700;min-height:44px;display:flex;align-items:center;gap:10px;list-style:none}
+.video summary::-webkit-details-marker{display:none}
+.video summary::before{content:"▶";font-size:.8rem;display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--teal);flex:none}
+.video[open] summary::before{content:"▼"}
+.video video{display:block;width:100%;height:auto;background:var(--teal)}
 @media print{.video{display:none!important}}
 .install{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-radius:12px;padding:12px 16px;margin:0 0 20px;background:#fff;box-shadow:var(--shadow);border-left:6px solid var(--teal-2)}
 .install p{margin:0}
@@ -169,6 +172,13 @@ footer.site a{color:var(--teal-2);font-weight:600}
   <div class="wrap">
     <h1>Budget Ledger</h1>
     <p>Your money today. Your plans for tomorrow.</p>
+    <details class="video" id="videoBox" open>
+      <summary>Watch how it works (3 min)</summary>
+      <video controls playsinline preload="none" poster="walkthrough-poster.jpg">
+        <source src="Budget-Ledger-Walkthrough.mp4" type="video/mp4">
+        Your browser can't play this video.
+      </video>
+    </details>
     <div class="toolbar">
       <button id="backup" class="gold" type="button">Download backup</button>
       <button id="restore" class="light" type="button">Restore backup</button>
@@ -182,13 +192,6 @@ footer.site a{color:var(--teal-2);font-weight:600}
 
 <main class="wrap">
   <div id="installBox" class="install" hidden></div>
-  <details class="video" id="videoBox">
-    <summary>New here? Watch how it works (3 min)</summary>
-    <video controls playsinline preload="none" poster="walkthrough-poster.jpg">
-      <source src="Budget-Ledger-Walkthrough.mp4" type="video/mp4">
-      Your browser can't play this video.
-    </video>
-  </details>
   <div id="backupBanner" class="backup" role="region" aria-label="Backup status"></div>
 
   <div class="cards" aria-live="polite">
