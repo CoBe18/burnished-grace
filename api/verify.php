@@ -55,6 +55,22 @@ if (!$seen) {
         @mail($email, 'Your Burnished Grace downloads', $body,
             "From: Burnished Grace Creative Studio <$from>\r\nReply-To: $from\r\nContent-Type: text/plain; charset=UTF-8", "-f$from");
     }
+
+    // Tell the shop owner about the sale (once per order, even if the buyer has no valid email).
+    $clean = function (string $s): string { return trim(preg_replace('/[\r\n]+/', ' ', $s)); };
+    $itemNames = [];
+    foreach (array_keys($skus) as $sku) $itemNames[] = $catalog[$sku]['name'];
+    $ownerBody = "New sale from your website.\n\n"
+        . 'Items: ' . implode(', ', $itemNames) . "\n"
+        . 'Amount paid: $' . number_format($paid, 2) . "\n"
+        . 'Buyer: ' . ($clean($nameP) ?: '(name not given)') . "\n"
+        . 'Buyer email: ' . ($clean($email) ?: '(none)') . "\n"
+        . "Order: $orderId\n"
+        . ($email && filter_var($email, FILTER_VALIDATE_EMAIL) ? '' : "\nThe buyer has no valid email on file, so no download email was sent. They saw their download buttons on the page; send their files by hand if they write in.\n");
+    $ownerFrom = $CFG['support_email'];
+    $ownerHeaders = "From: Burnished Grace Creative Studio <$ownerFrom>\r\nContent-Type: text/plain; charset=UTF-8";
+    if ($email && filter_var($email, FILTER_VALIDATE_EMAIL)) $ownerHeaders .= "\r\nReply-To: $email";
+    @mail($ownerFrom, 'New sale: ' . implode(', ', $itemNames), $ownerBody, $ownerHeaders, "-f$ownerFrom");
 }
 
 echo json_encode(['ok' => true, 'hours' => $hours, 'links' => $links]);
