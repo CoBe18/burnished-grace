@@ -66,6 +66,9 @@ const PRODUCTS = [
   { id: "budget-ledger", category: "Free tools", name: "Budget Ledger",
     desc: "Track deposits, expenses and upcoming bills, and see what is truly free to spend. Works on phones, tablets and computers, even offline. Free, with no sign-up; your entries stay on your device.",
     price: null, free: "tools/budget-ledger/" },
+  { id: "plr-profit-check", category: "Free tools", name: "PLR Profit Check",
+    desc: "Bought PLR that never earned its money back? See your real profit after each platform's fees, how many sales it takes to break even, and whether your license allows your plan. Import your Gumroad or Etsy sales to track it. Free, no sign-up; everything stays on your device.",
+    price: null, free: "tools/plr-profit-check/" },
   { id: "echoes-unseen", category: "Books", name: "Echoes of the Unseen",
     desc: "Book one of the Echoes series: why cultures across oceans and millennia remember giants, floods, and a lost world, tested against Scripture.",
     price: null }
