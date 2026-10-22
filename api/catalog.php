@@ -3,8 +3,29 @@
 // id => name, price, and the ZIP file name in bg-private/files on the server.
 // The id and price must match the same product in products.js.
 // Opening this file in a browser shows nothing.
-if (count(get_included_files()) === 1) { http_response_code(404); exit; }
+
+
+<?php
+// PRODUCTS FOR SALE, checked against every PayPal payment.
+// IDs and prices must match products.js.
+// ZIP files belong in bg-private/files on the server.
+
+if (count(get_included_files()) === 1) {
+    http_response_code(404);
+    exit;
+}
+
 return [
+    'secret-family-recipes' => [
+        'name'  => 'Secret Family Recipes',
+        'price' => 27.99,
+        'file'  => 'Secret-Family-Recipes-Individual-Edition.zip',
+    ],
+    'plr-profit-check' => [
+        'name'  => 'PLR Profit Check',
+        'price' => 17.00,
+        'file'  => 'PLR-Profit-Check.zip',
+    ],
     'commercial-cleaning' => [
         'name'  => 'Commercial Cleaning App',
         'price' => 37.00,
