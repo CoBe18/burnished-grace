@@ -1,0 +1,56 @@
+/* =====================================================================
+   APP COLORS AND FONTS
+   Change the hex values below to recolor the whole app.
+   The first block is the light look; the two blocks after it are the
+   dark-mode look (used when a phone or computer is set to dark mode).
+   If you change --plum, also change headerColor in settings.js and
+   "theme_color" in manifest.webmanifest, then remake the icons (see the guide).
+   ===================================================================== */
+:root {
+  /* Main colors (from the original Secret Family Recipes design) */
+  --plum: #3f043c;          /* header, bottom tab bar, selected buttons */
+  --plum-soft: #5c1a58;     /* lighter header highlight, Lunch cards */
+  --orange: #d85505;        /* main buttons, page titles, Dinner cards */
+  --orange-dark: #bf4a04;   /* main buttons when pressed/hovered */
+  --ochre: #c7720f;         /* Sides cards, "story" accent line */
+  --lime: #8ec63f;          /* selected tab, badges */
+  --olive: #5f7d2a;         /* Breakfast cards, checked boxes */
+  --rose: #a3405f;          /* Desserts cards */
+  --teal: #2f6b6b;          /* Snacks cards */
+  --on-header: #f2e2ce;     /* text and icons on the header */
+  --on-header-muted: #d8c2d3; /* unselected tab bar text */
+
+  --bg: #f5e6d6;          /* cream page */
+  --surface: #fffaf3;     /* cards and panels */
+  --ink: #2a1328;         /* main text, plum-tinted near-black */
+  --muted: #74606f;
+  --line: #e6d2c0;
+  --on-accent: #ffffff;
+  --focus: #d85505;
+  --danger: #b3261e;
+
+  --font-script: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+  --font-body: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --radius: 14px;
+  --tabbar-h: 64px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c0a1b; --surface: #2a1228; --ink: #f6e9dc; --muted: #c2a9bb;
+    --line: #47263f; --plum-soft: #6e2a68; --focus: #ff8a3d; --danger: #ff6b5f;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1c0a1b; --surface: #2a1228; --ink: #f6e9dc; --muted: #c2a9bb;
+  --line: #47263f; --plum-soft: #6e2a68; --focus: #ff8a3d; --danger: #ff6b5f;
+  color-scheme: dark;
+}
+
+
+/* Status colors (saved / waiting) */
+:root { --good: #4f7a1f; --warn: #a35a00; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --good: #a8d86a; --warn: #f5b25a; } }
+:root[data-theme="dark"] { --good: #a8d86a; --warn: #f5b25a; }
