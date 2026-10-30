@@ -183,3 +183,8 @@ dialog.notice p{margin:0 0 1.2rem;font-size:1.05rem}
 .btn-outline{background:transparent;color:var(--maroon);border-color:var(--gold-dark)}
 .btn-outline:hover{background:var(--linen);color:var(--maroon)}
 .buy .btn-free{display:inline-block;margin-top:.4rem;padding:.55rem 1rem;font-size:.95rem}
+
+/* studio tagline */
+.hero .tagline{font-family:var(--display);color:var(--gold-light);font-size:clamp(1.25rem,2.6vw,1.7rem);line-height:1.3;max-width:40rem;margin:-.6rem auto 1.25rem}
+.footer-tagline{font-family:var(--display);color:var(--gold-light);font-size:1.05rem;margin:0 0 .4rem}
+.hero .tagline span{display:inline-block}
