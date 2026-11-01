@@ -5,7 +5,6 @@
 // Opening this file in a browser shows nothing.
 
 
-<?php
 // PRODUCTS FOR SALE, checked against every PayPal payment.
 // IDs and prices must match products.js.
 // ZIP files belong in bg-private/files on the server.
