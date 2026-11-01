@@ -1,0 +1,54 @@
+name: Pre-deployment safety checks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  safety:
+    name: Validate site before any IONOS deployment
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Ensure required site files exist
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s index.html
+          test -s styles.css
+          test -s products.js
+          test -s shop.js
+          test -s api/catalog.php
+      - name: Prevent private payment files from entering Git
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git ls-files | grep -E '(^|/)(bg-private|\.env)(/|$)|(^|/)config\.php$|\.(pem|p12|pfx|key)$'; then
+            echo "::error::Private configuration or credentials appear in tracked files. Remove them from Git before deployment."
+            exit 1
+          fi
+      - name: Validate JavaScript syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' f; do
+            node --check "$f"
+          done < <(find . -type f -name '*.js' -not -path './node_modules/*' -not -path './.git/*' -print0)
+      - name: Validate PHP syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' f; do
+            php -l "$f"
+          done < <(find . -type f -name '*.php' -not -path './.git/*' -print0)
+      - name: Deployment remains disabled pending host validation
+        run: echo "Checks passed. No files were uploaded to IONOS. Configure deployment separately after verifying hosting target, backup, secure credentials, and rollback."
