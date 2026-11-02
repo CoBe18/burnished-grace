@@ -191,3 +191,7 @@ dialog.notice p{margin:0 0 1.2rem;font-size:1.05rem}
 .hero .tagline{font-size:min(1.7rem,calc((100vw - 44px) / 21.8))}
 .footer-tagline{font-size:min(1.05rem,calc((100vw - 44px) / 21.8))}
 .footer-tagline{display:table;text-align:center;margin-left:auto;margin-right:auto}
+/* footers with the studio tagline: center the copyright line and leave
+   about two and a half lines of space under the tagline */
+footer .wrap:has(> .footer-tagline){text-align:center}
+.footer-tagline{margin-bottom:3.7rem}
