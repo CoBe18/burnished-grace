@@ -5,6 +5,8 @@
 #   check-connection  Log in and list the website folder. Changes nothing.
 #   preview           Download the live site, compare it with GitHub, and
 #                     report what WOULD change. Changes nothing.
+#   import-live       Same as preview, and also saves the live site as a
+#                     download so it can be brought into GitHub. Changes nothing.
 #   deploy            Same comparison, then upload only new or changed files.
 #
 # Safety rules built into this script:
@@ -14,7 +16,7 @@
 #   * Files that must never go live are excluded (see EXCLUDES).
 set -euo pipefail
 
-MODE="${1:?usage: ionos-deploy.sh check-connection|preview|deploy}"
+MODE="${1:?usage: ionos-deploy.sh check-connection|preview|import-live|deploy}"
 : "${IONOS_SFTP_HOST:?IONOS_SFTP_HOST secret is missing}"
 : "${IONOS_SFTP_USER:?IONOS_SFTP_USER secret is missing}"
 : "${LFTP_PASSWORD:?IONOS_SFTP_PASSWORD secret is missing}"
@@ -117,6 +119,7 @@ check_connection
 case "$MODE" in
   check-connection) ;;
   preview) compare ;;
+  import-live) compare; echo "Live copy saved as the 'live-site' download on this run. Nothing on IONOS was changed." ;;
   deploy) compare; deploy ;;
   *) fail "Unknown mode: $MODE" ;;
 esac
