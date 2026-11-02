@@ -119,7 +119,7 @@ check_connection
 case "$MODE" in
   check-connection) ;;
   preview) compare ;;
-  import-live) compare; echo "Live copy saved as the 'live-site' download on this run. Nothing on IONOS was changed." ;;
+  import-live) compare; echo "Live copy handed to the import job. Nothing on IONOS was changed." ;;
   deploy) compare; deploy ;;
   *) fail "Unknown mode: $MODE" ;;
 esac
