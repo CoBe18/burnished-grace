@@ -19,7 +19,7 @@
         <div class="item">
           <h4 id="t-${p.id}">${esc(p.name)}</h4>
           <p>${esc(p.desc)}</p>
-          ${p.page ? `<p class="more"><a href="${esc(p.page)}" aria-label="See details and screenshots: ${esc(p.name)}">See details and screenshots</a></p>` : ""}
+          ${p.page ? `<p class="more"><a href="${esc(p.page)}" aria-label="${esc(p.pageLabel || "See details and screenshots")}: ${esc(p.name)}">${esc(p.pageLabel || "See details and screenshots")}</a></p>` : ""}
           <div class="buy">${
             p.free
               ? `<span class="price">Free</span><a class="btn btn-free" href="${esc(p.free)}" aria-label="Open the free ${esc(p.name)} app">Open free app</a>`
