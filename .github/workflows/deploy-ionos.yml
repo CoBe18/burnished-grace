@@ -46,11 +46,57 @@ jobs:
           IONOS_SFTP_USER: ${{ secrets.IONOS_SFTP_USER }}
           LFTP_PASSWORD: ${{ secrets.IONOS_SFTP_PASSWORD }}
         run: bash .github/scripts/ionos-deploy.sh "$MODE"
-      - name: Save live copy for review
+      - name: Save live copy for the import job
         if: inputs.mode == 'import-live'
         uses: actions/upload-artifact@v4
         with:
           name: live-site
-          path: ${{ runner.temp }}/bg-deploy/live/
+          path: |
+            ${{ runner.temp }}/bg-deploy/live/
+            ${{ runner.temp }}/bg-deploy/changed.txt
           include-hidden-files: true
           retention-days: 7
+
+  import:
+    name: Put live versions on a review branch
+    needs: deploy
+    if: inputs.mode == 'import-live'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # Only this job can write to the repository, and it never sees the
+    # IONOS password. It pushes to a separate branch, never to main.
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: live-site
+          path: ${{ runner.temp }}/bg-import
+      - name: Copy the live versions of the differing files
+        env:
+          IMPORT: ${{ runner.temp }}/bg-import
+        run: |
+          set -euo pipefail
+          git switch -C import/live-site
+          count=0
+          while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            if [ -f "$IMPORT/live/$f" ]; then
+              mkdir -p "$(dirname "$f")"
+              cp "$IMPORT/live/$f" "$f"
+              git add -- "$f"
+              count=$((count+1))
+            fi
+          done < "$IMPORT/changed.txt"
+          echo "Copied $count live file(s)."
+          if git diff --cached --quiet; then
+            echo "Nothing differs; no branch pushed."
+            exit 0
+          fi
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -q -m "Live site versions from IONOS for review"
+          git push -f origin import/live-site
+          echo "### Review branch" >> "$GITHUB_STEP_SUMMARY"
+          echo "Live versions of $count file(s) pushed to \`import/live-site\`. Nothing was merged." >> "$GITHUB_STEP_SUMMARY"
