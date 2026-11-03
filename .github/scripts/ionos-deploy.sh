@@ -26,8 +26,8 @@ WORK="${RUNNER_TEMP:-/tmp}/bg-deploy"
 SUMMARY="${GITHUB_STEP_SUMMARY:-/dev/null}"
 SITE_URL="${SITE_URL:-https://burnishedgracestudio.com/}"
 
-# Never uploaded. survey/ stays out until its database and consent form exist.
-EXCLUDES=(.git/ .github/ .gitignore .DS_Store README.txt survey/)
+# Never uploaded.
+EXCLUDES=(.git/ .github/ .gitignore .DS_Store README.txt)
 
 fail() { echo "::error::$1"; echo "**Stopped:** $1" >>"$SUMMARY"; exit 1; }
 

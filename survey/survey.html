@@ -68,6 +68,9 @@ textarea,input[type=text],input[type=email]{
   width:100%;font:400 1rem/1.5 var(--body);color:var(--text);background:#fff;
   border:1px solid #d9c6c0;border-radius:10px;padding:.75rem .9rem}
 textarea{min-height:9rem;resize:vertical}
+.names{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.names label{display:block}.names input{margin-top:.3rem}
+@media(max-width:520px){.names{grid-template-columns:1fr}}
 textarea:focus,input[type=text]:focus,input[type=email]:focus{outline:3px solid var(--gold);outline-offset:1px;border-color:var(--gold-dark)}
 .count{text-align:right;font-size:.85rem;color:var(--muted);margin-top:.25rem}
 .other-wrap{margin:.3rem 0 .4rem 0}
@@ -106,7 +109,7 @@ footer .url-fallback{position:absolute;left:-999px}
   <div class="card">
     <h1>In-Depth Work Frustrations and App Solutions Survey</h1>
     <hr class="rule">
-    <p class="intro">I’m researching the everyday frustrations that cost small business owners and freelancers time and money, and what kind of app might fix them. This takes about 3 minutes. Your honest answers will help shape the tools I build next. At the end, I’ll ask for your email so I can invite you to a short follow-up conversation and send occasional updates.</p>
+    <p class="intro">I’m researching the everyday frustrations that cost small business owners and freelancers time and money, and what kind of app might fix them. This takes about 3 minutes. Your honest answers will help shape the tools I build next. At the end, I’ll ask for your name and email so I can invite you to a short follow-up conversation and send occasional updates.</p>
 
     <form id="survey" novalidate>
       <!-- 1 -->
@@ -226,10 +229,28 @@ footer .url-fallback{position:absolute;left:-999px}
         </fieldset>
 
         <!-- 11 -->
+        <fieldset class="q">
+          <legend><span class="num">11.</span>Your name <span class="req" aria-hidden="true">*</span>
+            <span class="hint">Required.</span></legend>
+          <div class="names">
+            <label class="hint" for="first_name">First name
+              <input type="text" id="first_name" name="first_name" autocomplete="given-name" maxlength="80" required aria-required="true"></label>
+            <label class="hint" for="last_name">Last name
+              <input type="text" id="last_name" name="last_name" autocomplete="family-name" maxlength="80" required aria-required="true"></label>
+          </div>
+        </fieldset>
+
+        <!-- 12 -->
         <div class="q">
-          <label class="qlabel" for="q11"><span class="num">11.</span>If you’d like to be contacted for follow-up, please provide your email. <span class="req" aria-hidden="true">*</span>
-            <span class="hint">Only used to invite you to a short follow-up conversation. Required.</span></label>
+          <label class="qlabel" for="q11"><span class="num">12.</span>Your email <span class="req" aria-hidden="true">*</span>
+            <span class="hint">Used to invite you to a short follow-up conversation. Required.</span></label>
           <input type="email" id="q11" name="q11" autocomplete="email" inputmode="email" placeholder="Email address" required aria-required="true">
+          <label class="opt" style="margin-top:.8rem"><input type="checkbox" name="updates_ok" value="Yes"> Yes, also email me occasional updates when new tools are added to the site. You can unsubscribe any time.</label>
+        </div>
+
+        <!-- Leave empty. Hidden from people; only spam robots fill it in. -->
+        <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
+          <label for="website">Website</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
         </div>
 
         <div id="err" class="panel" role="alert" hidden></div>
@@ -251,9 +272,9 @@ footer .url-fallback{position:absolute;left:-999px}
 </footer>
 
 <script>
-/* Where responses are sent. Paste a form-endpoint URL here (for example a Formspree
-   or Basin form URL). Leave empty while previewing: nothing is saved. */
-const ENDPOINT = "https://formspree.io/f/mgaaavrv";
+/* Where responses are sent: the survey database on this website.
+   Leave empty while previewing: nothing is saved. */
+const ENDPOINT = "../api/survey.php";
 
 const $ = (s, r=document) => r.querySelector(s);
 const form = $('#survey'), rest = $('#rest'), endmsg = $('#endmsg');
@@ -300,35 +321,24 @@ form.addEventListener('submit', async ev => {
   if (!q1) return showErr('Please answer the first question so I know whether this survey is for you.', form.querySelector('input[name=q1]'));
   if (q1.value === 'No') return;
 
+  const first = $('#first_name'), last = $('#last_name');
+  if (!first.value.trim()) return showErr('Please enter your first name.', first);
+  if (!last.value.trim()) return showErr('Please enter your last name.', last);
+
   const email = $('#q11');
   if (!email.value.trim() || !email.checkValidity())
-    return showErr('Please enter a valid email address. It is required, and it is only used to invite you to a short follow-up conversation.', email);
+    return showErr('Please enter a valid email address. It is required, and it is used to invite you to a short follow-up conversation.', email);
 
-  // Readable field names so each emailed response reads like the survey
-  const LABELS = {
-    q1:'1. Small business owner or freelancer?',
-    q2:'2. Profession', q2_other:'2. Profession (described)',
-    q3:'3. Last work task that cost time or money',
-    q4:'4. How often it occurs',
-    q5:'5. Time cost per week',
-    q6:'6. Categories', q6_other:'6. Categories (other, described)',
-    q7:'7. Current workarounds', q7_other:'7. Workarounds (other, described)',
-    q8:'8. What the app should do',
-    q9:'9. Ever paid for a tool?',
-    q10:'10. Willing to pay per month',
-    q11:'11. Email for follow-up'
-  };
+  // Collect the answers. Checkbox questions are joined with commas.
   const fd = new FormData(form);
-  const raw = {};
+  const data = {};
   for (const [k, v] of fd.entries()) {
     const val = String(v).trim();
     if (!val) continue;
-    raw[k] = (k in raw) ? raw[k] + ', ' + val : val;
+    data[k] = (k in data) ? data[k] + ', ' + val : val;
   }
-  const data = {_subject: 'New survey response: Work Frustrations Survey'};
-  for (const k of Object.keys(LABELS)) if (raw[k]) data[LABELS[k]] = raw[k];
-  data.email = raw.q11;               // lets you reply straight from Formspree
-  data['Submitted at'] = new Date().toISOString();
+  data.email = data.q11 || '';
+  delete data.q11;
 
   if (!ENDPOINT) {
     const p = $('#preview');
@@ -345,12 +355,13 @@ form.addEventListener('submit', async ev => {
       headers: {'Content-Type':'application/json', 'Accept':'application/json'},
       body: JSON.stringify(data)
     });
-    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const out = await res.json().catch(() => ({}));
+    if (!res.ok || !out.ok) throw new Error(out.error || ('HTTP ' + res.status));
     form.hidden = true;
     const t = $('#thanks'); t.hidden = false; t.focus(); t.scrollIntoView({behavior:'smooth', block:'center'});
   } catch (err) {
     btn.disabled = false; btn.textContent = 'Submit my answers';
-    showErr('Something went wrong and your answers were not sent. Please try again in a moment.');
+    showErr((err && err.message && !/^HTTP|fetch|JSON/i.test(err.message)) ? err.message : 'Something went wrong and your answers were not sent. Please try again in a moment.');
   }
 });
 </script>
