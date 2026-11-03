@@ -1,9 +1,11 @@
 name: Deploy to IONOS
 
-# Manual for now: run it from the Actions tab and pick a mode.
-# Automatic deploys on every push to main get switched on only after a
-# successful manual preview and deploy.
+# Runs automatically on every push to main (deploy mode): safety checks
+# first, then only new or changed files are uploaded. Nothing on IONOS is
+# ever deleted. It can also be run by hand from the Actions tab.
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
     inputs:
       mode:
@@ -29,7 +31,7 @@ jobs:
     uses: ./.github/workflows/predeploy-safety.yml
 
   deploy:
-    name: IONOS (${{ inputs.mode }})
+    name: IONOS (${{ inputs.mode || 'deploy' }})
     needs: safety
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -39,9 +41,9 @@ jobs:
           persist-credentials: false
       - name: Install SFTP client
         run: sudo apt-get update -q && sudo apt-get install -y -q lftp
-      - name: Run ${{ inputs.mode }}
+      - name: Run ${{ inputs.mode || 'deploy' }}
         env:
-          MODE: ${{ inputs.mode }}
+          MODE: ${{ inputs.mode || 'deploy' }}
           IONOS_SFTP_HOST: ${{ secrets.IONOS_SFTP_HOST }}
           IONOS_SFTP_USER: ${{ secrets.IONOS_SFTP_USER }}
           LFTP_PASSWORD: ${{ secrets.IONOS_SFTP_PASSWORD }}
