@@ -113,3 +113,28 @@ indexnow.mjs is optional. It’s for when you’ve added several pages at
 once and want to send them all in one go. It runs from any terminal 
 on a computer with Node installed, not just VS Code. If you’d rather 
 keep it simple, the browser method is all you need. **/
+
+SURVEY DATABASE
+The survey page (survey/survey.html) saves each response to a MySQL database
+on IONOS. Responses are filed A to Z by last name on a private page:
+  https://burnishedgracestudio.com/api/survey-admin.php
+Each letter downloads as its own spreadsheet file (A.csv, B.csv ...), or all
+letters at once as a ZIP. Each row includes that person's unsubscribe link,
+to paste at the bottom of any update email you send them.
+
+One-time setup:
+1. In IONOS, Hosting > Databases > Create a database (MySQL). Note the host
+   name, database name, user name and password IONOS shows you.
+2. Create bg-private/survey-config.php (NEXT TO config.php, never in this
+   folder or in Git) containing:
+
+<?php
+return [
+  'db_host'        => 'YOUR_DB_HOST',      // e.g. db5012345678.hosting-data.io
+  'db_name'        => 'YOUR_DB_NAME',      // e.g. dbs12345678
+  'db_user'        => 'YOUR_DB_USER',      // e.g. dbu12345678
+  'db_pass'        => 'YOUR_DB_PASSWORD',
+  'admin_password' => 'YOUR_ADMIN_PASSWORD', // to open the private survey page
+];
+
+The table is created automatically the first time someone submits.
