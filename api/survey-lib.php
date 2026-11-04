@@ -22,9 +22,12 @@ function survey_db(array $cfg): PDO {
         PDO::ATTR_EMULATE_PREPARES => false,
     ]);
     // The table is created the first time it is needed; nothing to set up by hand.
+    // Each email address appears only once (uq_email).
     $pdo->exec("CREATE TABLE IF NOT EXISTS survey_responses (
         id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         created_at DATETIME NOT NULL,
+        updated_at DATETIME NOT NULL,
+        times_submitted SMALLINT UNSIGNED NOT NULL DEFAULT 1,
         letter CHAR(1) NOT NULL,
         last_name VARCHAR(80) NOT NULL,
         first_name VARCHAR(80) NOT NULL,
@@ -34,7 +37,7 @@ function survey_db(array $cfg): PDO {
         unsubscribe_token CHAR(32) NOT NULL,
         unsubscribed_at DATETIME NULL,
         INDEX idx_letter_name (letter, last_name, first_name),
-        INDEX idx_email (email),
+        UNIQUE KEY uq_email (email),
         UNIQUE KEY uq_token (unsubscribe_token)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
     return $pdo;

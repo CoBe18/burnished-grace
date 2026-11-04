@@ -45,12 +45,22 @@ foreach (SURVEY_QUESTIONS as $key => $label) {
 
 try {
     $db = survey_db($cfg);
+    // One row per email address. Taking the survey again with the same email
+    // replaces the earlier name and answers instead of adding a duplicate.
+    // Ticking "email me updates" again also undoes an earlier unsubscribe.
+    $wants = !empty($in['updates_ok']) ? 1 : 0;
     $st = $db->prepare('INSERT INTO survey_responses
-        (created_at, letter, last_name, first_name, email, updates_ok, answers, unsubscribe_token)
-        VALUES (UTC_TIMESTAMP(), ?, ?, ?, ?, ?, ?, ?)');
+        (created_at, updated_at, letter, last_name, first_name, email, updates_ok, answers, unsubscribe_token)
+        VALUES (UTC_TIMESTAMP(), UTC_TIMESTAMP(), ?, ?, ?, ?, ?, ?, ?)
+        ON DUPLICATE KEY UPDATE
+            updated_at = UTC_TIMESTAMP(),
+            times_submitted = times_submitted + 1,
+            letter = VALUES(letter), last_name = VALUES(last_name), first_name = VALUES(first_name),
+            answers = VALUES(answers),
+            updates_ok = VALUES(updates_ok),
+            unsubscribed_at = IF(VALUES(updates_ok) = 1, NULL, unsubscribed_at)');
     $st->execute([
-        survey_letter($last), $last, $first, strtolower($email),
-        !empty($in['updates_ok']) ? 1 : 0,
+        survey_letter($last), $last, $first, strtolower($email), $wants,
         json_encode($answers, JSON_UNESCAPED_UNICODE),
         bin2hex(random_bytes(16)),
     ]);

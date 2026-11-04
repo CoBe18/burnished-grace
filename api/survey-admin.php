@@ -90,12 +90,12 @@ function cell(string $v): string { return preg_match('/^[=+\-@\t\r]/', $v) ? "'"
 function csv_text(array $rows): string {
     $f = fopen('php://temp', 'w+');
     fwrite($f, "\xEF\xBB\xBF"); // so Excel and Numbers read accents correctly
-    $head = ['Last name', 'First name', 'Email', 'Wants updates', 'Unsubscribed', 'Submitted (Eastern)', 'Unsubscribe link'];
+    $head = ['Last name', 'First name', 'Email', 'Wants updates', 'Unsubscribed', 'First submitted (Eastern)', 'Last submitted (Eastern)', 'Times submitted', 'Unsubscribe link'];
     fputcsv($f, array_merge($head, array_values(SURVEY_QUESTIONS)), ',', '"', '');
     foreach ($rows as $r) {
         $a = json_decode($r['answers'], true) ?: [];
         $line = [$r['last_name'], $r['first_name'], $r['email'], $r['updates_ok'] ? 'Yes' : 'No',
-                 $r['unsubscribed_at'] ? 'Yes' : 'No', local_time($r['created_at']),
+                 $r['unsubscribed_at'] ? 'Yes' : 'No', local_time($r['created_at']), local_time($r['updated_at']), (string)$r['times_submitted'],
                  survey_site_url() . '/api/survey-unsubscribe.php?t=' . $r['unsubscribe_token']];
         foreach (array_keys(SURVEY_QUESTIONS) as $k) $line[] = $a[$k] ?? '';
         fputcsv($f, array_map('cell', $line), ',', '"', '');
@@ -157,7 +157,7 @@ foreach ($rows as $r) {
     foreach (SURVEY_QUESTIONS as $k => $q) if (isset($a[$k])) $dl .= '<dt>' . $h($q) . '</dt><dd>' . $h($a[$k]) . '</dd>';
     $status = $r['unsubscribed_at'] ? '<span class="tag off">Unsubscribed</span>'
             : ($r['updates_ok'] ? '<span class="tag">Yes</span>' : '<span class="tag no">No</span>');
-    $list .= '<tr><td><strong>' . $h($r['last_name']) . '</strong>, ' . $h($r['first_name']) . '</td><td><a href="mailto:' . $h($r['email']) . '">' . $h($r['email']) . '</a></td><td>' . $status . '</td><td>' . $h(local_time($r['created_at'])) . '</td><td><details><summary>Answers</summary><dl>' . $dl . '</dl></details></td></tr>';
+    $list .= '<tr><td><strong>' . $h($r['last_name']) . '</strong>, ' . $h($r['first_name']) . '</td><td><a href="mailto:' . $h($r['email']) . '">' . $h($r['email']) . '</a></td><td>' . $status . '</td><td>' . $h(local_time($r['updated_at'])) . ($r['times_submitted'] > 1 ? '<br><small>submitted ' . (int)$r['times_submitted'] . ' times; latest answers shown</small>' : '') . '</td><td><details><summary>Answers</summary><dl>' . $dl . '</dl></details></td></tr>';
 }
 if ($list === '') $list = '<tr><td colspan="5">No responses filed under ' . $h($label) . ' yet.</td></tr>';
 
@@ -167,5 +167,5 @@ page('Survey responses (' . $total . ')',
   . '<div class="actions"><a class="btn" href="?download=' . rawurlencode($sel) . '">Download ' . $h($label) . '.csv</a>'
   . '<a class="btn alt" href="?download=all">Download all letters (ZIP of A–Z files)</a></div>'
   . '<div class="card wrap"><h2 style="margin-top:0">' . $h($label) . ' · ' . count($rows) . ' ' . (count($rows) === 1 ? 'response' : 'responses') . '</h2>'
-  . '<table><thead><tr><th>Name</th><th>Email</th><th>Wants updates</th><th>Submitted (Eastern)</th><th></th></tr></thead><tbody>' . $list . '</tbody></table></div>'
+  . '<table><thead><tr><th>Name</th><th>Email</th><th>Wants updates</th><th>Last submitted (Eastern)</th><th></th></tr></thead><tbody>' . $list . '</tbody></table></div>'
   . '</main>');
