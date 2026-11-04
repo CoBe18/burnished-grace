@@ -64,9 +64,21 @@ try {
         json_encode($answers, JSON_UNESCAPED_UNICODE),
         bin2hex(random_bytes(16)),
     ]);
+    $isNew = $st->rowCount() === 1; // 1 = new row, 2 = earlier response replaced
+    $total = (int)$db->query('SELECT COUNT(*) FROM survey_responses')->fetchColumn();
 } catch (Throwable $e) {
     error_log('survey save failed: ' . $e->getMessage());
     reply(500, ['ok' => false, 'error' => 'Your answers could not be saved. Please try again in a moment.']);
+}
+
+// Email the studio inbox. A failed email never affects the person's answers.
+try {
+    survey_notify($cfg, [
+        'first_name' => $first, 'last_name' => $last, 'email' => strtolower($email),
+        'updates_ok' => $wants, 'letter' => survey_letter($last), 'answers' => $answers,
+    ], $isNew, $total);
+} catch (Throwable $e) {
+    error_log('survey notify: ' . $e->getMessage());
 }
 
 reply(200, ['ok' => true]);

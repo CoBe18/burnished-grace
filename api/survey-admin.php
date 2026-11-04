@@ -42,6 +42,14 @@ dl{margin:8px 0 0}dt{font-weight:600;margin-top:8px}dd{margin:0 0 0 0;white-spac
 input[type=password]{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:8px;width:100%;max-width:320px;min-height:44px}
 .err{color:#8a2a1c;font-weight:600}
 .btn.del{background:#fff;color:#8a2a1c;border:1px solid #c9a39c;padding:6px 12px;min-height:36px}.btn.del:hover{background:#fbe9e7}
+.bar{display:grid;grid-template-columns:minmax(8rem,16rem) 1fr 6.5rem;gap:10px;align-items:center;margin:6px 0}
+.bar .track{height:14px;background:#e8ebf2;border-radius:99px;overflow:hidden}.bar .fill{display:block;height:100%;background:var(--navy-2)}
+.bar .num{font-variant-numeric:tabular-nums;color:var(--muted);text-align:right}
+.muted{color:var(--muted);margin:0 0 8px}h3{margin:0 0 4px;color:var(--navy)}h3 small{font-weight:400;color:var(--muted)}
+.quotes{list-style:none;margin:0;padding:0}.quotes li{border-left:4px solid var(--gold);padding:6px 12px;margin:10px 0;background:#fafbfd}
+.quotes blockquote{margin:0}.quotes cite{display:block;color:var(--muted);font-size:.9rem;margin-top:4px}
+@media(max-width:600px){.bar{grid-template-columns:1fr 5.5rem}.bar .lbl{grid-column:1/-1}}
+@media print{header a,.actions,.tabs{display:none}body{background:#fff}.card{break-inside:avoid;border-color:#ccc}}
 .flash{background:#e7f0e7;color:#24572a;border-radius:8px;padding:10px 14px;margin:0 0 16px;font-weight:600}
 </style></head><body>' . $body . '</body></html>';
     exit;
@@ -164,6 +172,46 @@ foreach ($letters as $L) {
         : '<span aria-label="' . $h($name) . ', no responses">' . $inner . '</span>';
 }
 
+// Summary: every answer tallied across all responses
+if (($_GET['view'] ?? '') === 'summary') {
+    $all = rows_for($db, null);
+    $n = count($all);
+    $tally = []; $written = [];
+    foreach ($all as $r) {
+        $a = json_decode($r['answers'], true) ?: [];
+        foreach (SURVEY_CHOICES as $k => $opts) {
+            if (!isset($a[$k])) continue;
+            $picked = in_array($k, SURVEY_MULTI, true) ? array_map('trim', explode(', ', $a[$k])) : [trim($a[$k])];
+            foreach ($picked as $v) $tally[$k][$v] = ($tally[$k][$v] ?? 0) + 1;
+        }
+        foreach (SURVEY_WRITTEN as $k) if (!empty($a[$k])) $written[$k][] = ['who' => $r['first_name'] . ' ' . $r['last_name'], 'text' => $a[$k]];
+    }
+    $body = '';
+    foreach (SURVEY_CHOICES as $k => $opts) {
+        $answered = 0;
+        foreach ($all as $r) { $a = json_decode($r['answers'], true) ?: []; if (isset($a[$k])) $answered++; }
+        $extra = array_diff(array_keys($tally[$k] ?? []), $opts);
+        $bars = '';
+        foreach (array_merge($opts, $extra) as $o) {
+            $c = $tally[$k][$o] ?? 0;
+            $pct = $answered ? round($c * 100 / $answered) : 0;
+            $bars .= '<div class="bar"><span class="lbl">' . $h($o) . '</span><span class="track"><span class="fill" style="width:' . $pct . '%"></span></span><span class="num">' . $c . ' · ' . $pct . '%</span></div>';
+        }
+        $note = in_array($k, SURVEY_MULTI, true) ? ' <small>(people could pick several, so percentages add up to more than 100)</small>' : '';
+        $body .= '<div class="card"><h3>' . $h(SURVEY_QUESTIONS[$k]) . $note . '</h3><p class="muted">' . $answered . ' of ' . $n . ' answered</p>' . $bars . '</div>';
+    }
+    foreach (SURVEY_WRITTEN as $k) {
+        $items = '';
+        foreach ($written[$k] ?? [] as $w) $items .= '<li><blockquote>' . nl2br($h($w['text'])) . '</blockquote><cite>' . $h($w['who']) . '</cite></li>';
+        $body .= '<div class="card"><h3>' . $h(SURVEY_QUESTIONS[$k]) . '</h3><p class="muted">' . count($written[$k] ?? []) . (count($written[$k] ?? []) === 1 ? ' written answer' : ' written answers') . '</p>' . ($items ? '<ul class="quotes">' . $items . '</ul>' : '') . '</div>';
+    }
+    page('Survey summary (' . $n . ')',
+        '<header><h1>Survey summary · ' . $n . ' ' . ($n === 1 ? 'response' : 'responses') . '</h1><a href="?logout=1">Sign out</a></header><main>'
+      . '<div class="actions"><a class="btn alt" href="survey-admin.php">← Back to A–Z</a><a class="btn alt" href="?download=all">Download all letters (ZIP of A–Z files)</a><button class="btn alt" type="button" onclick="window.print()">Print or save as PDF</button></div>'
+      . ($n === 0 ? '<div class="card"><p>No responses yet.</p></div>' : $body)
+      . '</main>');
+}
+
 $rows = rows_for($db, $sel);
 $list = '';
 foreach ($rows as $r) {
@@ -185,7 +233,7 @@ page('Survey responses (' . $total . ')',
     '<header><h1>Survey responses · ' . $total . ' total</h1><a href="?logout=1">Sign out</a></header><main>'
   . ($flash !== '' ? '<p class="flash" role="status">' . $h($flash) . '</p>' : '')
   . '<nav class="tabs" aria-label="Filed by last name">' . $tabs . '</nav>'
-  . '<div class="actions"><a class="btn" href="?download=' . rawurlencode($sel) . '">Download ' . $h($label) . '.csv</a>'
+  . '<div class="actions"><a class="btn" href="?view=summary">Summary of all answers</a><a class="btn alt" href="?download=' . rawurlencode($sel) . '">Download ' . $h($label) . '.csv</a>'
   . '<a class="btn alt" href="?download=all">Download all letters (ZIP of A–Z files)</a></div>'
   . '<div class="card wrap"><h2 style="margin-top:0">' . $h($label) . ' · ' . count($rows) . ' ' . (count($rows) === 1 ? 'response' : 'responses') . '</h2>'
   . '<table><thead><tr><th>Name</th><th>Email</th><th>Wants updates</th><th>Last submitted (Eastern)</th><th></th><th></th></tr></thead><tbody>' . $list . '</tbody></table></div>'
