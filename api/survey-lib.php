@@ -87,6 +87,54 @@ const SURVEY_QUESTIONS = [
     'q10'      => '10. Willing to pay per month',
 ];
 
+// Answer choices in survey order, for the Summary tallies. q6 and q7 allow
+// several answers, saved joined with ", ".
+const SURVEY_CHOICES = [
+    'q1'  => ['Yes', 'No'],
+    'q2'  => ['Designer', 'Developer', 'Writer', 'Consultant', 'Trades or home services', 'Retail or e-commerce', 'Food or hospitality', 'Coaching or education', 'Other'],
+    'q4'  => ['Daily', 'A few times a week', 'Weekly', 'Monthly', 'Rarely'],
+    'q5'  => ['Less than 1 hour', '1-3 hours', '3-5 hours', '5-10 hours', '10+ hours'],
+    'q6'  => ['Scheduling and bookings', 'Invoicing and getting paid', 'Tracking income and expenses', 'Finding and keeping clients', 'Managing projects or tasks', 'Communicating with clients', 'Marketing and social media', 'Other'],
+    'q7'  => ['Spreadsheet', 'Paper or notebook', 'Several different apps', 'I pay someone else to do it', 'Nothing', 'Other'],
+    'q9'  => ['Yes', 'No'],
+    'q10' => ['Nothing', 'Under $10', '$11-$25', '$26-$50', '$50 or more'],
+];
+const SURVEY_MULTI = ['q6', 'q7'];
+// Written answers, shown together on the Summary page.
+const SURVEY_WRITTEN = ['q3', 'q8', 'q2_other', 'q6_other', 'q7_other'];
+
+// Emails a new or updated response to the studio inbox. Never stops the
+// survey from saving: a failed email is only logged.
+function survey_notify(array $cfg, array $r, bool $isNew, int $total): void {
+    if (array_key_exists('notify_email', $cfg) && !$cfg['notify_email']) return; // turned off
+    $to = $cfg['notify_email'] ?? 'inquiry@BurnishedGraceStudio.com';
+    $one = fn($v) => trim(str_replace(["\r", "\n"], ' ', (string)$v));
+    $name = $one($r['first_name'] . ' ' . $r['last_name']);
+    $subject = ($isNew ? 'New survey response' : 'Updated survey response') . ': ' . $name . " ($total total)";
+    if ($isNew && in_array($total, [15, 25, 50, 100], true)) $subject = "Survey milestone: $total responses! Latest from " . $name;
+
+    $lines = [
+        ($isNew ? 'A new response' : 'An updated response (same email, newer answers)') . ' just came in.',
+        '',
+        'Name: ' . $name,
+        'Email: ' . $r['email'],
+        'Wants update emails: ' . ($r['updates_ok'] ? 'Yes' : 'No'),
+        'Filed under: ' . ($r['letter'] === '#' ? 'Other' : $r['letter']),
+        '',
+    ];
+    foreach (SURVEY_QUESTIONS as $k => $q) if (isset($r['answers'][$k])) $lines[] = $q . "\n   " . $r['answers'][$k] . "\n";
+    $lines[] = "Total responses so far: $total";
+    $lines[] = 'See all responses, filed A-Z, with a Summary of every answer:';
+    $lines[] = survey_site_url() . '/api/survey-admin.php';
+
+    $from = $cfg['notify_from'] ?? $to;
+    $headers = "From: Burnished Grace Survey <$from>\r\n"
+             . 'Reply-To: ' . $one($r['email']) . "\r\n"
+             . "MIME-Version: 1.0\r\nContent-Type: text/plain; charset=UTF-8\r\nContent-Transfer-Encoding: 8bit";
+    $ok = @mail($to, mb_encode_mimeheader($subject, 'UTF-8'), implode("\n", $lines), $headers, '-f' . $from);
+    if (!$ok) error_log('survey notify: mail() failed for response from ' . $r['email']);
+}
+
 function survey_site_url(): string {
     return 'https://' . ($_SERVER['HTTP_HOST'] ?? 'burnishedgracestudio.com');
 }
