@@ -41,6 +41,8 @@ dl{margin:8px 0 0}dt{font-weight:600;margin-top:8px}dd{margin:0 0 0 0;white-spac
 .tag{display:inline-block;padding:1px 8px;border-radius:99px;font-size:.8rem;background:#e7f0e7;color:#24572a}.tag.no{background:#eef0f4;color:var(--muted)}.tag.off{background:#fbe9e7;color:#8a2a1c}
 input[type=password]{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:8px;width:100%;max-width:320px;min-height:44px}
 .err{color:#8a2a1c;font-weight:600}
+.btn.del{background:#fff;color:#8a2a1c;border:1px solid #c9a39c;padding:6px 12px;min-height:36px}.btn.del:hover{background:#fbe9e7}
+.flash{background:#e7f0e7;color:#24572a;border-radius:8px;padding:10px 14px;margin:0 0 16px;font-weight:600}
 </style></head><body>' . $body . '</body></html>';
     exit;
 }
@@ -57,6 +59,7 @@ if (empty($_SESSION['ok'])) {
         if (hash_equals((string)$cfg['admin_password'], (string)($_POST['password'] ?? ''))) {
             session_regenerate_id(true);
             $_SESSION['ok'] = true;
+            $_SESSION['csrf'] = bin2hex(random_bytes(16));
             header('Location: survey-admin.php'); exit;
         }
         sleep(2);
@@ -102,6 +105,18 @@ function csv_text(array $rows): string {
     }
     rewind($f);
     return stream_get_contents($f);
+}
+
+if (empty($_SESSION['csrf'])) $_SESSION['csrf'] = bin2hex(random_bytes(16));
+
+// Delete one response (button on each row; asks to confirm first)
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($_POST['action'] ?? '') === 'delete') {
+    $back = in_array($_POST['l'] ?? '', $letters, true) ? $_POST['l'] : 'A';
+    if (hash_equals($_SESSION['csrf'], (string)($_POST['csrf'] ?? ''))) {
+        $db->prepare('DELETE FROM survey_responses WHERE id = ?')->execute([(int)($_POST['id'] ?? 0)]);
+        $_SESSION['flash'] = 'Response deleted.';
+    }
+    header('Location: survey-admin.php?l=' . rawurlencode($back)); exit;
 }
 
 // Downloads
@@ -157,15 +172,21 @@ foreach ($rows as $r) {
     foreach (SURVEY_QUESTIONS as $k => $q) if (isset($a[$k])) $dl .= '<dt>' . $h($q) . '</dt><dd>' . $h($a[$k]) . '</dd>';
     $status = $r['unsubscribed_at'] ? '<span class="tag off">Unsubscribed</span>'
             : ($r['updates_ok'] ? '<span class="tag">Yes</span>' : '<span class="tag no">No</span>');
-    $list .= '<tr><td><strong>' . $h($r['last_name']) . '</strong>, ' . $h($r['first_name']) . '</td><td><a href="mailto:' . $h($r['email']) . '">' . $h($r['email']) . '</a></td><td>' . $status . '</td><td>' . $h(local_time($r['updated_at'])) . ($r['times_submitted'] > 1 ? '<br><small>submitted ' . (int)$r['times_submitted'] . ' times; latest answers shown</small>' : '') . '</td><td><details><summary>Answers</summary><dl>' . $dl . '</dl></details></td></tr>';
+    $list .= '<tr><td><strong>' . $h($r['last_name']) . '</strong>, ' . $h($r['first_name']) . '</td><td><a href="mailto:' . $h($r['email']) . '">' . $h($r['email']) . '</a></td><td>' . $status . '</td><td>' . $h(local_time($r['updated_at'])) . ($r['times_submitted'] > 1 ? '<br><small>submitted ' . (int)$r['times_submitted'] . ' times; latest answers shown</small>' : '') . '</td><td><details><summary>Answers</summary><dl>' . $dl . '</dl></details></td>'
+           . '<td><form method="post" onsubmit="return confirm(\'Delete the response from ' . $h(addslashes($r['first_name'] . ' ' . $r['last_name'])) . '? This cannot be undone.\')">'
+           . '<input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="' . (int)$r['id'] . '">'
+           . '<input type="hidden" name="l" value="' . $h($sel) . '"><input type="hidden" name="csrf" value="' . $h($_SESSION['csrf']) . '">'
+           . '<button class="btn del" type="submit" aria-label="Delete response from ' . $h($r['first_name'] . ' ' . $r['last_name']) . '">Delete</button></form></td></tr>';
 }
-if ($list === '') $list = '<tr><td colspan="5">No responses filed under ' . $h($label) . ' yet.</td></tr>';
+if ($list === '') $list = '<tr><td colspan="6">No responses filed under ' . $h($label) . ' yet.</td></tr>';
 
+$flash = (string)($_SESSION['flash'] ?? ''); unset($_SESSION['flash']);
 page('Survey responses (' . $total . ')',
     '<header><h1>Survey responses · ' . $total . ' total</h1><a href="?logout=1">Sign out</a></header><main>'
+  . ($flash !== '' ? '<p class="flash" role="status">' . $h($flash) . '</p>' : '')
   . '<nav class="tabs" aria-label="Filed by last name">' . $tabs . '</nav>'
   . '<div class="actions"><a class="btn" href="?download=' . rawurlencode($sel) . '">Download ' . $h($label) . '.csv</a>'
   . '<a class="btn alt" href="?download=all">Download all letters (ZIP of A–Z files)</a></div>'
   . '<div class="card wrap"><h2 style="margin-top:0">' . $h($label) . ' · ' . count($rows) . ' ' . (count($rows) === 1 ? 'response' : 'responses') . '</h2>'
-  . '<table><thead><tr><th>Name</th><th>Email</th><th>Wants updates</th><th>Last submitted (Eastern)</th><th></th></tr></thead><tbody>' . $list . '</tbody></table></div>'
+  . '<table><thead><tr><th>Name</th><th>Email</th><th>Wants updates</th><th>Last submitted (Eastern)</th><th></th><th></th></tr></thead><tbody>' . $list . '</tbody></table></div>'
   . '</main>');
