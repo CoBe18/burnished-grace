@@ -46,7 +46,7 @@ input[type=password]{font:inherit;padding:10px 12px;border:1px solid var(--line)
 }
 
 if (!$cfg) {
-    page('Survey responses', '<header><h1>Survey responses</h1></header><main><div class="card"><p class="err">The survey database is not set up yet.</p><p>Create <code>bg-private/survey-config.php</code> as described in README.txt under "SURVEY DATABASE".</p></div></main>');
+    page('Survey responses', '<header><h1>Survey responses</h1></header><main><div class="card"><p class="err">The survey database is not set up yet.</p><p>' . htmlspecialchars($GLOBALS['SURVEY_CONFIG_PROBLEM'] ?: 'Create bg-private/survey-config.php as described in README.txt under "SURVEY DATABASE".') . '</p></div></main>');
 }
 
 // Sign in / sign out

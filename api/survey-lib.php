@@ -4,12 +4,27 @@
 // open it from a browser. See README.txt, "SURVEY DATABASE".
 if (count(get_included_files()) === 1) { http_response_code(404); exit; }
 
+// Why the settings could not be used, for the private survey page.
+$SURVEY_CONFIG_PROBLEM = '';
+
 function survey_config(): ?array {
+    global $SURVEY_CONFIG_PROBLEM;
     $file = dirname(__DIR__, 2) . '/bg-private/survey-config.php';
-    if (!is_file($file)) return null;
-    $cfg = require $file;
+    if (!is_file($file)) { $SURVEY_CONFIG_PROBLEM = 'bg-private/survey-config.php was not found.'; return null; }
+    try {
+        $cfg = require $file;
+    } catch (Throwable $e) {
+        error_log('survey-config.php: ' . $e->getMessage());
+        $SURVEY_CONFIG_PROBLEM = 'bg-private/survey-config.php has a typing error on line ' . $e->getLine()
+            . '. Check that each value is wrapped in straight single quotes and each line ends with a comma.';
+        return null;
+    }
+    if (!is_array($cfg)) { $SURVEY_CONFIG_PROBLEM = 'bg-private/survey-config.php does not start with <?php and return [ ... ];'; return null; }
     foreach (['db_host', 'db_name', 'db_user', 'db_pass', 'admin_password'] as $k) {
-        if (empty($cfg[$k]) || str_contains((string)$cfg[$k], 'YOUR_')) return null;
+        if (empty($cfg[$k])) { $SURVEY_CONFIG_PROBLEM = "The '$k' setting is empty."; return null; }
+        if (strpos((string)$cfg[$k], 'YOUR_') !== false || strpos((string)$cfg[$k], 'PASTE_') !== false) {
+            $SURVEY_CONFIG_PROBLEM = "The '$k' setting still has the placeholder text in it."; return null;
+        }
     }
     return $cfg;
 }
