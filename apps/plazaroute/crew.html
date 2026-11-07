@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#0B1026"><title>My Jobs | PlazaRoute</title><meta name="description" content="Your cleaning jobs, directions, access notes and photos."><meta name="robots" content="noindex"><meta name="referrer" content="no-referrer"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="crew.css"><link rel="manifest" href="crew.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="icon" type="image/png" sizes="192x192" href="icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="My Jobs"><script type="module" src="crew.mjs"></script></head>
+<body class="crew"><a href="#crewMain" class="skip">Skip to content</a>
+<header class="crewtop"><img class="studiologo" src="studio-logo.png" alt="Burnished Grace Studio" width="720" height="360"><div class="crewtitle"><strong id="crewBiz">My Jobs</strong><span id="crewWho">PlazaRoute</span></div><button type="button" class="quiet" id="crewSignOut" hidden>Sign out</button></header>
+<main id="crewMain" tabindex="-1">
+
+<section id="crewLoading" class="crewscreen"><p class="crewcenter">Opening your jobs…</p></section>
+
+<section id="crewNoInvite" class="crewscreen" hidden><div class="homeband crewband"><div class="eyebrow">MY JOBS</div><h1>Your jobs live here.</h1><p class="intro">To get started, open the invite link your boss sent you, on this phone. It sets everything up.</p></div><p class="footnote crewpad">Already joined on another phone? Open the same invite link here, or ask your boss for a new sign-in link.</p></section>
+
+<section id="crewSign" class="crewscreen" hidden><div class="homeband crewband"><div class="eyebrow" id="crewSignEyebrow">WELCOME</div><h1 id="crewSignTitle">Make your password.</h1><p class="intro" id="crewSignIntro">You only do this once. After that, this page opens straight to your jobs.</p></div>
+<form id="crewSignForm" class="panel crewform" novalidate><label for="crewEmail">Your email</label><input id="crewEmail" type="email" autocomplete="username" autocapitalize="off" inputmode="email" required maxlength="300"><label for="crewPassword" id="crewPasswordLabel">Make a password <span>(at least 8 characters)</span></label><input id="crewPassword" type="password" autocomplete="new-password" required minlength="8" maxlength="200"><p id="crewSignStatus" class="crewstatus" role="status"></p><button class="primary wide" id="crewSignButton">Create my sign-in</button><button type="button" class="quiet wide" id="crewSwitch">I already have a password</button><p class="footnote">Forgot your password? Ask your boss for a new sign-in link.</p></form></section>
+
+<section id="crewOff" class="crewscreen" hidden><div class="panel"><h2>You’re not on this team right now</h2><p id="crewOffText">Your boss turned off your access, or your invite link was replaced. Ask them to send you a new link.</p><button type="button" class="primary" id="crewRetry">Check again</button></div></section>
+
+<section id="crewJobs" class="crewscreen" hidden>
+<div class="crewtabs" role="tablist" aria-label="Which jobs"><button type="button" role="tab" data-tab="today" aria-selected="true">Today</button><button type="button" role="tab" data-tab="next" aria-selected="false">Next 7 days</button><button type="button" role="tab" data-tab="past" aria-selected="false">Last 7 days</button></div>
+<div class="crewbar"><h1 id="crewHeading">Today</h1><button type="button" class="quiet" id="crewRefresh">Refresh</button></div>
+<p id="crewStatus" class="footnote" role="status"></p>
+<div id="crewList"></div>
+</section>
+</main>
+<div id="notice" role="status" aria-live="polite" class="toast" hidden><span id="noticeText"></span></div>
+</body></html>

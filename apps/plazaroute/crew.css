@@ -1,0 +1,30 @@
+/* PlazaRoute cleaners' page. Midnight blue base; maroon and gold on the welcome screens. */
+body.crew{background:var(--paper);min-height:100vh;min-height:100dvh;padding-bottom:calc(30px + env(safe-area-inset-bottom))}
+.crewtop{display:flex;align-items:center;gap:12px;padding:10px 16px;padding-top:calc(10px + env(safe-area-inset-top));background:var(--navy);color:#fff;position:sticky;top:0;z-index:5}
+.crewtop .studiologo{height:42px;background:#fff;border-radius:8px;padding:3px 6px}
+.crewtitle{flex:1;min-width:0;display:grid}.crewtitle strong{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:1.1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.crewtitle span{font-size:.72rem;color:#C9CFE3}
+.crewtop .quiet{color:#fff;border-color:#3A4470}.crewtop .quiet:hover{background:#1E2650}
+#crewMain{max-width:680px;margin:0 auto;padding:16px 14px;outline:0}
+.crewband{margin:6px 0 18px}.crewband h1{font-family:"Young Serif",Georgia,serif;font-weight:400;color:#fff;font-size:2rem;letter-spacing:-.3px;margin:0 0 10px}.crewband .intro{color:#F1E4E1;margin:0;line-height:1.55}
+.crewform{margin:0}.crewform .wide{margin-top:12px}.crewstatus{font-size:.86rem;line-height:1.55;min-height:1em;color:var(--ink)}
+.crewcenter{text-align:center;padding:60px 0;color:var(--muted)}.crewpad{padding:0 4px}
+.crewtabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:5px;margin-bottom:12px}
+.crewtabs button{background:transparent;border-radius:7px;font-weight:650;font-size:.82rem;color:var(--muted)}.crewtabs button[aria-selected=true]{background:var(--navy);color:#fff}
+.crewbar{display:flex;justify-content:space-between;align-items:center;gap:12px}.crewbar h1{font-size:1.7rem;margin:6px 0 2px;letter-spacing:-.5px}
+.crewday{font-size:1rem;margin:22px 0 6px;color:var(--navy)}
+.crewjob{background:#fff;border:1px solid var(--line);border-left:5px solid #9AA8D4;border-radius:10px;padding:16px;margin:12px 0}
+.crewjob.onway{border-left-color:#E0A800}.crewjob.working{border-left-color:#3D63D6}.crewjob.done{border-left-color:#2E8B57}.crewjob.problem{border-left-color:#B23A22}
+.crewjobtop{display:flex;gap:12px;align-items:flex-start}.crewjobtop>div{flex:1;min-width:0}.crewjobtop h2{font-size:1.15rem;margin:4px 0 2px;overflow-wrap:anywhere}
+.crewfacts{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 4px}.crewfacts p{flex-basis:100%;margin:0;font-size:.9rem;line-height:1.5}.crewfacts .buttonlink{font-size:.82rem;min-height:44px;padding:8px 12px}
+.crewnote{background:var(--paper);border-radius:8px;padding:10px 12px;margin:10px 0;font-size:.9rem;line-height:1.5}.crewnote strong{display:block;font-size:.72rem;letter-spacing:.8px;text-transform:uppercase;color:var(--navy);margin-bottom:3px}.crewnote p{margin:0;white-space:pre-wrap}
+.crewnote.access{background:#FFF6DD;border:1px solid #EDD68E}
+.crewphotos h3{font-size:.85rem;margin:14px 0 6px}
+.crewthumbs{display:flex;flex-wrap:wrap;gap:8px}.crewthumbs figure{position:relative;margin:0}.crewthumbs img{width:84px;height:84px;object-fit:cover;border-radius:8px;border:1px solid var(--line);display:block;background:var(--soft)}
+.crewdel{position:absolute;top:-8px;right:-8px;min-height:30px;min-width:30px;border-radius:15px;background:var(--navy);color:#fff;font-size:1rem;line-height:1;padding:0 8px}.crewdel.confirm{background:#B23A22;font-size:.72rem}
+.crewadd{display:flex;flex-direction:column;align-items:center;justify-content:center;width:84px;height:84px;margin:0;border:2px dashed #8c97b3;border-radius:8px;color:var(--navy);font-size:.7rem;text-align:center;cursor:pointer;background:#fff;font-weight:650}.crewadd span:first-of-type{font-size:1.5rem;line-height:1}
+.crewadd input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}.crewadd:focus-within{outline:3px solid #c99a2e;outline-offset:3px}
+.crewwarn{font-size:.82rem;color:#7A1E10;margin:8px 0}
+.crewactions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.crewactions .big{flex:1 1 140px;min-height:52px;font-size:.92rem;max-width:none}.crewactions[aria-busy=true]{opacity:.5;pointer-events:none}
+.crewpanel{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);display:grid;gap:10px}.crewpanel label{margin:0}.crewpanel .big{min-height:52px;font-size:.92rem;max-width:none}
+.crewempty{padding:40px 16px;color:var(--muted)}
+.crew .toast{bottom:calc(16px + env(safe-area-inset-bottom))}
