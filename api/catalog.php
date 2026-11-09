@@ -25,11 +25,6 @@ return [
         'price' => 17.00,
         'file'  => 'PLR-Profit-Check.zip',
     ],
-    'commercial-cleaning' => [
-        'name'  => 'Commercial Cleaning App',
-        'price' => 37.00,
-        'file'  => 'Cleaning-Budget-Quote-Planner.zip',
-    ],
     'real-estate-app' => [
         'name'  => 'Rental Property Finances: Individual Edition',
         'price' => 57.00,
@@ -42,7 +37,7 @@ return [
     ],
     'rental-cleaning-calc' => [
         'name'  => 'Rental Cleaning Pricing Calculator',
-        'price' => 17.00,
+        'price' => 32.00,
         'file'  => 'Rental-Cleaning-Pricing-Calculator.zip',
     ],
     'rental-cleaning-calc-plr' => [

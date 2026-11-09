@@ -35,13 +35,6 @@ const PRODUCTS = [
     pageLabel: "Watch the video and see details"
   },
 
-  {
-    id: "commercial-cleaning",
-    category: "Apps",
-    name: "Commercial Cleaning App",
-    desc: "Price jobs, track expenses, and keep your cleaning business organized. Runs on Windows and Mac and comes with a step-by-step installation and use guide.",
-    price: 37.00
-  },
 
   {
     id: "real-estate-app",
@@ -58,7 +51,7 @@ const PRODUCTS = [
     category: "Apps",
     name: "Rental Cleaning Pricing Calculator",
     desc: "Price every cabin turnover with confidence. Enter the bedrooms, beds, extras and the checkout-to-check-in window, and see the price, the crew you need, the finish time and your profit. Then send owners a polished quote with your own logo. Created from real experience running a Gatlinburg cabin rental company, with built-in prices for 10 vacation-rental markets and free price updates. Works in any browser on Windows and Mac, with a phone and tablet version for iPhone, iPad and Android (burnishedgracestudio.com/apps/rental-cleaning-pricing/). No subscription. Includes the calculator, the phone link, and the install and use guide. Single-use license for one business.",
-    price: 17.00,
+    price: 32.00,
     page: "apps/rental-cleaning-pricing-calculator.html#walkthrough",
     pageLabel: "Watch the walkthrough and see details"
   },
