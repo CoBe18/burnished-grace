@@ -49,7 +49,8 @@ const PRODUCTS = [
     name: "Rental Property Finances: Individual Edition",
     desc: "Track rental income and expenses by property, forecast five years of cash flow, and see your mortgage and depreciation schedules. Works offline on Windows and Mac, with a full installation and use guide and sample data to explore. For your own properties.",
     price: 57.00,
-    page: "apps/rental-property-finances.html"
+    page: "apps/rental-property-finances.html#walkthrough",
+    pageLabel: "Watch the walkthrough and see details"
   },
 
   {
@@ -76,7 +77,8 @@ const PRODUCTS = [
     name: "Rental Property Finances: PLR Edition",
     desc: "Rebrand the Rental Property Finances app completely, with your own name, logo, colors and guides, and sell it as your product. Includes a no-code Rebrand Tool, the source code, sales copy and the PLR terms. Includes everything in the Individual Edition. Minimum resale price $57 per copy.",
     price: 107.00,
-    page: "apps/rental-property-finances.html#editions",
+    page: "apps/rental-property-finances.html#walkthrough",
+    pageLabel: "Watch the walkthrough and see details",
     includes: ["real-estate-app"]
   },
 
