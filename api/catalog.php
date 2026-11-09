@@ -42,7 +42,7 @@ return [
     ],
     'rental-cleaning-calc-plr' => [
         'name'  => 'Rental Cleaning Pricing Calculator: Private Label Rights Edition',
-        'price' => 47.00,
+        'price' => 77.00,
         'file'  => 'Rental-Cleaning-Pricing-Calculator-PLR.zip',
     ],
     'beatitudes-kids' => [

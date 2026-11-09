@@ -79,8 +79,8 @@ const PRODUCTS = [
     id: "rental-cleaning-calc-plr",
     category: "PLR packages",
     name: "Rental Cleaning Pricing Calculator: Private Label Rights Edition",
-    desc: "Sell this calculator as your own. The built-in Rebrand tool changes the name, tagline, colors and credit line, then downloads your branded copy in one click. No coding needed. Includes the calculator with the Rebrand tool, an editable install and use guide in Word plus a PDF, and the PLR license terms. You may rebrand it and sell it to end users under a single-use license, at no less than $17 a copy. You may not pass on resale or PLR rights, or give it away. Full terms are in the PLR License Terms included with your download.",
-    price: 47.00,
+    desc: "Sell this calculator as your own. The built-in Rebrand tool changes the name, tagline, colors and credit line, then downloads your branded copy in one click. No coding needed. Includes the calculator with the Rebrand tool, an editable install and use guide in Word plus a PDF, and the PLR license terms. You may rebrand it and sell it to end users under a single-use license, at no less than $32 a copy. You may not pass on resale or PLR rights, or give it away. Full terms are in the PLR License Terms included with your download.",
+    price: 77.00,
     page: "apps/rental-cleaning-pricing-calculator.html#walkthrough",
     pageLabel: "Watch the walkthrough and see details",
     includes: ["rental-cleaning-calc"]
