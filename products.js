@@ -57,7 +57,9 @@ const PRODUCTS = [
     category: "Apps",
     name: "Rental Cleaning Pricing Calculator",
     desc: "Price every cabin turnover with confidence. Enter the bedrooms, beds, extras and the checkout-to-check-in window, and see the price, the crew you need, the finish time and your profit. Then send owners a polished quote with your own logo. Created from real experience running a Gatlinburg cabin rental company, with built-in prices for 10 vacation-rental markets and free price updates. Works in any browser on Windows and Mac, with a phone and tablet version for iPhone, iPad and Android (burnishedgracestudio.com/apps/rental-cleaning-pricing/). No subscription. Includes the calculator, the phone link, and the install and use guide. Single-use license for one business.",
-    price: 17.00
+    price: 17.00,
+    page: "apps/rental-cleaning-pricing-calculator.html#walkthrough",
+    pageLabel: "Watch the walkthrough and see details"
   },
 
   {
@@ -84,6 +86,8 @@ const PRODUCTS = [
     name: "Rental Cleaning Pricing Calculator: Private Label Rights Edition",
     desc: "Sell this calculator as your own. The built-in Rebrand tool changes the name, tagline, colors and credit line, then downloads your branded copy in one click. No coding needed. Includes the calculator with the Rebrand tool, an editable install and use guide in Word plus a PDF, and the PLR license terms. You may rebrand it and sell it to end users under a single-use license, at no less than $17 a copy. You may not pass on resale or PLR rights, or give it away. Full terms are in the PLR License Terms included with your download.",
     price: 47.00,
+    page: "apps/rental-cleaning-pricing-calculator.html#walkthrough",
+    pageLabel: "Watch the walkthrough and see details",
     includes: ["rental-cleaning-calc"]
   },
 
