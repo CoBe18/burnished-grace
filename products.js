@@ -181,7 +181,9 @@ const PRODUCTS = [
     name: "Budget Ledger",
     desc: "Track deposits, expenses and upcoming bills, and see what is truly free to spend. Works on phones, tablets and computers, even offline. Free, with no sign-up; your entries stay on your device.",
     price: null,
-    free: "tools/budget-ledger/"
+    free: "tools/budget-ledger/",
+    page: "tools/budget-ledger/#videoBox",
+    pageLabel: "Watch the walkthrough"
   },
 
   {
