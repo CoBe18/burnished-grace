@@ -57,6 +57,16 @@ const PRODUCTS = [
   },
 
   {
+    id: "commercial-cleaning",
+    category: "Apps",
+    name: "Cleaning Budget & Quote Planner",
+    desc: "Price every cleaning job from your real numbers: wages, payroll taxes, workers' comp, supplies, equipment, travel and your share of overhead. Plan your monthly budget, keep customers and properties, quote by margin or markup, and print clean quotes that never show your costs. After the job, compare estimated and actual results. Templates for house, deep, move-in/move-out, commercial, vacation-rental and hospitality cleaning. English and Spanish. Works offline in your browser on Windows and Mac, with a full installation and use guide. Pay once, no subscription. Single-use license for one business.",
+    price: 47.00,
+    page: "apps/cleaning-budget-quote-planner.html#walkthrough",
+    pageLabel: "Watch the walkthrough and see details"
+  },
+
+  {
     id: "cleanreach",
     category: "Apps",
     name: "CleanReach",

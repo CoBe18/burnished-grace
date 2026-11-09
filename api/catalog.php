@@ -25,6 +25,11 @@ return [
         'price' => 17.00,
         'file'  => 'PLR-Profit-Check.zip',
     ],
+    'commercial-cleaning' => [
+        'name'  => 'Cleaning Budget & Quote Planner',
+        'price' => 47.00,
+        'file'  => 'Cleaning-Budget-Quote-Planner.zip',
+    ],
     'cleanreach' => [
         'name'  => 'CleanReach',
         'price' => 37.00,

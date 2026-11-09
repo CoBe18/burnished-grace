@@ -7,7 +7,8 @@ Upload everything in this folder to your web host, keeping the same layout:
 index.html is the homepage.
 
 ADDING PRICES (turns on the "Add to order" checkbox)
-Currently priced: Rental Cleaning Pricing Calculator $32.00,
+Currently priced: Cleaning Budget & Quote Planner $47.00,
+Rental Cleaning Pricing Calculator $32.00,
 Rental Property Finances: Individual Edition $57.00,
 Rental Property Finances: PLR Edition $107.00.
 1. Open products.js in any text editor (Notepad on Windows, TextEdit on Mac).
