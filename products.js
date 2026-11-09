@@ -57,6 +57,16 @@ const PRODUCTS = [
   },
 
   {
+    id: "cleanreach",
+    category: "Apps",
+    name: "CleanReach",
+    desc: "Find local businesses that may need cleaning, like offices, restaurants, salons, gyms, medical offices and hotels, from published map listings, and keep them in one private notebook. Plan plaza days to clean several shops in one trip, track follow-ups and client projects, and prepare outreach messages that you send yourself. Runs privately on Mac (macOS 13.5 or newer) and Windows, with a phone and tablet version you host yourself and optional Sync through your own free Supabase account. Searches use your own Geoapify key. Pay once, no subscription. Single-use license for one business.",
+    price: 37.00,
+    page: "apps/cleanreach.html#walkthrough",
+    pageLabel: "Watch the walkthrough and see details"
+  },
+
+  {
     id: "finance-apps",
     category: "Apps",
     name: "Finance Apps",

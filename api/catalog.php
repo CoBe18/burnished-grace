@@ -25,6 +25,11 @@ return [
         'price' => 17.00,
         'file'  => 'PLR-Profit-Check.zip',
     ],
+    'cleanreach' => [
+        'name'  => 'CleanReach',
+        'price' => 37.00,
+        'file'  => 'CleanReach-1_1.zip',
+    ],
     'real-estate-app' => [
         'name'  => 'Rental Property Finances: Individual Edition',
         'price' => 57.00,
