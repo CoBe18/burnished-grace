@@ -126,3 +126,8 @@ body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
 .wc #videos .entries li h3{color:#FBF4E6}
 .wc #videos .entries li p{color:#E8C877}
 .wc .order{top:calc(var(--head-h) + 1rem)}
+
+/* product details as a bulleted list, sentences underneath */
+.item .points{margin:.1rem 0 .2rem;padding-left:1.15rem;color:#4A2A30;font-size:1rem;line-height:1.45}
+.item .points li{margin:.25rem 0}
+.item .points li::marker{color:#B48A3C}

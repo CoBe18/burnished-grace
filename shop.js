@@ -18,7 +18,8 @@
       ${PRODUCTS.filter(p => p.category === cat).map(p => `
         <div class="item">
           <h4 id="t-${p.id}">${esc(p.name)}</h4>
-          <p>${esc(p.desc)}</p>
+          ${p.points && p.points.length ? `<ul class="points">${p.points.map(t => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}
+          ${p.desc ? `<p>${esc(p.desc)}</p>` : ""}
           ${p.page ? `<p class="more"><a href="${esc(p.page)}" aria-label="${esc(p.pageLabel || "See details and screenshots")}: ${esc(p.name)}">${esc(p.pageLabel || "See details and screenshots")}</a></p>` : ""}
           <div class="buy">${
             p.free
