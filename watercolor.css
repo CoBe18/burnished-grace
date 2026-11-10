@@ -74,3 +74,55 @@ body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
   .wc .hero .tagline{font-size:1.45rem;line-height:1.3}
   .wc .hero .tagline span{white-space:normal}
 }
+
+/* =====================================================================
+   EACH ITEM IN ITS OWN BOX (shop, Bible stories, resources)
+   These sections sit right on the watercolor; every product, video and
+   article gets its own card, like the approved mockup.
+   ===================================================================== */
+.wc main > #shop > .wrap,
+.wc main > #videos > .wrap,
+.wc main > #resources > .wrap,
+.wc main > #rental-resources > .wrap{background:transparent;border:0;box-shadow:none;
+  padding:clamp(1.5rem,4vw,2.5rem) 1.25rem;width:auto;max-width:76rem}
+.wc #shop h2,.wc #videos h2,.wc #resources h2,.wc #rental-resources h2{color:#E8C877;text-align:center}
+.wc #shop .lede,.wc #videos .lede,.wc #resources .lede,.wc #rental-resources .lede{color:#F1E4CF;text-align:center;margin-left:auto;margin-right:auto}
+.wc #rental-resources .lede a{color:#E8C877}
+.wc .catalog-jumps{justify-content:center}
+
+/* category headings across the top of each group of cards */
+.wc .cat{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,17.5rem),1fr));gap:1.25rem;align-items:stretch}
+.wc .cat h3{grid-column:1/-1;color:#E8C877;border-bottom:1px solid rgba(217,180,90,.7);margin:0}
+
+/* one product = one card */
+.wc .item{display:flex;flex-direction:column;gap:.55rem;background:var(--cream);color:#3A0A16;
+  border:1px solid var(--cream-line);border-radius:6px;padding:1.4rem 1.4rem 1.2rem;box-shadow:0 12px 28px rgba(25,2,8,.35)}
+.wc .item h4{font-size:1.3rem;line-height:1.2;color:#3A0A16}
+.wc .item p{color:#4A2A30;max-width:none;font-size:1rem;line-height:1.55}
+.wc .item .more a{color:#7A1A2E}
+.wc .buy{align-self:stretch;margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 1rem;
+  text-align:left;min-width:0;padding-top:.85rem;border-top:1px solid #E6D3A8}
+.wc .buy .price{font-family:var(--display);font-weight:400;font-size:1.4rem;color:#3A0A16}
+.wc .buy label{margin:0;background:#7A1A2E;color:#FBF4E6;font-weight:600;padding:.6rem 1rem;border-radius:4px;min-height:44px}
+.wc .buy label:hover{background:#5E1222}
+.wc .buy label:has(input:checked){background:#B48A3C;color:#1f050b}
+.wc .buy input{accent-color:#DDBF78}
+.wc .buy .included{flex-basis:100%;margin:0;max-width:none}
+.wc .buy .btn-free{margin:0}
+.wc .buy .soon{font-size:1.05rem}
+
+/* the order total sits beside the cards on computers, below them on phones */
+.wc .order{box-shadow:0 18px 40px rgba(25,2,8,.45);border-color:var(--cream-line)}
+
+/* one article or video = one card */
+.wc .entries{gap:1.25rem}
+.wc .entries li{background:var(--cream);border:1px solid var(--cream-line);border-radius:6px;padding:1.2rem 1.3rem;
+  box-shadow:0 12px 28px rgba(25,2,8,.35);line-height:1.3}
+.wc .entries li h3 a{color:#3A0A16;text-decoration:none}
+.wc .entries li h3 a:hover{color:#7A1A2E;text-decoration:underline}
+.wc .entries li p{color:#4A2A30;line-height:1.4}
+.wc #videos .entries{max-width:54rem;margin:0 auto}
+.wc #videos .entries li{background:rgba(40,4,14,.55);border-color:rgba(217,180,90,.7)}
+.wc #videos .entries li h3{color:#FBF4E6}
+.wc #videos .entries li p{color:#E8C877}
+.wc .order{top:calc(var(--head-h) + 1rem)}
