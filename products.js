@@ -212,7 +212,7 @@ const PRODUCTS = [
     id: "beatitudes-kids",
     images: [
       { src: "images/shop/beatitudes-kids-1.jpg", alt: "Coloring page: the tax collector praying at the temple, from Luke 18." },
-      { src: "images/shop/beatitudes-kids-2.jpg", alt: "Coloring page for The Meek (Matthew 5:5): a farmer plowing a field with an ox." }
+      { src: "images/shop/beatitudes-kids-2.jpg", alt: "Coloring page: a man sitting and listening on a rooftop at night, by lamplight." }
     ],
     category: "Coloring books and planners",
     name: "The Beatitudes: Kids Edition",
@@ -296,7 +296,7 @@ const PRODUCTS = [
     id: "beatitudes-kids-es",
     images: [
       { src: "images/shop/beatitudes-kids-es-1.jpg", alt: "Página para colorear: el publicano orando en el templo (Lucas 18)." },
-      { src: "images/shop/beatitudes-kids-es-2.jpg", alt: "Página para colorear de «Los mansos» (Mateo 5:5): un agricultor arando un campo con un buey." }
+      { src: "images/shop/beatitudes-kids-es-2.jpg", alt: "Página para colorear: un hombre sentado escuchando en una azotea de noche, a la luz de una lámpara." }
     ],
     category: "Coloring books in Spanish (Libros para colorear en español)",
     name: "Las Bienaventuranzas: Libro para colorear para niños (Spanish edition)",
