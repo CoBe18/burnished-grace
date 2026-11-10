@@ -139,3 +139,23 @@ body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
 .wc .shop .order{order:-1;position:static;width:100%;max-width:46rem;margin:0 auto}
 .wc main > #shop > .wrap{max-width:80rem}
 .wc .cat{grid-template-columns:repeat(auto-fill,minmax(min(100%,max(15.5rem,calc((100% - 2.5rem) / 3))),1fr))}
+
+/* category headings: larger, with clear space between groups */
+.wc .cat{margin-bottom:clamp(3rem,6vw,4.5rem)}
+.wc .cat h3{font-size:clamp(1.75rem,3.2vw,2.4rem);line-height:1.15;padding-bottom:.45rem;margin-bottom:.35rem;
+  border-bottom:2px solid rgba(217,180,90,.8);text-shadow:0 2px 6px rgba(25,2,8,.45)}
+.wc .catalog-jumps{margin-bottom:clamp(2rem,4vw,3rem)}
+
+/* let it breathe: more room between and inside the cards */
+.wc .cat{gap:clamp(1.25rem,2.4vw,2rem);margin-bottom:clamp(3.5rem,7vw,5.5rem)}
+.wc .cat h3{margin-bottom:clamp(.4rem,1.2vw,.9rem)}
+.wc .item{padding:1.75rem 1.75rem 1.5rem;gap:.7rem}
+.wc .item .points li{margin:.35rem 0}
+.wc .buy{padding-top:1.1rem}
+.wc .shop{gap:clamp(2rem,4vw,3rem)!important}
+.wc .entries{gap:clamp(1.25rem,2.4vw,2rem)}
+.wc .entries li{padding:1.5rem 1.6rem}
+.wc main > #videos > .wrap,.wc main > #resources > .wrap,.wc main > #rental-resources > .wrap{padding-top:clamp(2.5rem,6vw,4rem);padding-bottom:clamp(2.5rem,6vw,4rem)}
+.wc #shop h2,.wc #videos h2,.wc #resources h2,.wc #rental-resources h2{margin-bottom:.5em}
+.wc #shop .lede,.wc #videos .lede,.wc #resources .lede,.wc #rental-resources .lede{margin-bottom:2.5rem}
+.wc .cat{grid-template-columns:repeat(auto-fill,minmax(min(100%,max(15.5rem,calc((100% - 4.1rem) / 3))),1fr))}
