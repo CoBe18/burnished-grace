@@ -3,6 +3,8 @@
   -----------------------------
   Each product needs: id, category, name, desc, price (a number, or null for "Coming soon").
   Optional:
+    images:   one or two pictures shown under the name: { src, alt }. alt describes the
+              picture for people using screen readers. Tapping a picture enlarges it.
     points:   the item's details, shown as a bulleted list. desc then shows underneath
               as plain sentences (desc can be "" when the list says it all).
     page:     a details page, shown as a "See details" link under the description.
@@ -29,6 +31,10 @@
 const PRODUCTS = [
   {
     id: "secret-family-recipes",
+    images: [
+      { src: "images/shop/secret-family-recipes-1.jpg", alt: "Secret Family Recipes recipe box with three family recipe cards and photos: Aunt May's Banana Bread, Southern Peach Cobbler and Grandma Ruth's chicken and dumplings." },
+      { src: "images/shop/secret-family-recipes-2.jpg", alt: "Secret Family Recipes shopping list, sorted by store section, with the ingredients for Mom's Spaghetti." }
+    ],
     category: "Apps",
     name: "Secret Family Recipes",
     points: [
@@ -46,6 +52,10 @@ const PRODUCTS = [
 
   {
     id: "real-estate-app",
+    images: [
+      { src: "images/shop/real-estate-app-1.jpg", alt: "Rental Property Finances overview for a sample vacation rental, showing recorded income, net operating income, cash flow before tax and an estimated tax reserve." },
+      { src: "images/shop/real-estate-app-2.jpg", alt: "Rental Property Finances five-year cash flow projection for a sample property." }
+    ],
     category: "Apps",
     name: "Rental Property Finances: Individual Edition",
     points: [
@@ -63,6 +73,10 @@ const PRODUCTS = [
 
   {
     id: "rental-cleaning-calc",
+    images: [
+      { src: "images/shop/rental-cleaning-calc-1.jpg", alt: "Rental Cleaning Pricing Calculator pricing a 5-bedroom cabin turnover at $465, with each extra listed with its price." },
+      { src: "images/shop/rental-cleaning-calc-2.jpg", alt: "A customer quote from the Rental Cleaning Pricing Calculator, ready to send to the cabin owner." }
+    ],
     category: "Apps",
     name: "Rental Cleaning Pricing Calculator",
     points: [
@@ -84,6 +98,10 @@ const PRODUCTS = [
 
   {
     id: "commercial-cleaning",
+    images: [
+      { src: "images/shop/commercial-cleaning-1.jpg", alt: "Cleaning Budget & Quote Planner job screen with the price build-up: direct cost, overhead, break-even and suggested price." },
+      { src: "images/shop/commercial-cleaning-2.jpg", alt: "Cleaning Budget & Quote Planner monthly overhead budget, with the overhead allocated to each job." }
+    ],
     category: "Apps",
     name: "Cleaning Budget & Quote Planner",
     points: [
@@ -107,6 +125,10 @@ const PRODUCTS = [
 
   {
     id: "cleanreach",
+    images: [
+      { src: "images/shop/cleanreach-1.jpg", alt: "CleanReach My prospects list, with filters for relationship, stage and follow-ups." },
+      { src: "images/shop/cleanreach-2.jpg", alt: "CleanReach Plaza days screen, grouping nearby businesses so several shops can be cleaned in one trip." }
+    ],
     category: "Apps",
     name: "CleanReach",
     points: [
@@ -142,6 +164,10 @@ const PRODUCTS = [
 
   {
     id: "rental-finances-plr",
+    images: [
+      { src: "images/shop/rental-finances-plr-1.jpg", alt: "The Rental Property Finances Rebrand Tool: enter your own product name, tagline, logo and colors and see a live preview." },
+      { src: "images/shop/real-estate-app-1.jpg", alt: "Rental Property Finances overview for a sample vacation rental, showing recorded income, net operating income, cash flow before tax and an estimated tax reserve." }
+    ],
     category: "PLR packages",
     name: "Rental Property Finances: PLR Edition",
     points: [
@@ -161,6 +187,10 @@ const PRODUCTS = [
 
   {
     id: "rental-cleaning-calc-plr",
+    images: [
+      { src: "images/shop/rental-cleaning-calc-plr-1.jpg", alt: "The Rebrand tab of the Rental Cleaning Pricing Calculator, for changing the name, tagline, colors and credit line." },
+      { src: "images/shop/rental-cleaning-calc-plr-2.jpg", alt: "Downloading your branded copy of the calculator in one click." }
+    ],
     category: "PLR packages",
     name: "Rental Cleaning Pricing Calculator: Private Label Rights Edition",
     points: [
@@ -180,6 +210,10 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-kids",
+    images: [
+      { src: "images/shop/beatitudes-kids-1.jpg", alt: "Coloring page: the tax collector praying at the temple, from Luke 18." },
+      { src: "images/shop/beatitudes-kids-2.jpg", alt: "Coloring page for The Meek (Matthew 5:5): a farmer plowing a field with an ox." }
+    ],
     category: "Coloring books and planners",
     name: "The Beatitudes: Kids Edition",
     points: [
@@ -196,6 +230,10 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-teen",
+    images: [
+      { src: "images/shop/beatitudes-teen-1.jpg", alt: "Coloring page: the blind beggar on the Jericho road, looking up." },
+      { src: "images/shop/beatitudes-teen-2.jpg", alt: "The opening page for The Poor in Spirit, with the verse from Matthew 5:3 and a short reflection." }
+    ],
     category: "Coloring books and planners",
     name: "The Beatitudes: Teen Devotional Edition",
     points: [
@@ -210,6 +248,10 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-adult",
+    images: [
+      { src: "images/shop/beatitudes-adult-1.jpg", alt: "Coloring page: Empty Hands at the Kitchen Table, a modern scene of a woman at her kitchen table with a Bible." },
+      { src: "images/shop/beatitudes-adult-2.jpg", alt: "The facing page for The Tax Collector at the Temple, with the verse, an As you color question and lined space for notes and prayers." }
+    ],
     category: "Coloring books and planners",
     name: "The Beatitudes: Adult Devotional Edition",
     points: [
@@ -225,6 +267,10 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-bundle",
+    images: [
+      { src: "images/shop/beatitudes-bundle-1.jpg", alt: "Coloring page for The Merciful (Matthew 5:7): the Good Samaritan caring for a wounded man beside his donkey." },
+      { src: "images/shop/beatitudes-bundle-2.jpg", alt: "Coloring page for Persecuted for Righteousness (Matthew 5:10): two prisoners in chains looking up toward a window." }
+    ],
     category: "Coloring books and planners",
     name: "The Beatitudes: Complete Bundle (Kids, Teen and Adult)",
     points: [
@@ -248,6 +294,10 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-kids-es",
+    images: [
+      { src: "images/shop/beatitudes-kids-es-1.jpg", alt: "Página para colorear: el publicano orando en el templo (Lucas 18)." },
+      { src: "images/shop/beatitudes-kids-es-2.jpg", alt: "Página para colorear de «Los mansos» (Mateo 5:5): un agricultor arando un campo con un buey." }
+    ],
     category: "Coloring books in Spanish (Libros para colorear en español)",
     name: "Las Bienaventuranzas: Libro para colorear para niños (Spanish edition)",
     points: [
@@ -264,6 +314,10 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-teen-es",
+    images: [
+      { src: "images/shop/beatitudes-teen-es-1.jpg", alt: "Página para colorear: el mendigo ciego en el camino de Jericó." },
+      { src: "images/shop/beatitudes-teen-es-2.jpg", alt: "Página de apertura de «Los pobres en espíritu», con el versículo de Mateo 5:3 y una breve reflexión." }
+    ],
     category: "Coloring books in Spanish (Libros para colorear en español)",
     name: "Las Bienaventuranzas: Libro devocional para colorear para jóvenes (Spanish edition)",
     points: [
@@ -278,6 +332,10 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-adult-es",
+    images: [
+      { src: "images/shop/beatitudes-adult-es-1.jpg", alt: "Página para colorear: una escena actual de una mujer en la mesa de la cocina con su Biblia." },
+      { src: "images/shop/beatitudes-adult-es-2.jpg", alt: "Página de enfrente de «El publicano en el templo», con el versículo, una pregunta y líneas para notas y oraciones." }
+    ],
     category: "Coloring books in Spanish (Libros para colorear en español)",
     name: "Las Bienaventuranzas: Libro devocional para colorear para adultos (Spanish edition)",
     points: [
@@ -293,6 +351,10 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-bundle-es",
+    images: [
+      { src: "images/shop/beatitudes-bundle-es-1.jpg", alt: "Página para colorear de «Los misericordiosos» (Mateo 5:7): el buen samaritano cuidando a un hombre herido." },
+      { src: "images/shop/beatitudes-bundle-es-2.jpg", alt: "Página para colorear de «Los que padecen persecución» (Mateo 5:10): dos prisioneros encadenados mirando hacia una ventana." }
+    ],
     category: "Coloring books in Spanish (Libros para colorear en español)",
     name: "Las Bienaventuranzas: Paquete completo para niños, jóvenes y adultos (Spanish edition)",
     points: [
@@ -315,6 +377,10 @@ const PRODUCTS = [
 
   {
     id: "budget-ledger",
+    images: [
+      { src: "images/shop/budget-ledger-1.jpg", alt: "Budget Ledger summary: balance now, money set aside for bills, what is free to spend, and total spent." },
+      { src: "images/shop/budget-ledger-2.jpg", alt: "The Budget Ledger list of deposits and expenses with a running balance." }
+    ],
     category: "Free tools",
     name: "Budget Ledger",
     points: [
@@ -332,6 +398,10 @@ const PRODUCTS = [
 
   {
     id: "plr-profit-check",
+    images: [
+      { src: "images/shop/plr-profit-check-1.jpg", alt: "PLR Profit Check results for a sample product: what you keep per sale, the sales needed to earn back your cost, and a verdict on whether it can pay off." },
+      { src: "images/shop/plr-profit-check-2.jpg", alt: "The PLR shelf in PLR Profit Check, tracking each product's status and sales against what it cost." }
+    ],
     category: "PLR packages",
     name: "PLR Profit Check",
     points: [

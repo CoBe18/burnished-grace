@@ -18,6 +18,8 @@
       ${PRODUCTS.filter(p => p.category === cat).map(p => `
         <div class="item">
           <h4 id="t-${p.id}">${esc(p.name)}</h4>
+          ${p.images && p.images.length ? `<div class="shots shots-${p.images.length}${/^Coloring/.test(p.category) ? " shots-pages" : ""}">${p.images.map(im =>
+            `<button type="button" class="shot" data-src="${esc(im.src)}" data-alt="${esc(im.alt)}" aria-label="Enlarge picture: ${esc(im.alt)}"><img src="${esc(im.src)}" alt="${esc(im.alt)}" loading="lazy" decoding="async"></button>`).join("")}</div>` : ""}
           ${p.points && p.points.length ? `<ul class="points">${p.points.map(t => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}
           ${p.desc ? `<p>${esc(p.desc)}</p>` : ""}
           ${p.page ? `<p class="more"><a href="${esc(p.page)}" aria-label="${esc(p.pageLabel || "See details and screenshots")}: ${esc(p.name)}">${esc(p.pageLabel || "See details and screenshots")}</a></p>` : ""}
@@ -31,6 +33,22 @@
           }</div>
         </div>`).join("")}
     </div>`).join("");
+
+  // Tap a product picture to see it full size
+  const viewer = document.createElement("dialog");
+  viewer.className = "shot-viewer";
+  viewer.setAttribute("aria-label", "Picture");
+  viewer.innerHTML = `<button type="button" class="shot-close" aria-label="Close picture">×</button><img alt="">`;
+  document.body.appendChild(viewer);
+  const viewerImg = viewer.querySelector("img");
+  catalog.addEventListener("click", e => {
+    const b = e.target.closest(".shot");
+    if (!b) return;
+    viewerImg.src = b.dataset.src;
+    viewerImg.alt = b.dataset.alt;
+    viewer.showModal();
+  });
+  viewer.addEventListener("click", e => { if (e.target !== viewerImg) viewer.close(); });
 
   const list = document.getElementById("order-list");
   const totalEl = document.getElementById("order-total");

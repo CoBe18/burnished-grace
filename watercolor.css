@@ -159,3 +159,24 @@ body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
 .wc #shop h2,.wc #videos h2,.wc #resources h2,.wc #rental-resources h2{margin-bottom:.5em}
 .wc #shop .lede,.wc #videos .lede,.wc #resources .lede,.wc #rental-resources .lede{margin-bottom:2.5rem}
 .wc .cat{grid-template-columns:repeat(auto-fill,minmax(min(100%,max(15.5rem,calc((100% - 4.1rem) / 3))),1fr))}
+
+/* product pictures: under the name, above the bulleted list; tap to enlarge */
+.item .shots{display:grid;gap:.6rem;margin:.2rem 0 .3rem}
+.item .shots-2{grid-template-columns:1fr 1fr}
+.item .shot{display:block;padding:0;border:1px solid #E6D3A8;border-radius:5px;background:#fff;overflow:hidden;cursor:zoom-in;
+  aspect-ratio:4/3;box-shadow:0 4px 10px rgba(25,2,8,.12);transition:transform .15s ease,box-shadow .15s ease}
+.item .shot:hover{transform:translateY(-2px);box-shadow:0 8px 16px rgba(25,2,8,.2)}
+.item .shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top left}
+.shot-viewer{max-width:min(96vw,1300px);max-height:94vh;padding:0;border:1px solid #D9B45A;border-radius:8px;background:#1f050b;overflow:visible}
+.shot-viewer::backdrop{background:rgba(20,2,8,.82)}
+.shot-viewer img{display:block;max-width:min(96vw,1300px);max-height:94vh;width:auto;height:auto;border-radius:8px}
+.shot-close{position:absolute;top:-.9rem;right:-.9rem;width:44px;height:44px;border-radius:50%;border:1px solid #D9B45A;
+  background:#3A0A16;color:#F6E2A8;font-size:1.6rem;line-height:1;cursor:pointer}
+/* app screenshots: whole screenshot, full card width, one above the other */
+.item .shots,.item .shots-2{grid-template-columns:1fr}
+.item .shot{aspect-ratio:auto}
+.item .shot img{height:auto;object-fit:contain}
+/* coloring books: two whole pages side by side */
+.item .shots-pages.shots-2{grid-template-columns:1fr 1fr}
+.item .shots-pages .shot{aspect-ratio:7/9}
+.item .shots-pages .shot img{height:100%;object-fit:contain;object-position:center}
