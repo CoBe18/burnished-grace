@@ -1,0 +1,76 @@
+/* =====================================================================
+   BURGUNDY WATERCOLOR THEME (Nov 2026)
+   Loaded after styles.css on pages whose <body> has class="wc":
+   the homepage, the articles and the Rental Property Finances page.
+   The apps' own pages (midnight blue) and the free tools don't load it.
+   To turn the theme off on a page, remove class="wc" from its <body>.
+   The background images live in images/watercolor-bg.jpg (computers)
+   and images/watercolor-bg-tall.jpg (phones held upright).
+   ===================================================================== */
+
+:root{ --head-h:5.25rem; --outline:#2A0410; --cream:#FBF5EA; --cream-line:#D9B45A }
+
+/* the painted background stays still while the page scrolls
+   (a fixed layer works on iPhone, where background-attachment:fixed doesn't) */
+body.wc{background:#6a1426;position:relative}
+body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
+  background:#6a1426 url(images/watercolor-bg.jpg) center top/cover no-repeat}
+@media (max-aspect-ratio:3/4){
+  body.wc::before{background-image:url(images/watercolor-bg-tall.jpg)}
+}
+
+/* floating logo and dove: the image files are never changed,
+   the page only moves them and adds a shadow underneath */
+@keyframes wcFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes wcFloatSmall{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+
+/* top bar: the dove plus the studio name */
+.wc .site-head{background:rgba(32,4,12,.78);border-bottom:1px solid rgba(217,180,90,.5);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.wc .brand{gap:.8rem;font-size:1.3rem}
+.wc .brand:has(.brand-logo) .brand-text{position:static;width:auto;height:auto;overflow:visible;clip:auto;white-space:normal}
+.wc .brand-logo{height:58px;filter:drop-shadow(0 6px 8px rgba(25,2,8,.55));animation:wcFloatSmall 5s ease-in-out infinite}
+@media(max-width:600px){.wc .brand-logo{height:44px}.wc .brand{font-size:1.1rem}}
+
+/* homepage opening screen: logo to the "Visit the shop" buttons fill
+   exactly one screen; the shop starts when the visitor scrolls */
+.wc .hero{background:transparent;border-bottom:0;
+  min-height:calc(100vh - var(--head-h));min-height:calc(100svh - var(--head-h));
+  display:flex;align-items:center;padding:clamp(1.5rem,4vh,3rem) 0}
+.wc .hero > .wrap{width:100%}
+.wc .hero-logo{width:auto;max-width:min(680px,100%);max-height:40vh;max-height:40svh;
+  filter:drop-shadow(0 18px 22px rgba(25,2,8,.55));animation:wcFloat 6s ease-in-out infinite}
+.wc .wordmark-wrap{margin-bottom:clamp(1rem,3vh,1.6rem)}
+.wc .hero p{color:#F1E4CF}
+.wc .hero .tagline{color:#FBF4E6;font-size:min(2.5rem,calc((100vw - 44px) / 21.8));margin:0 auto clamp(.8rem,2.5vh,1.25rem);
+  text-shadow:-1px -1px 0 var(--outline),1px -1px 0 var(--outline),-1px 1px 0 var(--outline),1px 1px 0 var(--outline),
+              0 -1px 0 var(--outline),0 1px 0 var(--outline),-1px 0 0 var(--outline),1px 0 0 var(--outline)}
+.wc .hero p:not(.tagline){margin-bottom:clamp(1.2rem,3vh,2rem)}
+
+/* every section after the opening screen sits on a cream card */
+.wc main > section{padding:clamp(1rem,2.5vw,1.75rem) 0}
+.wc main > section:last-of-type{padding-bottom:clamp(2.5rem,6vw,4rem)}
+.wc main > section.alt{background:transparent;border:0}
+.wc main > section > .wrap,
+.wc main.article > .wrap{width:min(72rem,calc(100% - 1.5rem));background:var(--cream);
+  border:1px solid var(--cream-line);border-radius:8px;padding:clamp(1.5rem,4vw,3rem);
+  box-shadow:0 18px 40px rgba(25,2,8,.35)}
+.wc main > section > .wrap.narrow,
+.wc main.article > .wrap.narrow{width:min(46rem,calc(100% - 1.5rem))}
+.wc main > section#shop{padding-top:clamp(1.5rem,4vw,2.5rem)}
+
+/* articles: the card starts a little below the top bar */
+.wc main.article{padding:clamp(1.5rem,4vw,2.5rem) 0 clamp(2.5rem,6vw,4rem)}
+
+/* product page opening (Rental Property Finances) shows the watercolor */
+.wc .product-hero{background:transparent;border-bottom:0}
+.wc .product-shot img{box-shadow:0 18px 40px rgba(25,2,8,.5)}
+
+/* footer */
+.wc footer{background:rgba(32,4,12,.82);border-top:1px solid rgba(217,180,90,.5)}
+
+/* phones: let the tagline wrap at a readable size instead of shrinking it */
+@media(max-width:600px){
+  .wc .hero .tagline{font-size:1.45rem;line-height:1.3}
+  .wc .hero .tagline span{white-space:normal}
+}
