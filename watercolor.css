@@ -131,3 +131,11 @@ body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
 .item .points{margin:.1rem 0 .2rem;padding-left:1.15rem;color:#4A2A30;font-size:1rem;line-height:1.45}
 .item .points li{margin:.25rem 0}
 .item .points li::marker{color:#B48A3C}
+
+/* three product cards across on laptops and desktops */
+.wc main > #shop > .wrap{max-width:88rem}
+/* the maroon "Your order" box sits at the top of the shop; the cards start underneath it */
+.wc .shop{grid-template-columns:minmax(0,1fr)!important;gap:1.75rem}
+.wc .shop .order{order:-1;position:static;width:100%;max-width:46rem;margin:0 auto}
+.wc main > #shop > .wrap{max-width:80rem}
+.wc .cat{grid-template-columns:repeat(auto-fill,minmax(min(100%,max(15.5rem,calc((100% - 2.5rem) / 3))),1fr))}
