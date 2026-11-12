@@ -37,6 +37,7 @@ body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
 .wc .hero{background:transparent;border-bottom:0;
   min-height:calc(100vh - var(--head-h));min-height:calc(100svh - var(--head-h));
   display:flex;align-items:center;padding:clamp(1.5rem,4vh,3rem) 0}
+.wc .hero{overflow-x:clip}   /* the glow may spread wider than a phone screen; never let it cause sideways scrolling */
 .wc .hero > .wrap{width:100%}
 .wc .hero-logo{width:auto;max-width:min(680px,100%);max-height:40vh;max-height:40svh;
   filter:drop-shadow(0 18px 22px rgba(25,2,8,.55));animation:wcFloat 6s ease-in-out infinite}
@@ -52,7 +53,7 @@ body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
    its back. images/dove-glow.png is a separate picture laid behind the logo
    (the logo file is not changed) and it floats together with the logo. */
 .wc .wordmark-wrap:has(.hero-logo)::after{content:"";position:absolute;z-index:-1;pointer-events:none;
-  left:-13.75%;top:-27.99%;width:127.5%;height:155.98%;
+  left:-25%;top:-50.89%;width:150%;height:201.78%;
   background:url(images/dove-glow.png) center/100% 100% no-repeat;animation:wcFloat 6s ease-in-out infinite}
 .wc .hero p{color:#F1E4CF}
 .wc .hero .tagline{color:#FBF4E6;font-size:min(2.4rem,calc((100vw - 44px) / 24));max-width:none;margin:0 auto clamp(.8rem,2.5vh,1.25rem);
