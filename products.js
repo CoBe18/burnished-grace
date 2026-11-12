@@ -134,7 +134,7 @@ const PRODUCTS = [
     id: "beatitudes-bundle",
     category: "Coloring books and planners",
     name: "The Beatitudes: Complete Bundle (Kids, Teen and Adult)",
-    desc: "All three editions, so the whole family can color the Beatitudes, each at their own level. Three printable PDFs. You save $5.98 compared with buying each edition. For personal and household use.",
+    desc: "All three editions, so the whole family can color the Beatitudes, each at their own level. Three printable PDFs with an optional color cover. You save $5.98 compared with buying each edition. For personal and household use.",
     price: 16.99,
     contains: [
       "beatitudes-kids",
