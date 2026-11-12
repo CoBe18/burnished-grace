@@ -211,18 +211,17 @@ const PRODUCTS = [
   {
     id: "beatitudes-kids",
     images: [
-      { src: "images/shop/beatitudes-kids-1.jpg", alt: "Coloring page: the tax collector praying at the temple, from Luke 18." },
-      { src: "images/shop/beatitudes-kids-2.jpg", alt: "Coloring page: a man sitting and listening on a rooftop at night, by lamplight." }
+      { src: "images/shop/beatitudes-kids-1.jpg", alt: "Coloring page: Jesus walking up the mountain path with a staff, in simple bold lines." },
+      { src: "images/shop/beatitudes-kids-2.jpg", alt: "Coloring page with the verse from Matthew 5:3 above a fisherman kneeling to pray beside his boat." }
     ],
     category: "Coloring books and planners",
     name: "The Beatitudes: Kids Edition",
     points: [
-      "40 detailed pictures to color from Matthew 5:3–12",
-      "Two scenes from Bible times and two from everyday life today for each Beatitude",
-      "Pictures only, no text",
-      "Best for ages 8 and up",
-      "Printable PDF, 42 pages, 8.5 × 11 in",
-      "Optional color cover"
+      "42 simple, bold-line pictures for little hands, from Matthew 5:3–10",
+      "Jesus climbs the mountain and sits down to teach, then five pictures for each of the eight Beatitudes",
+      "Each Beatitude opens with its verse (ESV)",
+      "Best for ages 1 to 5",
+      "Printable PDF, 43 pages, 8.5 × 11 in"
     ],
     desc: "For personal and household use.",
     price: 4.99
@@ -237,7 +236,8 @@ const PRODUCTS = [
     category: "Coloring books and planners",
     name: "The Beatitudes: Teen Devotional Edition",
     points: [
-      "The same 40 illustrations",
+      "40 detailed illustrations from Matthew 5:3–12",
+      "Two scenes from Bible times and two from everyday life today for each Beatitude",
       "Each Beatitude opens with its verse (ESV) and a short reflection, and closes with a Reflect page of questions to journal",
       "Printable PDF, 64 pages, 8.5 × 11 in",
       "Optional color cover"
@@ -278,7 +278,7 @@ const PRODUCTS = [
       "Three printable PDFs",
       "Optional color cover"
     ],
-    desc: "The whole family can color the same scenes, each at their own level. You save $5.98 compared with buying each edition. For personal and household use.",
+    desc: "The whole family can color the Beatitudes, each at their own level. You save $5.98 compared with buying each edition. For personal and household use.",
     price: 16.99,
     contains: [
       "beatitudes-kids",
@@ -295,17 +295,17 @@ const PRODUCTS = [
   {
     id: "beatitudes-kids-es",
     images: [
-      { src: "images/shop/beatitudes-kids-es-1.jpg", alt: "Página para colorear: el publicano orando en el templo (Lucas 18)." },
-      { src: "images/shop/beatitudes-kids-es-2.jpg", alt: "Página para colorear: un hombre sentado escuchando en una azotea de noche, a la luz de una lámpara." }
+      { src: "images/shop/beatitudes-kids-es-1.jpg", alt: "Página para colorear: Jesús sube por el camino del monte con un bastón, en trazos sencillos y gruesos." },
+      { src: "images/shop/beatitudes-kids-es-2.jpg", alt: "Página para colorear con el versículo de Mateo 5:3 sobre un pescador arrodillado orando junto a su barca." }
     ],
     category: "Coloring books in Spanish (Libros para colorear en español)",
     name: "Las Bienaventuranzas: Libro para colorear para niños (Spanish edition)",
     points: [
-      "40 dibujos detallados para colorear sobre Mateo 5:3–12",
-      "Dos escenas de los tiempos bíblicos y dos de la vida cotidiana de hoy para cada Bienaventuranza",
-      "Solo dibujos, sin texto",
-      "Recomendado para niños de 8 años en adelante",
-      "PDF imprimible de 42 páginas, tamaño carta",
+      "42 dibujos sencillos de trazo grueso para manos pequeñas, sobre Mateo 5:3–10",
+      "Jesús sube al monte y se sienta a enseñar; luego cinco dibujos para cada una de las ocho Bienaventuranzas",
+      "Cada Bienaventuranza comienza con su versículo (Reina-Valera 1909)",
+      "Recomendado para niños de 1 a 5 años",
+      "PDF imprimible de 43 páginas, tamaño carta",
       "Portada a color opcional"
     ],
     desc: "Para uso personal y familiar.",
@@ -321,7 +321,8 @@ const PRODUCTS = [
     category: "Coloring books in Spanish (Libros para colorear en español)",
     name: "Las Bienaventuranzas: Libro devocional para colorear para jóvenes (Spanish edition)",
     points: [
-      "Las mismas 40 ilustraciones",
+      "40 ilustraciones detalladas sobre Mateo 5:3–12",
+      "Dos escenas de los tiempos bíblicos y dos de la vida cotidiana de hoy para cada Bienaventuranza",
       "Cada Bienaventuranza comienza con su versículo (Reina-Valera 1909) y una breve reflexión, y termina con una página de preguntas para reflexionar y escribir",
       "PDF imprimible de 64 páginas, tamaño carta",
       "Portada a color opcional"
@@ -361,7 +362,7 @@ const PRODUCTS = [
       "Tres PDF imprimibles",
       "Portadas a color opcionales"
     ],
-    desc: "Las tres ediciones, para que toda la familia coloree las mismas escenas, cada uno a su nivel. Ahorras $5.98 frente a comprar cada edición por separado. Para uso personal y familiar.",
+    desc: "Las tres ediciones, para que toda la familia coloree las Bienaventuranzas, cada uno a su nivel. Ahorras $5.98 frente a comprar cada edición por separado. Para uso personal y familiar.",
     price: 16.99,
     contains: [
       "beatitudes-kids-es",
