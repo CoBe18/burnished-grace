@@ -144,8 +144,11 @@ body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
 /* product details as a bulleted list, sentences underneath */
 .item .points{margin:.1rem 0 .2rem;padding-left:1.15rem;color:#4A2A30;font-size:1rem;line-height:1.45}
 .item .points li{margin:.25rem 0;overflow-wrap:anywhere}
-/* the long contact email may wrap on very narrow phones instead of pushing the page sideways */
-.wc .contact-line a{overflow-wrap:anywhere}
+/* on phones the long contact email stays on one line: it sits a little further left (into the card's side room) and shrinks just enough to fit, so it never pushes the page sideways */
+@media (max-width:480px){
+  .wc .contact-line{white-space:nowrap;font-size:min(1.2rem,5.6vw)}
+  .wc .contact-line a{margin-left:-12px}
+}
 .item .points li::marker{color:#B48A3C}
 
 /* three product cards across on laptops and desktops */
