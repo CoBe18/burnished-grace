@@ -193,7 +193,7 @@ body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
 /* soft heavenly light coming down from the upper left and falling across the dove */
 .wc .wordmark-wrap:has(.hero-logo)::before{content:"";position:absolute;z-index:1;pointer-events:none;
   left:-45%;top:-40%;width:115%;height:90%;mix-blend-mode:screen;
-  background:conic-gradient(from 0deg at 0% 0%,rgba(255,240,205,0) 86deg,rgba(255,240,205,.07) 96deg,rgba(255,240,205,.17) 105deg,rgba(255,240,205,.22) 110deg,rgba(255,240,205,.17) 115deg,rgba(255,240,205,.07) 124deg,rgba(255,240,205,0) 134deg);
+  background:conic-gradient(from 0deg at 0% 0%,rgba(255,240,205,0) 86deg,rgba(255,240,205,.035) 96deg,rgba(255,240,205,.085) 105deg,rgba(255,240,205,.11) 110deg,rgba(255,240,205,.085) 115deg,rgba(255,240,205,.035) 124deg,rgba(255,240,205,0) 134deg);
   -webkit-mask-image:radial-gradient(ellipse 150% 150% at 0% 0%,transparent 5%,#000 40%,#000 78%,transparent 100%),linear-gradient(to right,#000 82%,transparent 100%),linear-gradient(to bottom,#000 82%,transparent 100%);-webkit-mask-composite:source-in,source-in;
           mask-image:radial-gradient(ellipse 150% 150% at 0% 0%,transparent 5%,#000 40%,#000 78%,transparent 100%),linear-gradient(to right,#000 82%,transparent 100%),linear-gradient(to bottom,#000 82%,transparent 100%);mask-composite:intersect;
   filter:blur(16px);animation:wcLight 7s ease-in-out infinite}
