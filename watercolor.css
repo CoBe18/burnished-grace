@@ -224,5 +224,5 @@ body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
 .wc main > section > .wrap,
 .wc main.article > .wrap{box-shadow:12px 12px 18px rgba(30,2,9,.9)}
 .wc .item,.wc .entries li,.wc .order{box-shadow:9px 9px 14px rgba(30,2,9,.9)}
-.wc .item .shot,.wc .product-shot img{box-shadow:5px 5px 8px rgba(46,5,16,.8)}
-.wc .item .shot:hover{box-shadow:7px 7px 10px rgba(46,5,16,.8)}
+.wc .item .shot,.wc .product-shot img{box-shadow:5px 5px 15px rgba(46,5,16,.45)}
+.wc .item .shot:hover{box-shadow:7px 7px 18px rgba(46,5,16,.5)}
