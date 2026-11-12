@@ -152,7 +152,7 @@ const PRODUCTS = [
     id: "beatitudes-kids-es",
     category: "Coloring books in Spanish (Libros para colorear en español)",
     name: "Las Bienaventuranzas: Libro para colorear para niños (Spanish edition)",
-    desc: "40 dibujos detallados para colorear sobre Mateo 5:3–12, con dos escenas de los tiempos bíblicos y dos de la vida cotidiana de hoy para cada Bienaventuranza. Solo dibujos, sin texto. Recomendado para niños de 8 años en adelante. PDF imprimible de 42 páginas, tamaño carta, con portada a color opcional. Para uso personal y familiar.",
+    desc: "42 dibujos sencillos de trazo grueso para manos pequeñas, sobre Mateo 5:3–10. Jesús sube al monte y se sienta a enseñar; luego cada una de las ocho Bienaventuranzas tiene cinco dibujos y comienza con su versículo (Reina-Valera 1909). Recomendado para niños de 1 a 5 años. PDF imprimible de 43 páginas, tamaño carta, con portada a color opcional. Para uso personal y familiar.",
     price: 4.99
   },
 
@@ -160,7 +160,7 @@ const PRODUCTS = [
     id: "beatitudes-teen-es",
     category: "Coloring books in Spanish (Libros para colorear en español)",
     name: "Las Bienaventuranzas: Libro devocional para colorear para jóvenes (Spanish edition)",
-    desc: "Las mismas 40 ilustraciones. Cada Bienaventuranza comienza con su versículo (Reina-Valera 1909) y una breve reflexión, y termina con una página de preguntas para reflexionar y escribir. PDF imprimible de 64 páginas, tamaño carta, con portada a color opcional. Para uso personal y familiar.",
+    desc: "40 ilustraciones detalladas sobre Mateo 5:3–12, con dos escenas de los tiempos bíblicos y dos de la vida cotidiana de hoy para cada Bienaventuranza. Cada Bienaventuranza comienza con su versículo (Reina-Valera 1909) y una breve reflexión, y termina con una página de preguntas para reflexionar y escribir. PDF imprimible de 64 páginas, tamaño carta, con portada a color opcional. Para uso personal y familiar.",
     price: 7.99
   },
 
@@ -176,7 +176,7 @@ const PRODUCTS = [
     id: "beatitudes-bundle-es",
     category: "Coloring books in Spanish (Libros para colorear en español)",
     name: "Las Bienaventuranzas: Paquete completo para niños, jóvenes y adultos (Spanish edition)",
-    desc: "Las tres ediciones, para que toda la familia coloree las mismas escenas, cada uno a su nivel. Tres PDF imprimibles con portadas a color opcionales. Ahorras $5.98 frente a comprar cada edición por separado. Para uso personal y familiar.",
+    desc: "Las tres ediciones, para que toda la familia coloree las Bienaventuranzas, cada uno a su nivel. Tres PDF imprimibles con portadas a color opcionales. Ahorras $5.98 frente a comprar cada edición por separado. Para uso personal y familiar.",
     price: 16.99,
     contains: [
       "beatitudes-kids-es",
