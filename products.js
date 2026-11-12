@@ -110,7 +110,7 @@ const PRODUCTS = [
     id: "beatitudes-kids",
     category: "Coloring books and planners",
     name: "The Beatitudes: Kids Edition",
-    desc: "40 detailed pictures to color from Matthew 5:3–12, with two scenes from Bible times and two from everyday life today for each Beatitude. Pictures only, no text. Best for ages 8 and up. Printable PDF, 42 pages, 8.5 × 11 in, with an optional color cover. For personal and household use.",
+    desc: "42 simple, bold-line pictures for little hands, from Matthew 5:3–10. Jesus climbs the mountain and sits down to teach, then each of the eight Beatitudes gets five pictures, opening with its verse (ESV). Best for ages 1 to 5. Printable PDF, 43 pages, 8.5 × 11 in. For personal and household use.",
     price: 4.99
   },
 
@@ -118,7 +118,7 @@ const PRODUCTS = [
     id: "beatitudes-teen",
     category: "Coloring books and planners",
     name: "The Beatitudes: Teen Devotional Edition",
-    desc: "The same 40 illustrations, with each Beatitude opening with its verse (ESV) and a short reflection and closing with a Reflect page of questions to journal. Printable PDF, 64 pages, 8.5 × 11 in, with an optional color cover. For personal and household use.",
+    desc: "40 detailed illustrations from Matthew 5:3–12, two scenes from Bible times and two from everyday life today for each Beatitude, with each Beatitude opening with its verse (ESV) and a short reflection and closing with a Reflect page of questions to journal. Printable PDF, 64 pages, 8.5 × 11 in, with an optional color cover. For personal and household use.",
     price: 7.99
   },
 
@@ -134,7 +134,7 @@ const PRODUCTS = [
     id: "beatitudes-bundle",
     category: "Coloring books and planners",
     name: "The Beatitudes: Complete Bundle (Kids, Teen and Adult)",
-    desc: "All three editions, so the whole family can color the same scenes, each at their own level. Three printable PDFs with an optional color cover. You save $5.98 compared with buying each edition. For personal and household use.",
+    desc: "All three editions, so the whole family can color the Beatitudes, each at their own level. Three printable PDFs. You save $5.98 compared with buying each edition. For personal and household use.",
     price: 16.99,
     contains: [
       "beatitudes-kids",
