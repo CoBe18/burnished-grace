@@ -12,9 +12,9 @@
 
 /* the painted background stays still while the page scrolls
    (a fixed layer works on iPhone, where background-attachment:fixed doesn't) */
-body.wc{background:#6a1426;position:relative}
+body.wc{background:#560b18;position:relative}
 body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
-  background:#6a1426 url(images/watercolor-bg.jpg) center top/cover no-repeat}
+  background:#560b18 url(images/watercolor-bg.jpg) center top/cover no-repeat}
 @media (max-aspect-ratio:3/4){
   body.wc::before{background-image:url(images/watercolor-bg-tall.jpg)}
 }
