@@ -210,10 +210,10 @@ body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
 .wc .item h4{font-size:calc(1.3rem + 4px)}
 .wc #videos .entries li h3,.wc #portfolio .entries li h3{font-size:calc(1.2rem + 4px)}
 
-/* 7px more room between neighbouring cards. The cards keep their size, so each row grows 7px past the category line on both sides; the line itself stays where it was. Phones (one card per row) are left alone. */
+/* 13px more room between neighbouring cards. The cards keep their size, so each row grows 13px past the category line on both sides; the line itself stays where it was. Phones (one card per row) are left alone. */
 @media (min-width:800px){
-  .wc .cat{column-gap:calc(clamp(1.25rem,2.4vw,2rem) + 7px);margin-left:-7px;margin-right:-7px}
+  .wc .cat{column-gap:calc(clamp(1.25rem,2.4vw,2rem) + 13px);margin-left:-13px;margin-right:-13px}
   /* with the wider gaps, still fit three cards across wherever three fit now */
-  .wc .cat{grid-template-columns:repeat(auto-fill,minmax(min(100%,max(15.5rem,calc((100% - 78px) / 3))),1fr))}
-  .wc .cat h3{margin-left:7px;margin-right:7px}
+  .wc .cat{grid-template-columns:repeat(auto-fill,minmax(min(100%,max(15.5rem,calc((100% - 90px) / 3))),1fr))}
+  .wc .cat h3{margin-left:13px;margin-right:13px}
 }
