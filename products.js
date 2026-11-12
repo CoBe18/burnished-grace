@@ -249,7 +249,7 @@ const PRODUCTS = [
   {
     id: "beatitudes-adult",
     images: [
-      { src: "images/shop/beatitudes-adult-1.jpg", alt: "Coloring page: Empty Hands at the Kitchen Table, a modern scene of a woman at her kitchen table with a Bible." },
+      { src: "images/shop/beatitudes-adult-1.jpg", alt: "Coloring page: The Tax Collector at the Temple, a man with his head bowed and a hand on his chest in the temple courtyard while a Pharisee prays in the background." },
       { src: "images/shop/beatitudes-adult-2.jpg", alt: "The facing page for The Tax Collector at the Temple, with the verse, an As you color question and lined space for notes and prayers." }
     ],
     category: "Coloring books and planners",
@@ -334,7 +334,7 @@ const PRODUCTS = [
   {
     id: "beatitudes-adult-es",
     images: [
-      { src: "images/shop/beatitudes-adult-es-1.jpg", alt: "Página para colorear: una escena actual de una mujer en la mesa de la cocina con su Biblia." },
+      { src: "images/shop/beatitudes-adult-es-1.jpg", alt: "Página para colorear: «El publicano en el templo», un hombre con la cabeza inclinada y la mano en el pecho en el patio del templo, mientras un fariseo ora al fondo." },
       { src: "images/shop/beatitudes-adult-es-2.jpg", alt: "Página de enfrente de «El publicano en el templo», con el versículo, una pregunta y líneas para notas y oraciones." }
     ],
     category: "Coloring books in Spanish (Libros para colorear en español)",
