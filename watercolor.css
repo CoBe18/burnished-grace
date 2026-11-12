@@ -166,6 +166,11 @@ body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
 .wc .item{padding:1.75rem 1.75rem 1.5rem;gap:.7rem}
 .wc .item .points li{margin:.35rem 0}
 .wc .buy{padding-top:1.1rem}
+/* when a category has two or more rows of cards, 20px more room under each row.
+   The category's own bottom space is trimmed by the same 20px, so the gap after
+   the last row (and for one-row categories) stays exactly as it was. */
+.wc .cat .item{margin-bottom:20px}
+.wc .cat{margin-bottom:calc(clamp(3.5rem,7vw,5.5rem) - 20px)}
 .wc .shop{gap:clamp(2rem,4vw,3rem)!important}
 .wc .entries{gap:clamp(1.25rem,2.4vw,2rem)}
 .wc .entries li{padding:1.5rem 1.6rem}
