@@ -1,0 +1,182 @@
+/* =====================================================================
+   BURGUNDY WATERCOLOR THEME (Nov 2026)
+   Loaded after styles.css on pages whose <body> has class="wc":
+   the homepage, the articles and the Rental Property Finances page.
+   The apps' own pages (midnight blue) and the free tools don't load it.
+   To turn the theme off on a page, remove class="wc" from its <body>.
+   The background images live in images/watercolor-bg.jpg (computers)
+   and images/watercolor-bg-tall.jpg (phones held upright).
+   ===================================================================== */
+
+:root{ --head-h:5.25rem; --outline:#2A0410; --cream:#FBF5EA; --cream-line:#D9B45A }
+
+/* the painted background stays still while the page scrolls
+   (a fixed layer works on iPhone, where background-attachment:fixed doesn't) */
+body.wc{background:#6a1426;position:relative}
+body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
+  background:#6a1426 url(images/watercolor-bg.jpg) center top/cover no-repeat}
+@media (max-aspect-ratio:3/4){
+  body.wc::before{background-image:url(images/watercolor-bg-tall.jpg)}
+}
+
+/* floating logo and dove: the image files are never changed,
+   the page only moves them and adds a shadow underneath */
+@keyframes wcFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes wcFloatSmall{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+
+/* top bar: the dove plus the studio name */
+.wc .site-head{overflow:clip;background:rgba(32,4,12,.78);border-bottom:1px solid rgba(217,180,90,.5);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.wc .brand{gap:.8rem;font-size:1.3rem}
+.wc .brand:has(.brand-logo) .brand-text{position:static;width:auto;height:auto;overflow:visible;clip:auto;white-space:normal}
+.wc .brand-logo{height:58px;filter:drop-shadow(0 6px 8px rgba(25,2,8,.55));animation:wcFloatSmall 5s ease-in-out infinite}
+@media(max-width:600px){.wc .brand-logo{height:44px}.wc .brand{font-size:1.1rem}}
+
+/* homepage opening screen: logo to the "Visit the shop" buttons fill
+   exactly one screen; the shop starts when the visitor scrolls */
+.wc .hero{background:transparent;border-bottom:0;
+  min-height:calc(100vh - var(--head-h));min-height:calc(100svh - var(--head-h));
+  display:flex;align-items:center;padding:clamp(1.5rem,4vh,3rem) 0}
+.wc .hero > .wrap{width:100%}
+.wc .hero-logo{width:auto;max-width:min(680px,100%);max-height:40vh;max-height:40svh;
+  filter:drop-shadow(0 18px 22px rgba(25,2,8,.55));animation:wcFloat 6s ease-in-out infinite}
+.wc .wordmark-wrap{margin-bottom:clamp(1rem,3vh,1.6rem)}
+.wc .hero p{color:#F1E4CF}
+.wc .hero .tagline{color:#FBF4E6;font-size:min(2.4rem,calc((100vw - 44px) / 24));max-width:none;margin:0 auto clamp(.8rem,2.5vh,1.25rem);
+  text-shadow:-1px -1px 0 var(--outline),1px -1px 0 var(--outline),-1px 1px 0 var(--outline),1px 1px 0 var(--outline),
+              0 -1px 0 var(--outline),0 1px 0 var(--outline),-1px 0 0 var(--outline),1px 0 0 var(--outline)}
+.wc .hero p:not(.tagline){margin-bottom:clamp(1.2rem,3vh,2rem)}
+
+/* every section after the opening screen sits on a cream card */
+.wc main > section{padding:clamp(1rem,2.5vw,1.75rem) 0}
+.wc main > section:last-of-type{padding-bottom:clamp(2.5rem,6vw,4rem)}
+.wc main > section.alt{background:transparent;border:0}
+.wc main > section > .wrap,
+.wc main.article > .wrap{width:min(72rem,calc(100% - 1.5rem));background:var(--cream);
+  border:1px solid var(--cream-line);border-radius:8px;padding:clamp(1.5rem,4vw,3rem);
+  box-shadow:0 18px 40px rgba(25,2,8,.35)}
+.wc main > section > .wrap.narrow,
+.wc main.article > .wrap.narrow{width:min(46rem,calc(100% - 1.5rem))}
+.wc main > section#shop{padding-top:clamp(1.5rem,4vw,2.5rem)}
+
+/* articles: the card starts a little below the top bar */
+.wc main.article{padding:clamp(1.5rem,4vw,2.5rem) 0 clamp(2.5rem,6vw,4rem)}
+
+/* product page opening (Rental Property Finances) shows the watercolor */
+.wc .product-hero{background:transparent;border-bottom:0}
+.wc .product-shot img{box-shadow:0 18px 40px rgba(25,2,8,.5)}
+
+/* footer */
+.wc footer{background:rgba(32,4,12,.82);border-top:1px solid rgba(217,180,90,.5)}
+
+/* phones: let the tagline wrap at a readable size instead of shrinking it */
+@media(max-width:600px){
+  .wc .hero .tagline{font-size:1.45rem;line-height:1.3}
+  .wc .hero .tagline span{white-space:normal}
+}
+
+/* =====================================================================
+   EACH ITEM IN ITS OWN BOX (shop, Bible stories, resources)
+   These sections sit right on the watercolor; every product, video and
+   article gets its own card, like the approved mockup.
+   ===================================================================== */
+.wc main > #shop > .wrap,
+.wc main > #videos > .wrap,
+.wc main > #resources > .wrap,
+.wc main > #rental-resources > .wrap{background:transparent;border:0;box-shadow:none;
+  padding:clamp(1.5rem,4vw,2.5rem) 1.25rem;width:auto;max-width:76rem}
+.wc #shop h2,.wc #videos h2,.wc #resources h2,.wc #rental-resources h2{color:#E8C877;text-align:center}
+.wc #shop .lede,.wc #videos .lede,.wc #resources .lede,.wc #rental-resources .lede{color:#F1E4CF;text-align:center;margin-left:auto;margin-right:auto}
+.wc #rental-resources .lede a{color:#E8C877}
+.wc .catalog-jumps{justify-content:center}
+
+/* category headings across the top of each group of cards */
+.wc .cat{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,17.5rem),1fr));gap:1.25rem;align-items:stretch}
+.wc .cat h3{grid-column:1/-1;color:#E8C877;border-bottom:1px solid rgba(217,180,90,.7);margin:0}
+
+/* one product = one card */
+.wc .item{display:flex;flex-direction:column;gap:.55rem;background:var(--cream);color:#3A0A16;
+  border:1px solid var(--cream-line);border-radius:6px;padding:1.4rem 1.4rem 1.2rem;box-shadow:0 12px 28px rgba(25,2,8,.35)}
+.wc .item h4{font-size:1.3rem;line-height:1.2;color:#3A0A16}
+.wc .item p{color:#4A2A30;max-width:none;font-size:1rem;line-height:1.55}
+.wc .item .more a{color:#7A1A2E}
+.wc .buy{align-self:stretch;margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 1rem;
+  text-align:left;min-width:0;padding-top:.85rem;border-top:1px solid #E6D3A8}
+.wc .buy .price{font-family:var(--display);font-weight:400;font-size:1.4rem;color:#3A0A16}
+.wc .buy label{margin:0;background:#7A1A2E;color:#FBF4E6;font-weight:600;padding:.6rem 1rem;border-radius:4px;min-height:44px}
+.wc .buy label:hover{background:#5E1222}
+.wc .buy label:has(input:checked){background:#B48A3C;color:#1f050b}
+.wc .buy input{accent-color:#DDBF78}
+.wc .buy .included{flex-basis:100%;margin:0;max-width:none}
+.wc .buy .btn-free{margin:0}
+.wc .buy .soon{font-size:1.05rem}
+
+/* the order total sits beside the cards on computers, below them on phones */
+.wc .order{box-shadow:0 18px 40px rgba(25,2,8,.45);border-color:var(--cream-line)}
+
+/* one article or video = one card */
+.wc .entries{gap:1.25rem}
+.wc .entries li{background:var(--cream);border:1px solid var(--cream-line);border-radius:6px;padding:1.2rem 1.3rem;
+  box-shadow:0 12px 28px rgba(25,2,8,.35);line-height:1.3}
+.wc .entries li h3 a{color:#3A0A16;text-decoration:none}
+.wc .entries li h3 a:hover{color:#7A1A2E;text-decoration:underline}
+.wc .entries li p{color:#4A2A30;line-height:1.4}
+.wc #videos .entries{max-width:54rem;margin:0 auto}
+.wc #videos .entries li{background:rgba(40,4,14,.55);border-color:rgba(217,180,90,.7)}
+.wc #videos .entries li h3{color:#FBF4E6}
+.wc #videos .entries li p{color:#E8C877}
+.wc .order{top:calc(var(--head-h) + 1rem)}
+
+/* product details as a bulleted list, sentences underneath */
+.item .points{margin:.1rem 0 .2rem;padding-left:1.15rem;color:#4A2A30;font-size:1rem;line-height:1.45}
+.item .points li{margin:.25rem 0}
+.item .points li::marker{color:#B48A3C}
+
+/* three product cards across on laptops and desktops */
+.wc main > #shop > .wrap{max-width:88rem}
+/* the maroon "Your order" box sits at the top of the shop; the cards start underneath it */
+.wc .shop{grid-template-columns:minmax(0,1fr)!important;gap:1.75rem}
+.wc .shop .order{order:-1;position:static;width:100%;max-width:46rem;margin:0 auto}
+.wc main > #shop > .wrap{max-width:80rem}
+.wc .cat{grid-template-columns:repeat(auto-fill,minmax(min(100%,max(15.5rem,calc((100% - 2.5rem) / 3))),1fr))}
+
+/* category headings: larger, with clear space between groups */
+.wc .cat{margin-bottom:clamp(3rem,6vw,4.5rem)}
+.wc .cat h3{font-size:clamp(1.75rem,3.2vw,2.4rem);line-height:1.15;padding-bottom:.45rem;margin-bottom:.35rem;
+  border-bottom:2px solid rgba(217,180,90,.8);text-shadow:0 2px 6px rgba(25,2,8,.45)}
+.wc .catalog-jumps{margin-bottom:clamp(2rem,4vw,3rem)}
+
+/* let it breathe: more room between and inside the cards */
+.wc .cat{gap:clamp(1.25rem,2.4vw,2rem);margin-bottom:clamp(3.5rem,7vw,5.5rem)}
+.wc .cat h3{margin-bottom:clamp(.4rem,1.2vw,.9rem)}
+.wc .item{padding:1.75rem 1.75rem 1.5rem;gap:.7rem}
+.wc .item .points li{margin:.35rem 0}
+.wc .buy{padding-top:1.1rem}
+.wc .shop{gap:clamp(2rem,4vw,3rem)!important}
+.wc .entries{gap:clamp(1.25rem,2.4vw,2rem)}
+.wc .entries li{padding:1.5rem 1.6rem}
+.wc main > #videos > .wrap,.wc main > #resources > .wrap,.wc main > #rental-resources > .wrap{padding-top:clamp(2.5rem,6vw,4rem);padding-bottom:clamp(2.5rem,6vw,4rem)}
+.wc #shop h2,.wc #videos h2,.wc #resources h2,.wc #rental-resources h2{margin-bottom:.5em}
+.wc #shop .lede,.wc #videos .lede,.wc #resources .lede,.wc #rental-resources .lede{margin-bottom:2.5rem}
+.wc .cat{grid-template-columns:repeat(auto-fill,minmax(min(100%,max(15.5rem,calc((100% - 4.1rem) / 3))),1fr))}
+
+/* product pictures: under the name, above the bulleted list; tap to enlarge */
+.item .shots{display:grid;gap:.6rem;margin:.2rem 0 .3rem}
+.item .shots-2{grid-template-columns:1fr 1fr}
+.item .shot{display:block;padding:0;border:1px solid #E6D3A8;border-radius:5px;background:#fff;overflow:hidden;cursor:zoom-in;
+  aspect-ratio:4/3;box-shadow:0 4px 10px rgba(25,2,8,.12);transition:transform .15s ease,box-shadow .15s ease}
+.item .shot:hover{transform:translateY(-2px);box-shadow:0 8px 16px rgba(25,2,8,.2)}
+.item .shot img{display:block;width:100%;height:100%;object-fit:cover;object-position:top left}
+.shot-viewer{max-width:min(96vw,1300px);max-height:94vh;padding:0;border:1px solid #D9B45A;border-radius:8px;background:#1f050b;overflow:visible}
+.shot-viewer::backdrop{background:rgba(20,2,8,.82)}
+.shot-viewer img{display:block;max-width:min(96vw,1300px);max-height:94vh;width:auto;height:auto;border-radius:8px}
+.shot-close{position:absolute;top:-.9rem;right:-.9rem;width:44px;height:44px;border-radius:50%;border:1px solid #D9B45A;
+  background:#3A0A16;color:#F6E2A8;font-size:1.6rem;line-height:1;cursor:pointer}
+/* app screenshots: whole screenshot, full card width, one above the other */
+.item .shots,.item .shots-2{grid-template-columns:1fr}
+.item .shot{aspect-ratio:auto}
+.item .shot img{height:auto;object-fit:contain}
+/* coloring books: two whole pages side by side */
+.item .shots-pages.shots-2{grid-template-columns:1fr 1fr}
+.item .shots-pages .shot{aspect-ratio:7/9}
+.item .shots-pages .shot img{height:100%;object-fit:contain;object-position:center}

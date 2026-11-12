@@ -139,3 +139,16 @@ return [
 ];
 
 The table is created automatically the first time someone submits.
+
+WATERCOLOR THEME (Nov 2026)
+The burgundy watercolor look lives in watercolor.css, which loads after
+styles.css on the homepage, the articles and the Rental Property Finances page.
+Those pages have  <body class="wc">  — remove class="wc" to put a page back to
+the old look. The background images are images/watercolor-bg.jpg (computers)
+and images/watercolor-bg-tall.jpg (phones). The top bar shows images/dove.png,
+cut from the logo without changing it. The logo and dove "float" using page
+code only; visitors who turn on Reduce Motion see them stand still.
+The homepage opening (logo down to the Visit the shop button) fills one screen;
+the shop starts when the visitor scrolls.
+The app product pages (CleanReach, Cleaning Budget & Quote Planner, Rental
+Cleaning Pricing Calculator) keep their midnight blue on purpose.

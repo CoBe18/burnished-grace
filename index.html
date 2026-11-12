@@ -21,13 +21,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&family=Young+Serif&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="watercolor.css">
 </head>
-<body>
+<body class="wc">
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="site-head">
   <div class="wrap">
-    <a class="brand" href="#top"><img class="brand-logo" src="images/logo.png" alt="" onerror="this.remove()"><span class="brand-text">Burnished Grace</span></a>
+    <a class="brand" href="#top"><img class="brand-logo" src="images/dove.png" alt="" onerror="this.remove()"><span class="brand-text">Burnished Grace</span></a>
     <nav aria-label="Main">
       <ul>
         <li><a href="#shop">Shop</a></li>
@@ -58,7 +59,7 @@
   <section id="shop" aria-labelledby="shop-heading">
     <div class="wrap">
       <h2 id="shop-heading">Shop</h2>
-      <p class="lede">Check the items you'd like, and your total adds up on the right. Checkout runs through PayPal, and your download links appear right after payment, with a copy sent to your email.</p>
+      <p class="lede">Check the items you'd like, and your total adds up in the Your order box. Checkout runs through PayPal, and your download links appear right after payment, with a copy sent to your email.</p>
       <div class="shop">
         <div id="catalog"></div>
         <aside class="order" aria-labelledby="order-h">
@@ -164,6 +165,8 @@
 </footer>
 
 <script>document.getElementById("yr").textContent = new Date().getFullYear();</script>
+<script>/* the opening screen fills exactly one screen below the top bar */
+(function(){var h=document.querySelector(".site-head");function set(){document.documentElement.style.setProperty("--head-h",h.offsetHeight+"px")}set();addEventListener("resize",set);addEventListener("load",set)})();</script>
 <script src="products.js"></script>
 <script src="https://www.paypal.com/sdk/js?client-id=BAAlmK1dUBG3xw9m66SRKQIT1AVfeemsl5haAaKjNPHPrPofo1hiLlpuWPnI0x1_0WWooiNVdaGQgqw5XA&components=buttons&enable-funding=venmo&currency=USD" defer></script>
 <script src="shop.js"defer></script>
