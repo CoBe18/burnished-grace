@@ -112,6 +112,7 @@ body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
 .wc .item{display:flex;flex-direction:column;gap:.55rem;background:var(--cream);color:#3A0A16;
   border:1px solid var(--cream-line);border-radius:6px;padding:1.4rem 1.4rem 1.2rem;box-shadow:0 12px 28px rgba(25,2,8,.35)}
 .wc .item h4{font-size:1.3rem;line-height:1.2;color:#3A0A16;font-weight:700}   /* card titles are bold */
+.wc .item h4{text-align:center}   /* card titles are centered; a title with a colon continues after it on a second line (see shop.js) */
 .wc .item p{color:#4A2A30;max-width:none;font-size:1rem;line-height:1.55}
 .wc .item .more a{color:#7A1A2E}
 .wc .buy{align-self:stretch;margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 1rem;
@@ -139,6 +140,7 @@ body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
 .wc #videos .entries{max-width:54rem;margin:0 auto}
 .wc #videos .entries li{background:rgba(40,4,14,.55);border-color:rgba(217,180,90,.7)}
 .wc #videos .entries li h3{color:#FBF4E6}
+.wc #videos .entries li h3{text-align:center}
 .wc #videos .entries li p{color:#E8C877}
 .wc .order{top:calc(var(--head-h) + 1rem)}
 

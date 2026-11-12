@@ -17,7 +17,7 @@
     <div class="cat" id="${categoryId(cat)}"><h3>${esc(cat)}</h3>
       ${PRODUCTS.filter(p => p.category === cat).map(p => `
         <div class="item">
-          <h4 id="t-${p.id}">${esc(p.name)}</h4>
+          <h4 id="t-${p.id}">${esc(p.name).replace(/:\s+/, ": <br>")}</h4>
           ${p.images && p.images.length ? `<div class="shots shots-${p.images.length}${/^Coloring/.test(p.category) ? " shots-pages" : ""}">${p.images.map(im =>
             `<button type="button" class="shot" data-src="${esc(im.src)}" data-alt="${esc(im.alt)}" aria-label="Enlarge picture: ${esc(im.alt)}"><img src="${esc(im.src)}" alt="${esc(im.alt)}" loading="lazy" decoding="async"></button>`).join("")}</div>` : ""}
           ${p.points && p.points.length ? `<ul class="points">${p.points.map(t => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}
