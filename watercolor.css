@@ -192,14 +192,14 @@ body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
 /* the shaft of light, feathered on every side */
 .wc .wordmark-wrap:has(.hero-logo)::before{content:"";position:absolute;z-index:-1;pointer-events:none;
   left:-45%;top:-40%;width:115%;height:90%;
-  background:conic-gradient(from 0deg at 0% 0%,rgba(255,236,190,0) 100deg,rgba(255,236,190,.12) 106deg,rgba(255,236,190,.22) 110deg,rgba(255,236,190,.12) 114deg,rgba(255,236,190,0) 120deg);
-  -webkit-mask-image:radial-gradient(ellipse 125% 125% at 0% 0%,transparent 10%,#000 40%,#000 80%,transparent 100%);
-          mask-image:radial-gradient(ellipse 125% 125% at 0% 0%,transparent 10%,#000 40%,#000 80%,transparent 100%);
-  filter:blur(4px);animation:wcLight 7s ease-in-out infinite}
+  background:conic-gradient(from 0deg at 0% 0%,rgba(255,236,190,0) 84deg,rgba(255,236,190,.06) 94deg,rgba(255,236,190,.15) 104deg,rgba(255,236,190,.18) 110deg,rgba(255,236,190,.15) 116deg,rgba(255,236,190,.06) 126deg,rgba(255,236,190,0) 136deg);
+  -webkit-mask-image:radial-gradient(ellipse 125% 125% at 0% 0%,transparent 5%,#000 45%,#000 75%,transparent 100%),linear-gradient(to right,#000 62%,transparent 98%),linear-gradient(to bottom,#000 62%,transparent 98%);-webkit-mask-composite:source-in,source-in;
+          mask-image:radial-gradient(ellipse 125% 125% at 0% 0%,transparent 5%,#000 45%,#000 75%,transparent 100%),linear-gradient(to right,#000 62%,transparent 98%),linear-gradient(to bottom,#000 62%,transparent 98%);mask-composite:intersect;
+  filter:blur(18px);animation:wcLight 7s ease-in-out infinite}
 /* where the light comes to rest: a faint warm pool behind the dove */
 .wc .wordmark-wrap:has(.hero-logo)::after{content:"";position:absolute;z-index:-1;pointer-events:none;
-  left:55%;top:33%;width:40%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;
-  background:radial-gradient(circle,rgba(255,236,190,.22) 0%,rgba(255,232,180,.09) 45%,rgba(255,232,180,0) 70%);
+  left:53%;top:32%;width:58%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(circle,rgba(255,236,190,.20) 0%,rgba(255,232,180,.09) 40%,rgba(255,232,180,0) 70%);filter:blur(10px);
   animation:wcLight 7s ease-in-out infinite}
 @keyframes wcLight{0%,100%{opacity:.75}50%{opacity:1}}
 /* the long contact email may wrap on narrow phones instead of pushing the page sideways */
