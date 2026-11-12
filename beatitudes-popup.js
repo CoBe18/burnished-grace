@@ -24,11 +24,16 @@
 (function () {
   var VIDEO_EN = "videos/The_Beatitudes_Walkthrough_English.mp4";
   var VIDEO_ES = "videos/The_Beatitudes_Walkthrough_Spanish.mp4";
+  // The Kids edition (ages 1 to 5) has its own walkthrough.
+  var VIDEO_KIDS_EN = "videos/The_Beatitudes_Kids_Walkthrough_English.mp4";
+  var VIDEO_KIDS_ES = "videos/The_Beatitudes_Kids_Walkthrough_Spanish.mp4";
 
   var SELECTOR = '[id^="t-beatitudes-"]';           // the h4 titles shop.js creates
   function videoForEl(el) {
     if (!el || !el.id) return null;
     if (el.id.indexOf('t-beatitudes-') !== 0) return null;
+    if (el.id === 't-beatitudes-kids') return VIDEO_KIDS_EN;
+    if (el.id === 't-beatitudes-kids-es') return VIDEO_KIDS_ES;
     return /-es$/.test(el.id) ? VIDEO_ES : VIDEO_EN; // any "-es" title -> Spanish
   }
 
