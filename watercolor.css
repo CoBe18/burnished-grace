@@ -53,7 +53,7 @@ body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
    its back. images/dove-glow.png is a separate picture laid behind the logo
    (the logo file is not changed) and it floats together with the logo. */
 .wc .wordmark-wrap:has(.hero-logo)::after{content:"";position:absolute;z-index:-1;pointer-events:none;
-  left:-37.5%;top:-76.34%;width:175%;height:252.67%;
+  left:-47.5%;top:-96.69%;width:195%;height:293.38%;
   background:url(images/dove-glow.png) center/100% 100% no-repeat;animation:wcFloat 6s ease-in-out infinite}
 .wc .hero p{color:#F1E4CF}
 .wc .hero .tagline{color:#FBF4E6;font-size:min(2.4rem,calc((100vw - 44px) / 24));max-width:none;margin:0 auto clamp(.8rem,2.5vh,1.25rem);
