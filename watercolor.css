@@ -12,9 +12,9 @@
 
 /* the painted background stays still while the page scrolls
    (a fixed layer works on iPhone, where background-attachment:fixed doesn't) */
-body.wc{background:#560b18;position:relative}
+body.wc{background:#3a0812;position:relative}
 body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
-  background:#560b18 url(images/watercolor-bg.jpg) center top/cover no-repeat}
+  background:#3a0812 url(images/watercolor-bg.jpg) center top/cover no-repeat}
 @media (max-aspect-ratio:3/4){
   body.wc::before{background-image:url(images/watercolor-bg-tall.jpg)}
 }
@@ -41,6 +41,13 @@ body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
 .wc .hero-logo{width:auto;max-width:min(680px,100%);max-height:40vh;max-height:40svh;
   filter:drop-shadow(0 18px 22px rgba(25,2,8,.55));animation:wcFloat 6s ease-in-out infinite}
 .wc .wordmark-wrap{margin-bottom:clamp(1rem,3vh,1.6rem)}
+/* a soft red glow that sits behind the dove in the big logo (page code only:
+   the logo file is not changed). It is tied to the logo, so it stays behind
+   the dove on every screen size. */
+.wc .wordmark-wrap:has(.hero-logo){position:relative;z-index:0;width:fit-content;margin-left:auto;margin-right:auto}
+.wc .wordmark-wrap:has(.hero-logo)::before{content:"";position:absolute;z-index:-1;left:57%;top:34%;
+  width:105%;aspect-ratio:1.2;transform:translate(-50%,-50%);pointer-events:none;
+  background:radial-gradient(closest-side,rgba(170,34,58,.62) 0%,rgba(140,24,46,.42) 32%,rgba(104,16,34,.2) 62%,rgba(80,10,24,0) 100%)}
 .wc .hero p{color:#F1E4CF}
 .wc .hero .tagline{color:#FBF4E6;font-size:min(2.4rem,calc((100vw - 44px) / 24));max-width:none;margin:0 auto clamp(.8rem,2.5vh,1.25rem);
   text-shadow:-1px -1px 0 var(--outline),1px -1px 0 var(--outline),-1px 1px 0 var(--outline),1px 1px 0 var(--outline),
