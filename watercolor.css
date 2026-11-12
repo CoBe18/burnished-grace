@@ -111,7 +111,7 @@ body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
 /* one product = one card */
 .wc .item{display:flex;flex-direction:column;gap:.55rem;background:var(--cream);color:#3A0A16;
   border:1px solid var(--cream-line);border-radius:6px;padding:1.4rem 1.4rem 1.2rem;box-shadow:0 12px 28px rgba(25,2,8,.35)}
-.wc .item h4{font-size:1.3rem;line-height:1.2;color:#3A0A16}
+.wc .item h4{font-size:1.3rem;line-height:1.2;color:#3A0A16;font-weight:700}   /* card titles are bold */
 .wc .item p{color:#4A2A30;max-width:none;font-size:1rem;line-height:1.55}
 .wc .item .more a{color:#7A1A2E}
 .wc .buy{align-self:stretch;margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 1rem;
@@ -132,6 +132,7 @@ body.wc::before{content:"";position:fixed;inset:0;z-index:-1;
 .wc .entries{gap:1.25rem}
 .wc .entries li{background:var(--cream);border:1px solid var(--cream-line);border-radius:6px;padding:1.2rem 1.3rem;
   box-shadow:0 12px 28px rgba(25,2,8,.35);line-height:1.3}
+.wc .entries li h3{font-weight:700}   /* article and video card titles are bold */
 .wc .entries li h3 a{color:#3A0A16;text-decoration:none}
 .wc .entries li h3 a:hover{color:#7A1A2E;text-decoration:underline}
 .wc .entries li p{color:#4A2A30;line-height:1.4}
