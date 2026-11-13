@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Unsubscribe | Burnished Grace Creative Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&family=Young+Serif&display=swap" rel="stylesheet">
+<style>
+  :root { --maroon:#5e1a24; --deep:#3f0f17; --gold:#c9a24a; --cream:#fbf6ee; --ink:#2b1a1c; }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px;
+    font-family:"Figtree",system-ui,sans-serif; color:var(--ink);
+    background:radial-gradient(ellipse at 30% 20%, #8a2a36 0%, var(--maroon) 45%, var(--deep) 100%); }
+  .card { width:100%; max-width:480px; background:var(--cream); border-radius:14px; padding:36px 32px;
+    border:1px solid var(--gold); box-shadow:0 18px 50px rgba(0,0,0,.35); }
+  h1 { font-family:"Young Serif",Georgia,serif; font-weight:400; color:var(--maroon); font-size:1.8rem; margin:0 0 12px; }
+  p { line-height:1.6; margin:0 0 18px; }
+  label { display:block; font-weight:600; margin-bottom:6px; }
+  input[type=email] { width:100%; padding:12px 14px; font-size:1rem; border:1px solid #bba58a; border-radius:8px; font-family:inherit; }
+  input[type=email]:focus { outline:2px solid var(--gold); outline-offset:1px; }
+  button { margin-top:18px; width:100%; padding:13px; font-size:1rem; font-weight:600; font-family:inherit; cursor:pointer;
+    color:var(--cream); background:var(--maroon); border:1px solid var(--gold); border-radius:8px; }
+  button:hover { background:var(--deep); }
+  .hp { position:absolute; left:-9999px; }
+  .note { font-size:.9rem; color:#6b5a55; margin-top:20px; margin-bottom:0; }
+  a { color:var(--maroon); }
+</style>
+</head>
+<body>
+<main class="card">
+  <h1>Unsubscribe</h1>
+  <p>Enter the email address that received our product emails, and we'll stop sending them. You won't need to do anything else.</p>
+  <form method="post" action="../api/unsubscribe.php">
+    <label for="email">Email address</label>
+    <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@yourbusiness.com">
+    <div class="hp" aria-hidden="true">
+      <label for="website">Leave this empty</label>
+      <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+    </div>
+    <button type="submit">Unsubscribe me</button>
+  </form>
+  <p class="note">Burnished Grace Creative Studio · 631 Sinasta Dr, Suite 1E, Erwin, TN 37650<br>
+  Questions? <a href="mailto:inquiry@BurnishedGraceStudio.com">inquiry@BurnishedGraceStudio.com</a></p>
+</main>
+<script>
+  // Prefill when the link includes ?email=someone@example.com
+  try {
+    var e = new URLSearchParams(location.search).get('email');
+    if (e) document.getElementById('email').value = e;
+  } catch (err) {}
+</script>
+</body>
+</html>
