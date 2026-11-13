@@ -1,0 +1,9 @@
+Options -Indexes
+AddType text/javascript .mjs .js
+AddType application/manifest+json .webmanifest
+AddType font/woff2 .woff2
+<IfModule mod_headers.c>
+<FilesMatch "^(sw\.js|index\.html|crew\.html|book\.html)$">
+Header set Cache-Control "no-cache"
+</FilesMatch>
+</IfModule>

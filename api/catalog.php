@@ -35,6 +35,11 @@ return [
         'price' => 37.00,
         'file'  => 'CleanReach-1_1.zip',
     ],
+    'plazaroute' => [
+        'name'  => 'PlazaRoute',
+        'price' => 107.00,
+        'file'  => 'PlazaRoute-2_1.zip',
+    ],
     'real-estate-app' => [
         'name'  => 'Rental Property Finances: Individual Edition',
         'price' => 57.00,
