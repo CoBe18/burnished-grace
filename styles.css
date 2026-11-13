@@ -195,3 +195,14 @@ dialog.notice p{margin:0 0 1.2rem;font-size:1.05rem}
    about two and a half lines of space under the tagline */
 footer .wrap:has(> .footer-tagline){text-align:center}
 .footer-tagline{margin-bottom:3.7rem}
+
+/* Constance's photo: About section and the author box at the end of articles */
+.about-photo{float:right;width:11rem;height:11rem;object-fit:cover;border-radius:50%;border:3px solid var(--gold);margin:0 0 1rem 1.5rem;box-shadow:0 6px 18px rgba(31,5,11,.25)}
+.clear{clear:both}
+.author-box{display:flex;gap:1.25rem;align-items:flex-start;margin-top:2.5rem;padding-top:1.5rem;border-top:2px solid var(--gold)}
+.author-box img{flex:0 0 auto;width:6.5rem;height:6.5rem;object-fit:cover;border-radius:50%;border:3px solid var(--gold)}
+.author-box h2{margin-top:0}
+@media (max-width:560px){
+  .about-photo{float:none;display:block;margin:0 auto 1.25rem}
+  .author-box{flex-direction:column;align-items:center;text-align:center}
+}
