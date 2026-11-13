@@ -153,3 +153,13 @@ The homepage opening (logo down to the Visit the shop button) fills one screen;
 the shop starts when the visitor scrolls.
 The app product pages (CleanReach, Cleaning Budget & Quote Planner, Rental
 Cleaning Pricing Calculator) keep their midnight blue on purpose.
+
+UNSUBSCRIBE PAGE (product emails)
+The unsubscribe link in product emails is https://burnishedgracestudio.com/unsubscribe/
+Someone types their email and clicks "Unsubscribe me" (adding ?email=their@address
+to the link fills it in for them). Then api/unsubscribe.php:
+  - adds the address to bg-private/unsubscribes.csv (date and email; each address once)
+  - emails inquiry@BurnishedGraceStudio.com with the address, so you can mark the
+    contact "Do not email" in Notion before the next send.
+Nothing to set up: the list file is created the first time someone unsubscribes.
+Honor every request before your next send (the law allows up to 10 business days).
