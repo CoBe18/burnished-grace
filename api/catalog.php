@@ -38,7 +38,7 @@ return [
     'plazaroute' => [
         'name'  => 'PlazaRoute',
         'price' => 107.00,
-        'file'  => 'PlazaRoute-2_1.zip',
+        'file'  => 'PlazaRoute-2.1.zip',
     ],
     'real-estate-app' => [
         'name'  => 'Rental Property Finances: Individual Edition',
