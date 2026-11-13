@@ -31,6 +31,7 @@
 const PRODUCTS = [
   {
     id: "secret-family-recipes",
+    video: { src: "videos/secret-family-recipes-walkthrough.mp4", poster: "videos/secret-family-recipes-poster.jpg", length: "3:33" },
     images: [
       { src: "images/shop/secret-family-recipes-1.jpg", alt: "Secret Family Recipes recipe box with three family recipe cards and photos: Aunt May's Banana Bread, Southern Peach Cobbler and Grandma Ruth's chicken and dumplings." },
       { src: "images/shop/secret-family-recipes-2.jpg", alt: "Secret Family Recipes shopping list, sorted by store section, with the ingredients for Mom's Spaghetti." }
@@ -52,6 +53,7 @@ const PRODUCTS = [
 
   {
     id: "real-estate-app",
+    video: { src: "videos/rental-property-finances-walkthrough.mp4", poster: "videos/rental-property-finances-poster.jpg", length: "6:34" },
     images: [
       { src: "images/shop/real-estate-app-1.jpg", alt: "Rental Property Finances overview for a sample vacation rental, showing recorded income, net operating income, cash flow before tax and an estimated tax reserve." },
       { src: "images/shop/real-estate-app-2.jpg", alt: "Rental Property Finances five-year cash flow projection for a sample property." }
@@ -73,6 +75,7 @@ const PRODUCTS = [
 
   {
     id: "rental-cleaning-calc",
+    video: { src: "videos/rental-cleaning-pricing-calculator-walkthrough.mp4", poster: "videos/rental-cleaning-pricing-calculator-poster.jpg", length: "6:01" },
     images: [
       { src: "images/shop/rental-cleaning-calc-1.jpg", alt: "Rental Cleaning Pricing Calculator pricing a 5-bedroom cabin turnover at $465, with each extra listed with its price." },
       { src: "images/shop/rental-cleaning-calc-2.jpg", alt: "A customer quote from the Rental Cleaning Pricing Calculator, ready to send to the cabin owner." }
@@ -98,6 +101,7 @@ const PRODUCTS = [
 
   {
     id: "commercial-cleaning",
+    video: { src: "videos/cleaning-budget-quote-planner-walkthrough.mp4", poster: "videos/cleaning-budget-quote-planner-poster.jpg", length: "7:11" },
     images: [
       { src: "images/shop/commercial-cleaning-1.jpg", alt: "Cleaning Budget & Quote Planner job screen with the price build-up: direct cost, overhead, break-even and suggested price." },
       { src: "images/shop/commercial-cleaning-2.jpg", alt: "Cleaning Budget & Quote Planner monthly overhead budget, with the overhead allocated to each job." }
@@ -125,6 +129,7 @@ const PRODUCTS = [
 
   {
     id: "cleanreach",
+    video: { src: "videos/cleanreach-walkthrough.mp4", poster: "videos/cleanreach-poster.jpg", length: "8:25" },
     images: [
       { src: "images/shop/cleanreach-1.jpg", alt: "CleanReach My prospects list, with filters for relationship, stage and follow-ups." },
       { src: "images/shop/cleanreach-2.jpg", alt: "CleanReach Plaza days screen, grouping nearby businesses so several shops can be cleaned in one trip." }
@@ -152,6 +157,7 @@ const PRODUCTS = [
 
   {
     id: "plazaroute",
+    video: { src: "videos/plazaroute-walkthrough.mp4", poster: "videos/plazaroute-poster.jpg", length: "16:51" },
     images: [
       { src: "images/shop/plazaroute-1.jpg", alt: "PlazaRoute Team & jobs screen: today's stops in route order, each with its cleaner, status, times and the cleaner's notes." },
       { src: "images/shop/plazaroute-2.jpg", alt: "PlazaRoute Bookings screen: new customer bookings waiting to be confirmed, with the service, time, price and the customer's note." }
@@ -191,6 +197,7 @@ const PRODUCTS = [
 
   {
     id: "rental-finances-plr",
+    video: { src: "videos/rental-property-finances-walkthrough.mp4", poster: "videos/rental-property-finances-poster.jpg", length: "6:34" },
     images: [
       { src: "images/shop/rental-finances-plr-1.jpg", alt: "The Rental Property Finances Rebrand Tool: enter your own product name, tagline, logo and colors and see a live preview." },
       { src: "images/shop/real-estate-app-1.jpg", alt: "Rental Property Finances overview for a sample vacation rental, showing recorded income, net operating income, cash flow before tax and an estimated tax reserve." }
@@ -214,6 +221,7 @@ const PRODUCTS = [
 
   {
     id: "rental-cleaning-calc-plr",
+    video: { src: "videos/rental-cleaning-pricing-calculator-walkthrough.mp4", poster: "videos/rental-cleaning-pricing-calculator-poster.jpg", length: "6:01" },
     images: [
       { src: "images/shop/rental-cleaning-calc-plr-1.jpg", alt: "The Rebrand tab of the Rental Cleaning Pricing Calculator, for changing the name, tagline, colors and credit line." },
       { src: "images/shop/rental-cleaning-calc-plr-2.jpg", alt: "Downloading your branded copy of the calculator in one click." }
@@ -237,6 +245,7 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-kids",
+    video: { src: "videos/The_Beatitudes_Kids_Walkthrough_English.mp4", poster: "videos/beatitudes-kids-poster.jpg", length: "1:20" },
     images: [
       { src: "images/shop/beatitudes-kids-1.jpg", alt: "Coloring page: Jesus walking up the mountain path with a staff, in simple bold lines." },
       { src: "images/shop/beatitudes-kids-2.jpg", alt: "Coloring page with the verse from Matthew 5:3 above a fisherman kneeling to pray beside his boat." }
@@ -256,6 +265,7 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-teen",
+    video: { src: "videos/The_Beatitudes_Walkthrough_English.mp4", poster: "videos/beatitudes-poster.jpg", length: "2:34" },
     images: [
       { src: "images/shop/beatitudes-teen-1.jpg", alt: "Coloring page: the blind beggar on the Jericho road, looking up." },
       { src: "images/shop/beatitudes-teen-2.jpg", alt: "The opening page for The Poor in Spirit, with the verse from Matthew 5:3 and a short reflection." }
@@ -275,6 +285,7 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-adult",
+    video: { src: "videos/The_Beatitudes_Walkthrough_English.mp4", poster: "videos/beatitudes-poster.jpg", length: "2:34" },
     images: [
       { src: "images/shop/beatitudes-adult-1.jpg", alt: "Coloring page: The Tax Collector at the Temple, a man with his head bowed and a hand on his chest in the temple courtyard while a Pharisee prays in the background." },
       { src: "images/shop/beatitudes-adult-2.jpg", alt: "The facing page for The Tax Collector at the Temple, with the verse, an As you color question and lined space for notes and prayers." }
@@ -294,6 +305,7 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-bundle",
+    video: { src: "videos/The_Beatitudes_Walkthrough_English.mp4", poster: "videos/beatitudes-poster.jpg", length: "2:34" },
     images: [
       { src: "images/shop/beatitudes-bundle-1.jpg", alt: "Coloring page for The Merciful (Matthew 5:7): the Good Samaritan caring for a wounded man beside his donkey." },
       { src: "images/shop/beatitudes-bundle-2.jpg", alt: "Coloring page for Persecuted for Righteousness (Matthew 5:10): two prisoners in chains looking up toward a window." }
@@ -321,6 +333,7 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-kids-es",
+    video: { src: "videos/The_Beatitudes_Kids_Walkthrough_Spanish.mp4", poster: "videos/beatitudes-kids-es-poster.jpg", length: "1:26" },
     images: [
       { src: "images/shop/beatitudes-kids-es-1.jpg", alt: "Página para colorear: Jesús sube por el camino del monte con un bastón, en trazos sencillos y gruesos." },
       { src: "images/shop/beatitudes-kids-es-2.jpg", alt: "Página para colorear con el versículo de Mateo 5:3 sobre un pescador arrodillado orando junto a su barca." }
@@ -341,6 +354,7 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-teen-es",
+    video: { src: "videos/The_Beatitudes_Walkthrough_Spanish.mp4", poster: "videos/beatitudes-es-poster.jpg", length: "2:34" },
     images: [
       { src: "images/shop/beatitudes-teen-es-1.jpg", alt: "Página para colorear: el mendigo ciego en el camino de Jericó." },
       { src: "images/shop/beatitudes-teen-es-2.jpg", alt: "Página de apertura de «Los pobres en espíritu», con el versículo de Mateo 5:3 y una breve reflexión." }
@@ -360,6 +374,7 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-adult-es",
+    video: { src: "videos/The_Beatitudes_Walkthrough_Spanish.mp4", poster: "videos/beatitudes-es-poster.jpg", length: "2:34" },
     images: [
       { src: "images/shop/beatitudes-adult-es-1.jpg", alt: "Página para colorear: «El publicano en el templo», un hombre con la cabeza inclinada y la mano en el pecho en el patio del templo, mientras un fariseo ora al fondo." },
       { src: "images/shop/beatitudes-adult-es-2.jpg", alt: "Página de enfrente de «El publicano en el templo», con el versículo, una pregunta y líneas para notas y oraciones." }
@@ -379,6 +394,7 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-bundle-es",
+    video: { src: "videos/The_Beatitudes_Walkthrough_Spanish.mp4", poster: "videos/beatitudes-es-poster.jpg", length: "2:34" },
     images: [
       { src: "images/shop/beatitudes-bundle-es-1.jpg", alt: "Página para colorear de «Los misericordiosos» (Mateo 5:7): el buen samaritano cuidando a un hombre herido." },
       { src: "images/shop/beatitudes-bundle-es-2.jpg", alt: "Página para colorear de «Los que padecen persecución» (Mateo 5:10): dos prisioneros encadenados mirando hacia una ventana." }
@@ -405,6 +421,7 @@ const PRODUCTS = [
 
   {
     id: "budget-ledger",
+    video: { src: "tools/budget-ledger/Budget-Ledger-Walkthrough.mp4", poster: "tools/budget-ledger/walkthrough-poster.jpg", length: "3:01" },
     images: [
       { src: "images/shop/budget-ledger-1.jpg", alt: "Budget Ledger summary: balance now, money set aside for bills, what is free to spend, and total spent." },
       { src: "images/shop/budget-ledger-2.jpg", alt: "The Budget Ledger list of deposits and expenses with a running balance." }
@@ -426,6 +443,7 @@ const PRODUCTS = [
 
   {
     id: "plr-profit-check",
+    video: { src: "tools/plr-profit-check/PLR-Profit-Check-Walkthrough.mp4?v=20261021-paid", poster: "tools/plr-profit-check/walkthrough-poster.jpg", length: "3:02" },
     images: [
       { src: "images/shop/plr-profit-check-1.jpg", alt: "PLR Profit Check results for a sample product: what you keep per sale, the sales needed to earn back your cost, and a verdict on whether it can pay off." },
       { src: "images/shop/plr-profit-check-2.jpg", alt: "The PLR shelf in PLR Profit Check, tracking each product's status and sales against what it cost." }
