@@ -13,10 +13,21 @@
         ${jumpCategories.map(cat => `<a class="btn" href="#${categoryId(cat)}">${cat.includes("Spanish") ? "Ediciones en español" : "English editions"}</a>`).join("")}
       </nav>`
     : "";
+  // A walkthrough still at the top of a card; tapping it plays the video right here.
+  const isSpanish = p => /Spanish/.test(p.category);
+  const vidButton = p => {
+    const es = isSpanish(p), label = es ? "Ver el video" : "Watch the walkthrough";
+    return `<button type="button" class="vidshot" data-video="${esc(p.video.src)}" data-title="${esc(p.name)}" aria-label="${esc(label + ": " + p.name + (p.video.length ? ", " + p.video.length : ""))}">
+      <img src="${esc(p.video.poster)}" alt="" loading="lazy" decoding="async">
+      <span class="vidplay" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+      <span class="vidlabel">${esc(label)}${p.video.length ? ` · ${esc(p.video.length)}` : ""}</span>
+    </button>`;
+  };
   catalog.innerHTML = jumpNav + cats.map(cat => `
     <div class="cat" id="${categoryId(cat)}"><h3>${esc(cat)}</h3>
       ${PRODUCTS.filter(p => p.category === cat).map(p => `
         <div class="item">
+          ${p.video ? vidButton(p) : ""}
           <h4 id="t-${p.id}">${esc(p.name).replace(/:\s+/, ": <br>")}</h4>
           ${p.images && p.images.length ? `<div class="shots shots-${p.images.length}${/^Coloring/.test(p.category) ? " shots-pages" : ""}">${p.images.map(im =>
             `<button type="button" class="shot" data-src="${esc(im.src)}" data-alt="${esc(im.alt)}" aria-label="Enlarge picture: ${esc(im.alt)}"><img src="${esc(im.src)}" alt="${esc(im.alt)}" loading="lazy" decoding="async"></button>`).join("")}</div>` : ""}
@@ -49,6 +60,25 @@
     viewer.showModal();
   });
   viewer.addEventListener("click", e => { if (e.target !== viewerImg) viewer.close(); });
+
+  // Walkthrough videos play in a viewer on the shop page; closing it stops the video.
+  const player = document.createElement("dialog");
+  player.className = "vid-viewer";
+  player.setAttribute("aria-label", "Walkthrough video");
+  player.innerHTML = `<button type="button" class="shot-close" aria-label="Close video">×</button><video controls playsinline preload="metadata"></video>`;
+  document.body.appendChild(player);
+  const playerVideo = player.querySelector("video");
+  catalog.addEventListener("click", e => {
+    const b = e.target.closest(".vidshot");
+    if (!b) return;
+    playerVideo.src = b.dataset.video;
+    playerVideo.setAttribute("aria-label", b.dataset.title + " walkthrough");
+    player.showModal();
+    const go = playerVideo.play();
+    if (go && go.catch) go.catch(() => {});
+  });
+  player.addEventListener("click", e => { if (e.target === player || e.target.closest(".shot-close")) player.close(); });
+  player.addEventListener("close", () => { playerVideo.pause(); playerVideo.removeAttribute("src"); playerVideo.load(); });
 
   const list = document.getElementById("order-list");
   const totalEl = document.getElementById("order-total");
