@@ -151,6 +151,33 @@ const PRODUCTS = [
   },
 
   {
+    id: "plazaroute",
+    images: [
+      { src: "images/shop/plazaroute-1.jpg", alt: "PlazaRoute Team & jobs screen: today's stops in route order, each with its cleaner, status, times and the cleaner's notes." },
+      { src: "images/shop/plazaroute-2.jpg", alt: "PlazaRoute Bookings screen: new customer bookings waiting to be confirmed, with the service, time, price and the customer's note." }
+    ],
+    category: "Apps",
+    name: "PlazaRoute",
+    points: [
+      "For cleaning businesses with weekly customers, like restroom cleaning for restaurants, salons, gyms and offices",
+      "Monthly accounts, a weekly visit log and a route day planned plaza by plaza",
+      "Sends each day's stops to your cleaners' phones, with before-and-after photos and Job complete",
+      "Your own booking link and QR code: customers book one-time jobs or ask for monthly service",
+      "Customers pay on your own Stripe or PayPal link",
+      "Revenue by month and week, and a pricing and profit check before you quote",
+      "Finds new businesses near you and plans plaza days (everything CleanReach does)",
+      "Runs on Mac (macOS 13.5 or newer), Windows, and a phone and tablet version you host yourself",
+      "Sync, your team and bookings use your own free Supabase account",
+      "Pay once, no subscription",
+      "Single-use license for one business"
+    ],
+    desc: "",
+    price: 107.00,
+    page: "apps/plazaroute.html#walkthrough",
+    pageLabel: "Watch the walkthrough and see details"
+  },
+
+  {
     id: "finance-apps",
     category: "Apps",
     name: "Finance Apps",

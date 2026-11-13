@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>PlazaRoute | Burnished Grace Creative Studio</title>
+  <meta name="description" content="Run a cleaning route with weekly customers: monthly accounts, the visit log, route days, your cleaners’ phones, online bookings and revenue. Mac, Windows, phone and tablet. Watch the full walkthrough. Pay once, no subscription.">
+  <link rel="canonical" href="https://burnishedgracestudio.com/apps/plazaroute.html">
+
+  <meta property="og:title" content="PlazaRoute">
+  <meta property="og:description" content="Your cleaners finish the route, and you never have to call to ask. Watch every feature, start to finish.">
+  <meta property="og:type" content="product">
+  <meta property="og:image" content="https://burnishedgracestudio.com/videos/plazaroute-poster.jpg">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4H5SPPZE8X"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", "G-4H5SPPZE8X");
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700&family=Young+Serif&display=swap" rel="stylesheet">
+
+  <style>
+    /* EDIT: colors follow PlazaRoute's own midnight blue */
+    :root{--mid:#0B1026;--mid2:#1E2650;--accent:#9AA8D4;--tint:#DDE0EC;--bg:#F2F3F8;--gold:#F2C76B;--text:#0B1026}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font:400 18px/1.65 Figtree,system-ui,sans-serif}
+    a{color:var(--mid2)}
+    .wrap{max-width:1120px;margin:auto;padding:0 24px}
+    .head{background:var(--mid);padding:18px 0}
+    .head .wrap{display:flex;gap:24px;align-items:center;justify-content:space-between}
+    .brand{font:400 24px "Young Serif",Georgia,serif;color:var(--gold);text-decoration:none}
+    .head nav{display:flex;gap:22px;flex-wrap:wrap}
+    .head nav a{color:#fff;text-decoration:none;font-weight:600}
+    .head nav a:hover,.head nav a:focus-visible{text-decoration:underline}
+    .hero{padding:60px 0 44px;background:linear-gradient(160deg,var(--mid2),var(--mid));color:#fff}
+    .kicker{letter-spacing:.12em;text-transform:uppercase;font-size:13px;font-weight:700;color:var(--gold);margin:0}
+    .hero h1{font:400 clamp(38px,5.6vw,64px)/1.1 "Young Serif",Georgia,serif;margin:16px 0;max-width:900px}
+    .lead{font-size:clamp(19px,2.4vw,23px);max-width:800px}
+    .btn{display:inline-block;padding:13px 24px;border-radius:8px;background:var(--gold);color:var(--mid);text-decoration:none;font-weight:700;margin:8px 14px 8px 0;box-shadow:0 3px 0 rgba(0,0,0,.18)}
+    .btn.alt{background:transparent;color:#fff;border:2px solid #fff;box-shadow:none}
+    .section{padding:54px 0}
+    .section h2{font:400 34px/1.2 "Young Serif",Georgia,serif;color:var(--mid);margin:0 0 18px}
+    .video{display:block;width:100%;border-radius:14px;background:var(--mid);box-shadow:0 12px 30px rgba(11,43,64,.25)}
+    .note{max-width:850px;font-size:16px}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
+    .grid article{background:#fff;border-radius:12px;padding:20px 22px;box-shadow:0 4px 14px rgba(11,43,64,.08)}
+    .grid h3{font:700 19px Figtree,sans-serif;color:var(--mid);margin:0 0 6px}
+    .grid p{margin:0;font-size:16px}
+    .buys{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+    .buy{background:#fff;border-radius:14px;padding:28px;box-shadow:0 6px 20px rgba(11,43,64,.1);border-top:6px solid var(--mid2)}
+    .buy h2{font-size:28px}
+    .price{font:400 46px/1.2 "Young Serif",Georgia,serif;color:var(--mid);margin:10px 0}
+    .buy .btn{background:var(--mid);color:#fff}
+    .buy li{margin:.4em 0}
+    .soft{background:var(--tint)}
+    .faq{max-width:850px}
+    .faq details{border-bottom:1px solid #b9cfd9;padding:16px 0}
+    .faq summary{font-weight:700;cursor:pointer}
+    .hidden{display:none}
+    .shots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px}
+    .shots figure{margin:0;background:#fff;border-radius:12px;padding:10px;box-shadow:0 4px 14px rgba(11,16,38,.1)}
+    .shots img{display:block;width:100%;height:auto;border-radius:8px}
+    .shots figcaption{font-size:15px;padding:10px 6px 4px}
+    .phones{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;max-width:880px}
+    .phones figure{margin:0;min-width:0}
+    .phones img{display:block;width:100%;height:auto;border-radius:18px;box-shadow:0 6px 18px rgba(11,16,38,.18)}
+    .phones figcaption{font-size:15px;padding:10px 4px 0;text-align:center}
+    .shots figure{min-width:0}
+    footer{padding:30px 0;background:var(--mid);color:#fff;font-size:15px}
+    footer a{color:var(--gold)}
+    @media (max-width:760px){
+      .grid,.buys,.shots,.phones{grid-template-columns:1fr}
+      .phones{max-width:340px}
+      .head .wrap{flex-direction:column;align-items:flex-start;gap:10px}
+      .section{padding:36px 0}
+      .wrap{padding:0 20px}
+    }
+  </style>
+</head>
+
+<body>
+  <header class="head">
+    <div class="wrap">
+      <a class="brand" href="../index.html">Burnished Grace</a>
+      <nav aria-label="Main">
+        <a href="../index.html#shop">Shop</a>
+        <a href="#walkthrough">Watch the walkthrough</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <p class="kicker">Apps · PlazaRoute 2.1</p>
+        <!-- EDIT: headline -->
+        <h1>Your cleaners finish the route, and you never have to call to ask.</h1>
+        <p class="lead">For cleaning businesses with weekly customers, like restroom cleaning for restaurants, salons, gyms and offices. Keep your monthly accounts, check off every visit, plan the day plaza by plaza, send the stops to your cleaners’ phones, and let customers book you online.</p>
+        <p>Mac and Windows · Phone and tablet version you host yourself · Pay once, no subscription</p>
+        <a class="btn" href="#walkthrough">Watch the walkthrough</a>
+        <a class="btn alt" href="#buy">Buy PlazaRoute</a>
+      </div>
+    </section>
+
+    <section id="walkthrough" class="section">
+      <div class="wrap">
+        <h2>Watch every feature, start to finish</h2>
+        <video class="video" controls playsinline preload="metadata"
+               poster="../videos/plazaroute-poster.jpg"
+               aria-describedby="video-note">
+          <source src="../videos/plazaroute-walkthrough.mp4" type="video/mp4">
+          <p>Your browser can't play this video. The features are listed below.</p>
+        </video>
+        <p class="note" id="video-note">The walkthrough covers your numbers, connections and backups, monthly accounts, the visit log, route days, Team &amp; jobs and your cleaners’ phones, setting up online bookings, what your customers see, handling bookings and payments, revenue, pricing a new customer, finding customers, your prospects, plaza days, outreach and open dates, and the phone version. Large captions explain each step, so it works with the sound off. The businesses, people and phone numbers in the video are made up, and the business searches are simulated.</p>
+        <p class="note"><strong>Chapters:</strong> 0:00 Start here · 0:55 Your numbers · 1:48 Connections &amp; backup · 2:49 Accounts · 3:56 Visit log · 4:40 Route day · 5:36 Team &amp; jobs · 6:46 Your cleaners’ phones · 8:19 Bookings setup · 9:51 Your customers book · 10:55 Handling bookings · 12:33 Revenue · 13:05 Price a new customer · 13:45 Find customers · 14:19 My prospects · 14:57 Plaza days · 15:49 Outreach &amp; open dates · 16:23 On your phone</p>
+      </div>
+    </section>
+
+    <section class="section soft">
+      <div class="wrap">
+        <h2>What it does</h2>
+        <div class="grid">
+          <article><h3>Monthly accounts</h3><p>Each customer’s plan, price, service days, time window, access notes and instructions for your cleaners, with your monthly revenue and estimated profit.</p></article>
+          <article><h3>A visit log for every week</h3><p>Check off each visit as it’s done. Missed, skipped and moved visits stay on record, and visits nobody logged are flagged.</p></article>
+          <article><h3>Route days, plaza by plaza</h3><p>Customers at the same plaza count as one stop. Stops are put in a short driving order from your home base, with directions and a printable route sheet.</p></article>
+          <article><h3>Your cleaners’ phones</h3><p>Each cleaner sees only their own jobs, never your prices. They send before-and-after photos and tap Job complete, and the visit is marked Done for you.</p></article>
+          <article><h3>Online bookings</h3><p>Your own booking link and QR code. Customers book one-time jobs at your open times or ask for monthly service, and you confirm each one.</p></article>
+          <article><h3>Paid on your own account</h3><p>Customers pay on your own Stripe or PayPal link. PlazaRoute never touches the money; you mark each booking Paid.</p></article>
+          <article><h3>Revenue and pricing</h3><p>What each month and week earned, what missed visits put at risk, and a profit check that shows the price to quote before you quote it.</p></article>
+          <article><h3>Find the next customer</h3><p>Search your city for restaurants, salons, gyms, offices and more, keep a prospect notebook, and plan plaza days with the property manager.</p></article>
+          <article><h3>Use it on every device</h3><p>Mac, Windows, and a phone and tablet version, with Sync, your team and bookings in your own free Supabase account.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <h2>See it</h2>
+        <div class="shots">
+          <figure><img src="../images/apps/plazaroute/route.jpg" width="1600" height="900" loading="lazy" alt="PlazaRoute Route day: two plazas in driving order from the home base, with visits, time on site and drive time."><figcaption>Route day: the day planned plaza by plaza.</figcaption></figure>
+          <figure><img src="../images/apps/plazaroute/team.jpg" width="1600" height="900" loading="lazy" alt="PlazaRoute Team &amp; jobs: each stop with its cleaner, status, times and notes from the cleaner."><figcaption>Team &amp; jobs: every stop’s status, live.</figcaption></figure>
+          <figure><img src="../images/apps/plazaroute/bookings.jpg" width="1600" height="900" loading="lazy" alt="PlazaRoute Bookings: new customer bookings waiting to be confirmed."><figcaption>Bookings: confirm, mark paid, send to a cleaner.</figcaption></figure>
+          <figure><img src="../images/apps/plazaroute/revenue.jpg" width="1600" height="900" loading="lazy" alt="PlazaRoute Revenue: earned this month, contracts, visits done and missed visits."><figcaption>Revenue: what your route earned, visit by visit.</figcaption></figure>
+        </div>
+        <h2 style="margin-top:44px">On the phone</h2>
+        <div class="phones">
+          <figure><img src="../images/apps/plazaroute/cleaner-phone.jpg" width="390" height="844" loading="lazy" alt="A cleaner's job on her phone: directions, call button, how to get in and the owner's instructions."><figcaption>Your cleaner’s job list</figcaption></figure>
+          <figure><img src="../images/apps/plazaroute/booking-page.jpg" width="390" height="844" loading="lazy" alt="A cleaning business's booking page on a phone, with its logo and two services with prices."><figcaption>Your booking page</figcaption></figure>
+          <figure><img src="../images/apps/plazaroute/booking-done.jpg" width="390" height="844" loading="lazy" alt="The customer's confirmation code and pay button after booking."><figcaption>Booked, with a pay button</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="buy" class="section soft">
+      <div class="wrap">
+        <h2>Get PlazaRoute</h2>
+        <div class="buys" style="grid-template-columns:minmax(0,560px)">
+          <div class="buy">
+            <p class="kicker" style="color:var(--mid2)">For one cleaning business</p>
+            <h2>PlazaRoute 2.1</h2>
+            <p class="price" data-price-of="plazaroute">$107.00</p>
+            <ul>
+              <li>PlazaRoute for Mac (macOS 13.5 or newer) and for Windows</li>
+              <li>The phone and tablet version, with your cleaners’ page and your customer booking page, ready to upload to the hosting of your choice</li>
+              <li>Step-by-step setup guides for each device, Sync, Team &amp; jobs and Bookings</li>
+              <li>Single-use license for one business</li>
+            </ul>
+            <a class="btn" data-buy="plazaroute" href="../index.html?add=plazaroute#shop">Add to order</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap"><div class="faq">
+        <h2>Before you buy</h2>
+        <details>
+          <summary>What else do I need?</summary>
+          <p>A free Supabase account of your own for Sync, your team and online bookings, and web hosting you choose for the phone version, your cleaners’ page and your booking page. To find new businesses you need a search key from Geoapify, which offers a free starter plan. You set up each account yourself; the guides walk you through it.</p>
+        </details>
+        <details>
+          <summary>Does PlazaRoute take payments?</summary>
+          <p>No. Customers pay on your own Stripe Payment Link or PayPal link, straight to you. PlazaRoute never touches the money and doesn’t confirm payments for you, so you mark each booking Paid when the money arrives. Refunds are made in your own Stripe or PayPal account.</p>
+        </details>
+        <details>
+          <summary>Does it send texts or emails?</summary>
+          <p>No. It writes the messages, like confirmations and invitations, and you send them yourself by text or email. It also doesn’t notify you when a booking comes in, so check Bookings once or twice a day.</p>
+        </details>
+        <details>
+          <summary>What can my cleaners see?</summary>
+          <p>Only their own jobs: the address, directions, how to get in, your instructions and the customer’s note. Never your prices, your other customers, your prospects or each other.</p>
+        </details>
+        <details>
+          <summary>Where are my records kept?</summary>
+          <p>On your own computer or phone, and in your own Supabase account when you turn on Sync. They are never sent to us. Download a backup once a month.</p>
+        </details>
+        <details>
+          <summary>I already have CleanReach. Do I need both?</summary>
+          <p>No. PlazaRoute does everything CleanReach does, and a CleanReach backup can be restored into PlazaRoute to bring your prospects, plazas and business profile across.</p>
+        </details>
+        <details>
+          <summary>How do I get my download?</summary>
+          <p>After your PayPal payment goes through, the shop gives you your download link and emails it to your PayPal address. For help, email <a href="mailto:inquiry@BurnishedGraceStudio.com">inquiry@BurnishedGraceStudio.com</a> with your receipt.</p>
+        </details>
+      </div></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© <span id="yr">2026</span> Burnished Grace Creative Studio · <a href="../index.html#shop">Back to the shop</a></div>
+  </footer>
+
+  <script src="../products.js"></script>
+  <script>
+    document.getElementById("yr").textContent = new Date().getFullYear();
+    if (typeof PRODUCTS !== "undefined") {
+      document.querySelectorAll("[data-price-of]").forEach(function (el) {
+        var p = PRODUCTS.find(function (x) { return x.id === el.dataset.priceOf; });
+        if (p && typeof p.price === "number") { el.textContent = "$" + p.price.toFixed(2); }
+        else {
+          el.textContent = "Coming soon";
+          var b = document.querySelector('[data-buy="' + el.dataset.priceOf + '"]');
+          if (b) b.classList.add("hidden");
+        }
+      });
+    }
+  </script>
+</body>
+</html>

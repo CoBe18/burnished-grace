@@ -8,8 +8,11 @@ const STORE='plazaroute.crew.v1';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
 const todayLocal=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
-let picking=0;const isPicking=()=>picking&&Date.now()-picking<300000;
-let s=load(),client=null,me=null,tab='today',jobs=[],photos=new Map(),urls=new Map(),pending=new Map(),busy=new Set(),openPanel='',signMode='signup',noticeTimer;
+let s=load(),client=null,me=null,tab='today',jobs=[],photos=new Map(),urls=new Map(),pending=new Map(),busy=new Set(),openPanel='',signMode='signup',noticeTimer,picking=0;
+// Opening the camera hides this page. If the job cards were rebuilt while it was open, the photo
+// came back to a button that no longer existed and was lost. So nothing refreshes while picking.
+const isPicking=()=>picking&&Date.now()-picking<5*60000;
+const quiet=()=>document.visibilityState==='visible'&&me&&!openPanel&&!busy.size&&!isPicking()&&!$('crewJobs').hidden;
 
 function load(){try{const v=JSON.parse(localStorage.getItem(STORE)||'null');return v&&typeof v==='object'?v:null}catch{return null}}
 function save(){try{if(s)localStorage.setItem(STORE,JSON.stringify(s));else localStorage.removeItem(STORE)}catch{}}
@@ -115,9 +118,6 @@ ${isToday||j.status!=='Assigned'||tab!=='next'?photoRow(j,'before')+photoRow(j,'
 }
 
 $('crewList').addEventListener('click',async e=>{
- // Opening the camera hides this page. Don't rebuild the job cards until the photo comes back,
- // or the photo is handed to a button that no longer exists.
- if(e.target.closest('.crewadd')){picking=Date.now();return}
  const b=e.target.closest('button');if(!b)return;const id=b.dataset.job;
  if(b.dataset.panel!==undefined){openPanel=b.dataset.panel?id+':'+b.dataset.panel:'';renderJobs();if(openPanel)document.getElementById('note-'+id)?.focus();return}
  if(b.dataset.status)return setStatus(id,b.dataset.status,null);
@@ -125,6 +125,7 @@ $('crewList').addEventListener('click',async e=>{
  if(b.dataset.retry)return sendPending(b.dataset.retry);
  if(b.dataset.delphoto){if(b.dataset.confirm!=='1'){b.dataset.confirm='1';b.textContent='Delete?';b.classList.add('confirm');setTimeout(()=>{b.dataset.confirm='';b.textContent='×';b.classList.remove('confirm')},4000);return}return deletePhoto(id,b.dataset.delphoto)}
 });
+$('crewList').addEventListener('click',e=>{if(e.target.closest('.crewadd'))picking=Date.now()},true);
 $('crewList').addEventListener('change',async e=>{
  const input=e.target.closest('input[data-upload]');if(!input)return;
  picking=0;
@@ -161,9 +162,8 @@ async function setStatus(id,status,note){
 }
 for(const t of document.querySelectorAll('[data-tab]'))t.onclick=()=>{tab=t.dataset.tab;openPanel='';for(const x of document.querySelectorAll('[data-tab]'))x.setAttribute('aria-selected',String(x===t));loadJobs()};
 $('crewRefresh').onclick=()=>loadJobs();
-const quiet=()=>document.visibilityState==='visible'&&me&&!openPanel&&!busy.size&&!isPicking()&&!$('crewJobs').hidden;
 setInterval(()=>{if(quiet())loadJobs(true)},60000);
-// Coming back from another app: wait a moment so a photo from the camera is handled first.
+// Wait a few seconds after coming back, so a photo just taken has time to arrive first.
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')setTimeout(()=>{if(quiet())loadJobs(true)},4000)});
 
 // ---------------------------------------------------------------- open

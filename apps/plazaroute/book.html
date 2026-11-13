@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#0B1026"><title>Book a cleaning</title><meta name="description" content="Book a cleaning online: pick a service, a day and a time."><meta name="robots" content="noindex"><meta name="referrer" content="no-referrer"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="book.css"><link rel="icon" type="image/png" sizes="192x192" href="icon-192.png"><script type="module" src="book.mjs"></script></head>
+<body class="book"><a href="#bookMain" class="skip">Skip to content</a>
+<header class="booktop"><img id="bookLogo" class="booklogo" alt="" hidden><div class="booktitle"><strong id="bookBiz">Book a cleaning</strong><span id="bookArea"></span></div><a class="buttonlink bookcall" id="bookCall" hidden>Call</a></header>
+<main id="bookMain" tabindex="-1">
+
+<section id="bookLoading" class="bookscreen"><p class="bookcenter">Opening the booking page…</p></section>
+
+<section id="bookNoLink" class="bookscreen" hidden><div class="homeband bookband"><div class="eyebrow">BOOK ONLINE</div><h1>This page needs a booking link.</h1><p class="intro" id="bookNoLinkText">Open the booking link or scan the QR code the cleaning business gave you. It brings you straight to their services and open times.</p></div></section>
+
+<section id="bookOff" class="bookscreen" hidden><div class="homeband bookband"><div class="eyebrow">BOOK ONLINE</div><h1 id="bookOffTitle">Online booking is closed right now.</h1><p class="intro">Please call or message the business to book.</p></div><button type="button" class="quiet" id="bookOffRetry">Check again</button></section>
+
+<section id="bookHome" class="bookscreen" hidden>
+<div class="homeband bookband"><div class="eyebrow">BOOK ONLINE</div><h1 id="bookHeading">Book a cleaning.</h1><p class="intro" id="bookIntro"></p></div>
+<div class="booktabs" role="tablist" aria-label="What would you like to do?"><button type="button" role="tab" id="tabJob" data-tab="job" aria-selected="true" aria-controls="paneJob">One-time job</button><button type="button" role="tab" id="tabMonthly" data-tab="monthly" aria-selected="false" aria-controls="paneMonthly">Monthly service</button><button type="button" role="tab" id="tabMine" data-tab="mine" aria-selected="false" aria-controls="paneMine">My bookings</button></div>
+
+<div id="paneJob" role="tabpanel" aria-labelledby="tabJob">
+<article class="panel bookstep"><h2><span class="stepdot">1</span> Choose a service</h2><div id="bookServices" class="bookservices"></div></article>
+<article class="panel bookstep" id="stepDay" hidden><h2><span class="stepdot">2</span> Choose a day</h2><div id="bookDays" class="bookdays"></div><button type="button" class="quiet" id="bookMoreDays" hidden>Show more days</button></article>
+<article class="panel bookstep" id="stepTime" hidden><h2><span class="stepdot">3</span> Choose a time <span class="footnote" id="bookDayName"></span></h2><div id="bookTimes" class="booktimes"></div></article>
+<article class="panel bookstep" id="stepDetails" hidden><h2><span class="stepdot">4</span> Your details</h2><p class="booksummary" id="bookSummary"></p>
+<form id="jobForm" novalidate><div class="twocol"><div><label for="jName">Your name</label><input id="jName" autocomplete="name" maxlength="120" required></div><div><label for="jBusiness">Business name <span>(if this is for a business)</span></label><input id="jBusiness" autocomplete="organization" maxlength="180"></div></div>
+<div class="twocol"><div><label for="jPhone">Phone</label><input id="jPhone" type="tel" autocomplete="tel" inputmode="tel" maxlength="60" required></div><div><label for="jEmail">Email</label><input id="jEmail" type="email" autocomplete="email" inputmode="email" autocapitalize="off" maxlength="300" required></div></div>
+<label for="jAddress">Address of the place to clean</label><input id="jAddress" autocomplete="street-address" maxlength="500" required>
+<label for="jNotes">Anything we should know? <span>(optional: how to get in, parking, what matters most)</span></label><textarea id="jNotes" rows="3" maxlength="1500"></textarea>
+<div class="hp" aria-hidden="true"><label for="jWebsite">Leave this empty</label><input id="jWebsite" name="website" tabindex="-1" autocomplete="off"></div>
+<p id="jobStatus" class="bookstatus" role="status"></p><button class="primary wide" id="jobSend">Request this booking</button><p class="footnote">Your booking is a request until the business confirms it. Your time is held while you wait.</p></form></article>
+</div>
+
+<div id="paneMonthly" role="tabpanel" aria-labelledby="tabMonthly" hidden>
+<article class="panel bookstep"><h2>Ask about monthly service</h2><p class="footnote">Tell us about your place and the days that suit you. We will get back to you with a price and a start date. Nothing is charged here.</p>
+<form id="monthlyForm" novalidate><div class="twocol"><div><label for="mName">Your name</label><input id="mName" autocomplete="name" maxlength="120" required></div><div><label for="mBusiness">Business name</label><input id="mBusiness" autocomplete="organization" maxlength="180"></div></div>
+<div class="twocol"><div><label for="mPhone">Phone</label><input id="mPhone" type="tel" autocomplete="tel" inputmode="tel" maxlength="60" required></div><div><label for="mEmail">Email</label><input id="mEmail" type="email" autocomplete="email" inputmode="email" autocapitalize="off" maxlength="300" required></div></div>
+<label for="mAddress">Address of the place to clean</label><input id="mAddress" autocomplete="street-address" maxlength="500" required>
+<label for="mRestrooms">How many restrooms? <span>(optional)</span></label><input id="mRestrooms" type="number" inputmode="numeric" min="1" max="50" step="1">
+<fieldset class="bookfield"><legend>Which days would suit you? <span>(optional)</span></legend><div class="daypicks" id="mDays"></div></fieldset>
+<label for="mNotes">Anything we should know? <span>(optional: hours you are open, what you need cleaned)</span></label><textarea id="mNotes" rows="3" maxlength="1500"></textarea>
+<div class="hp" aria-hidden="true"><label for="mWebsite">Leave this empty</label><input id="mWebsite" name="website" tabindex="-1" autocomplete="off"></div>
+<p id="monthlyStatus" class="bookstatus" role="status"></p><button class="primary wide" id="monthlySend">Send my request</button></form></article>
+</div>
+
+<div id="paneMine" role="tabpanel" aria-labelledby="tabMine" hidden>
+<article class="panel bookstep"><div class="sectionhead"><h2>My bookings</h2><button type="button" class="quiet" id="mineRefresh">Refresh</button></div><p id="mineStatus" class="footnote" role="status"></p><div id="mineList"></div></article>
+<article class="panel bookstep"><h2>Find a booking</h2><p class="footnote">Booked on another phone or computer? Enter the email you used and your confirmation code.</p><form id="lookupForm" novalidate><div class="twocol"><div><label for="lEmail">Email</label><input id="lEmail" type="email" autocomplete="email" inputmode="email" autocapitalize="off" maxlength="300" required></div><div><label for="lCode">Confirmation code</label><input id="lCode" autocomplete="off" autocapitalize="characters" maxlength="14" placeholder="ABCDE-12345" required></div></div><p id="lookupStatus" class="bookstatus" role="status"></p><button class="primary wide">Find my booking</button></form></article>
+</div>
+</section>
+
+<section id="bookDone" class="bookscreen" hidden><div class="homeband bookband"><div class="eyebrow" id="doneEyebrow">REQUEST SENT</div><h1 id="doneTitle">Your request is in.</h1><p class="intro" id="doneIntro"></p></div>
+<article class="panel bookstep"><p class="footnote">Your confirmation code</p><p class="bookcode" id="doneCode"></p><p class="footnote">Keep this code. With your email, it lets you check or cancel this booking from any phone or computer.</p><dl class="bookfacts" id="doneFacts"></dl></article>
+<article class="panel bookstep" id="donePay" hidden><h2>Pay online</h2><p id="donePayNote"></p><a class="primary bookpay" id="donePayLink" target="_blank" rel="noopener noreferrer"></a><p class="footnote" id="donePayFoot"></p></article>
+<div class="bookdoneactions"><button type="button" class="quiet" id="doneMine">See my bookings</button><button type="button" class="quiet" id="doneAgain">Book something else</button></div></section>
+</main>
+<footer class="bookfoot"><img src="studio-logo.png" alt="Burnished Grace Studio" width="720" height="360"><span>Online booking by PlazaRoute</span></footer>
+<div id="notice" role="status" aria-live="polite" class="toast" hidden><span id="noticeText"></span></div>
+</body></html>

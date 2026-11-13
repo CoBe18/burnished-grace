@@ -1,0 +1,43 @@
+/* PlazaRoute customer booking page. Midnight blue base; maroon and gold on the welcome band. */
+body.book{background:var(--paper);min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+.booktop{display:flex;align-items:center;gap:12px;padding:10px 16px;padding-top:calc(10px + env(safe-area-inset-top));background:var(--navy);color:#fff}
+.booklogo{height:46px;width:46px;object-fit:contain;background:#fff;border-radius:8px;padding:3px}
+.booktitle{flex:1;min-width:0;display:grid}.booktitle strong{font-family:"Young Serif",Georgia,serif;font-weight:400;font-size:1.2rem;overflow-wrap:anywhere}.booktitle span{font-size:.74rem;color:#C9CFE3}
+.bookcall{background:transparent;color:#fff;border-color:#3A4470;min-height:44px;padding:8px 14px;font-size:.82rem}.bookcall:hover{background:#1E2650}
+#bookMain{flex:1;width:100%;max-width:720px;margin:0 auto;padding:16px 14px 30px;outline:0}
+.bookband{margin:6px 0 18px;padding:22px 22px 24px}.bookband h1{font-family:"Young Serif",Georgia,serif;font-weight:400;color:#fff;font-size:clamp(1.7rem,6vw,2.3rem);letter-spacing:-.3px;line-height:1.15;margin:0 0 10px;overflow-wrap:anywhere}.bookband .intro{color:#F1E4E1;margin:0;line-height:1.6;white-space:pre-line}
+.bookcenter{text-align:center;padding:60px 0;color:var(--muted)}
+.booktabs{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:6px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:5px;margin-bottom:14px}
+.booktabs button{background:transparent;border-radius:7px;font-weight:650;font-size:.82rem;color:var(--muted);min-height:46px;padding:6px 4px}.booktabs button[aria-selected=true]{background:var(--navy);color:#fff}
+.bookstep{margin:0 0 14px;padding:18px}.bookstep h2{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 14px;font-size:1.08rem}
+.stepdot{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--navy);color:#fff;font-size:.8rem;font-weight:700;flex:none}
+.bookservices{display:grid;gap:10px}
+.bookservice{display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;align-items:start;margin:0;padding:14px;border:2px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;font-weight:400;font-size:.9rem}
+.bookservice input{width:20px;min-height:20px;height:20px;margin:2px 0 0;accent-color:var(--navy)}
+.bookservice strong{font-size:.98rem;overflow-wrap:anywhere}.bookservice .bookprice{font-weight:700;font-size:1rem;white-space:nowrap}.bookservice p{grid-column:2/4;margin:0;color:var(--muted);font-size:.84rem;line-height:1.5;white-space:pre-line}
+.bookservice:has(input:checked){border-color:var(--navy);background:#F5F6FB}.bookservice:focus-within{outline:3px solid #c99a2e;outline-offset:3px}
+.bookdays{display:grid;grid-template-columns:repeat(auto-fill,minmax(98px,1fr));gap:8px}
+.bookdays button,.booktimes button{background:#fff;border:2px solid var(--line);border-radius:10px;padding:10px 6px;min-height:64px;display:grid;gap:2px;justify-items:center;color:var(--ink)}
+.bookdays button strong{font-size:.92rem}.bookdays button span{font-size:.72rem;color:var(--muted)}
+.bookdays button[aria-pressed=true],.booktimes button[aria-pressed=true]{background:var(--navy);border-color:var(--navy);color:#fff}.bookdays button[aria-pressed=true] span{color:#C9CFE3}
+.bookdays button:disabled,.booktimes button:disabled{background:var(--soft);text-decoration:line-through;opacity:.6}
+#bookMoreDays{margin-top:12px}
+.booktimes{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:8px}.booktimes button{min-height:50px;font-weight:650;font-size:.9rem}
+.booksummary{background:var(--paper);border-radius:8px;padding:10px 12px;font-size:.9rem;font-weight:650;margin:0 0 4px}
+.bookstatus{font-size:.86rem;line-height:1.55;min-height:1em;color:#7A1E10;margin:14px 0 0}
+.bookfield{border:0;padding:0;margin:18px 0 0}.bookfield legend{font-size:.83rem;font-weight:650;padding:0;margin-bottom:6px}.bookfield legend span{font-weight:400;color:var(--muted)}
+.book .daypicks label{display:flex;align-items:center;gap:6px;margin:0;min-height:44px;font-weight:400}.book .daypicks input{width:20px;min-height:20px;height:20px;accent-color:var(--navy)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.bookcode{font:700 1.9rem/1.2 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:2px;margin:2px 0 8px;color:var(--navy);overflow-wrap:anywhere}
+.bookfacts{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:16px 0 0;font-size:.9rem}.bookfacts dt{color:var(--muted)}.bookfacts dd{margin:0;font-weight:650;overflow-wrap:anywhere}
+.bookpay{display:flex;max-width:none;width:100%;min-height:54px;font-size:.98rem;text-decoration:none;margin:8px 0}
+.bookdoneactions{display:flex;flex-wrap:wrap;gap:10px}.bookdoneactions .quiet{flex:1 1 150px;min-height:48px}
+.minecard{border:1px solid var(--line);border-left:5px solid #9AA8D4;border-radius:10px;padding:14px;margin:10px 0;background:#fff}
+.minecard.working{border-left-color:#3D63D6}.minecard.done{border-left-color:#2E8B57}.minecard.problem{border-left-color:#B23A22}.minecard.none{border-left-color:#B4B9CF}
+.minetop{display:flex;gap:10px;justify-content:space-between;align-items:flex-start}.minetop h3{margin:0 0 2px;font-size:1rem;overflow-wrap:anywhere}
+.minecard p{margin:6px 0;font-size:.88rem;line-height:1.5}.minenote{background:var(--paper);border-radius:8px;padding:8px 10px}
+.mineactions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}.mineactions .primary{max-width:none;text-decoration:none;min-height:46px}.mineactions .quiet{min-height:46px}
+.paidtag{font-weight:700;color:#1E6B41}.unpaidtag{color:var(--muted)}
+.bookfoot{display:flex;align-items:center;justify-content:center;gap:10px;padding:18px 14px calc(18px + env(safe-area-inset-bottom));font-size:.72rem;color:var(--muted)}.bookfoot img{height:34px;width:auto}
+.book .toast{bottom:calc(16px + env(safe-area-inset-bottom))}
+@media(max-width:420px){.booktabs button{font-size:.76rem}.bookservice{grid-template-columns:auto 1fr}.bookservice .bookprice{grid-column:2}.bookservice p{grid-column:2}}

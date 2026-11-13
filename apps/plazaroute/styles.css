@@ -161,3 +161,18 @@ h1{font-weight:700;letter-spacing:-1px}
 .hubinviteactions{justify-content:flex-start;flex-wrap:wrap}.hubinviteactions .buttonlink.primary{color:#fff;background:var(--green);border-color:var(--green);font-size:.8rem;padding:13px 18px;min-height:44px}
 #hubConfirm{max-width:460px}#hubConfirm p{font-size:.95rem;line-height:1.6}
 @media(max-width:760px){.jobrow,.memberrow{flex-direction:column;align-items:stretch}.jobside,.memberactions{justify-content:flex-start;flex-basis:auto}.jobside select{max-width:none;flex-basis:100%}.hubbulk select{max-width:none}}
+/* Bookings (2.1) */
+.bkcard{border:1px solid var(--line);border-radius:10px;padding:14px;margin:12px 0;background:#fff}.bktop{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.bktop strong{display:block;overflow-wrap:anywhere}.bktop .footnote{display:block;margin-top:2px}.bkwhere{font-size:.86rem;margin:8px 0 0;line-height:1.5}.bkcard .jobnote{display:block;margin:8px 0 0}.bkcard>.footnote{margin:8px 0 0}
+.bkcontact{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.bkcontact .buttonlink{overflow-wrap:anywhere}.bkactions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}.bkactions .primary{max-width:none;width:auto;margin:0}
+.bkcount{margin-left:8px;background:#F2C76B;color:#0B1026;font-weight:700;vertical-align:middle}.nav .count:not([hidden])#bookingCount{background:#F2C76B;color:#0B1026;font-weight:700}
+.bkonline{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:6px}.bkonline .primary{max-width:none;width:auto;margin:0}
+.bkqrhead{margin:22px 0 10px}.bkqrrow{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}.bkqr{width:170px;flex:none;border:1px solid var(--line);border-radius:8px;padding:6px;background:#fff}.bkqr svg{display:block;width:100%;height:auto}.bkqrrow>div:last-child{flex:1 1 200px}.bkqrrow .footnote{margin:0 0 10px}
+.bkfield{border:0;padding:0;margin:18px 0 0}.bkfield legend{font-size:.83rem;font-weight:650;padding:0;margin-bottom:6px}.bkfield .dueonly{font-size:.83rem;white-space:normal;font-weight:400}
+#bkPageForm .dueonly,#bkServiceForm .dueonly{font-size:.83rem;white-space:normal;margin-top:14px!important}
+.bklogorow{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.bklogorow img{height:56px;width:56px;object-fit:contain;border:1px solid var(--line);border-radius:8px;background:#fff;padding:3px}.bklogorow input{flex:1 1 200px}
+#bkTellText{font-size:.9rem}
+/* Phone widths: keep the top bar inside the screen when the Sync button is showing. */
+@media(max-width:420px){.topbar{gap:8px;padding-left:12px;padding-right:12px}.topactions{gap:6px}.topactions .quiet{padding:7px 8px;font-size:.68rem}.brand{gap:8px;min-width:0}.brandname{padding-left:8px;font-size:.95rem}.studiologo{height:32px}}
+@media(max-width:375px){#helpOpen{display:none}}
+#bkMain{margin-top:24px}#bkMain>.panel,#bkMain>.overviewgrid{margin-bottom:20px}#bkMain>.overviewgrid>.panel{margin-bottom:0}
+@media(max-width:1100px){#bkMain>.overviewgrid>.panel{margin-bottom:18px}}
