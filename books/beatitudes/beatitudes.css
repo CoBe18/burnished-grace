@@ -1,0 +1,41 @@
+/* =====================================================================
+   THE BEATITUDES BOOK PAGES (books/beatitudes/)
+   Loaded after styles.css and watercolor.css. Only these pages use it.
+   ===================================================================== */
+
+/* the coloring pages are tall, so the picture beside the title stays a sensible size */
+.bt-hero-grid{align-items:center}
+@media(min-width:900px){.bt-hero-grid{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}}
+.bt-shot{max-width:24rem;margin:0 auto;width:100%}
+.bt-shot img{background:#fff}
+.bt-hero-price{font-family:var(--display);font-size:2rem;color:var(--gold-light);margin:0 0 1rem;line-height:1}
+
+/* walkthrough video and the English / Español choice */
+.bt-video{display:block;width:100%;height:auto;border-radius:12px;background:#1f050b;box-shadow:0 12px 30px rgba(31,5,11,.3)}
+.bt-length{font-size:.6em;color:var(--muted)}
+.bt-lang{display:flex;gap:.5rem;margin:0 0 1rem}
+.bt-lang-btn{font:600 1rem var(--body);padding:.55rem 1.3rem;border-radius:999px;cursor:pointer;
+  border:1px solid var(--gold-dark);background:transparent;color:var(--maroon-deep)}
+.bt-lang-btn[aria-pressed="true"]{background:var(--maroon-deep);color:var(--gold-light);border-color:var(--maroon-deep)}
+.bt-lang-btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+/* edition cards */
+.bt-editions{max-width:none;grid-template-columns:repeat(auto-fit,minmax(min(100%,14.5rem),1fr))}
+.bt-three{grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr))}
+.bt-card{padding:1rem 1.1rem 1.3rem}
+.bt-card h3{font-size:1.3rem}
+.bt-card h3 a{color:var(--maroon-deep);text-decoration:none}
+.bt-card h3 a:hover{text-decoration:underline}
+.bt-thumb img{display:block;width:100%;height:auto;aspect-ratio:7/6;object-fit:cover;object-position:top;
+  border:1px solid #E2CFC8;border-radius:4px;background:#fff;margin-bottom:.9rem}
+.bt-card .edition-price{font-size:1.9rem;margin:.5rem 0 .7rem}
+.bt-card .checklist{margin-bottom:1rem}
+.bt-actions{margin:auto 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1rem}
+.bt-actions .btn{padding:.45rem 1.1rem}
+.bt-more{font-weight:600}
+
+/* two pages from inside the book, side by side */
+.bt-pages{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));max-width:44rem}
+.bt-pages img{display:block;width:100%;height:auto;border:1px solid #E2CFC8;border-radius:4px;background:#fff;transition:transform .2s ease}
+.bt-pages a:hover img{transform:translateY(-2px)}
+.bt-back{margin:1.5rem 0 0;font-weight:600}
