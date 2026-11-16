@@ -2,71 +2,98 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://burnishedgracestudio.com/</loc>
+    <lastmod>2026-11-13</lastmod>
   </url>
   <url>
-    <loc>https://burnishedgracestudio.com/tools/budget-ledger/</loc>
+    <loc>https://burnishedgracestudio.com/apps/secret-family-recipes.html</loc>
+    <lastmod>2026-10-22</lastmod>
   </url>
   <url>
     <loc>https://burnishedgracestudio.com/apps/rental-property-finances.html</loc>
+    <lastmod>2026-11-13</lastmod>
   </url>
   <url>
     <loc>https://burnishedgracestudio.com/apps/rental-cleaning-pricing-calculator.html</loc>
-  </url>
-  <url>
-    <loc>https://burnishedgracestudio.com/apps/cleanreach.html</loc>
+    <lastmod>2026-11-09</lastmod>
   </url>
   <url>
     <loc>https://burnishedgracestudio.com/apps/cleaning-budget-quote-planner.html</loc>
+    <lastmod>2026-11-09</lastmod>
+  </url>
+  <url>
+    <loc>https://burnishedgracestudio.com/apps/cleanreach.html</loc>
+    <lastmod>2026-11-09</lastmod>
   </url>
   <url>
     <loc>https://burnishedgracestudio.com/apps/plazaroute.html</loc>
+    <lastmod>2026-11-13</lastmod>
   </url>
   <url>
-    <loc>https://burnishedgracestudio.com/articles/cleaning_app/price-a-cleaning-job.html</loc>
-  </url>
-  <url>
-    <loc>https://burnishedgracestudio.com/articles/cleaning_app/cleaning-business-startup-costs.html</loc>
-  </url>
-  <url>
-    <loc>https://burnishedgracestudio.com/articles/cleaning_app/cleaning-supply-checklist.html</loc>
-  </url>
-  <url>
-    <loc>https://burnishedgracestudio.com/articles/real_estate_income_app/five-year-rental-forecast.html</loc>
-  </url>
-  <url>
-    <loc>https://burnishedgracestudio.com/articles/real_estate_income_app/read-owner-statement.html</loc>
-  </url>
-  <url>
-    <loc>https://burnishedgracestudio.com/articles/real_estate_income_app/vacation-rental-costs.html</loc>
-  </url>
-  <url>
-    <loc>https://burnishedgracestudio.com/articles/real_estate_income_app/rental-property-records.html</loc>
-  </url>
-    <url>
-    <loc>https://burnishedgracestudio.com/articles/cleaning_app/raise-cleaning-prices.html</loc>
-  </url>
-  <url>
-    <loc>https://burnishedgracestudio.com/articles/cleaning_app/cleaning-business-expenses.html</loc>
-  </url>
-  <url>
-    <loc>https://burnishedgracestudio.com/articles/cleaning_app/write-a-cleaning-quote.html</loc>
-  </url>
-  <url>
-    <loc>https://burnishedgracestudio.com/articles/cleaning_app/hire-good-cleaners.html</loc>
-  </url>
-  <url>
-    <loc>https://burnishedgracestudio.com/articles/real_estate_income_app/vacation-rental-cash-flow.html</loc>
-  </url>
-  <url>
-    <loc>https://burnishedgracestudio.com/articles/real_estate_income_app/rental-property-expense-categories.html</loc>
-  </url>
-  <url>
-    <loc>https://burnishedgracestudio.com/articles/real_estate_income_app/vacation-rental-off-season-checklist.html</loc>
+    <loc>https://burnishedgracestudio.com/tools/budget-ledger/</loc>
+    <lastmod>2026-10-20</lastmod>
   </url>
   <url>
     <loc>https://burnishedgracestudio.com/tools/plr-profit-check/</loc>
+    <lastmod>2026-11-02</lastmod>
+  </url>
+  <url>
+    <loc>https://burnishedgracestudio.com/articles/cleaning_app/cleaning-business-expenses.html</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://burnishedgracestudio.com/articles/cleaning_app/cleaning-business-startup-costs.html</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://burnishedgracestudio.com/articles/cleaning_app/cleaning-supply-checklist.html</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://burnishedgracestudio.com/articles/cleaning_app/hire-good-cleaners.html</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://burnishedgracestudio.com/articles/cleaning_app/price-a-cleaning-job.html</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://burnishedgracestudio.com/articles/cleaning_app/raise-cleaning-prices.html</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://burnishedgracestudio.com/articles/cleaning_app/write-a-cleaning-quote.html</loc>
+    <lastmod>2026-11-10</lastmod>
   </url>
   <url>
     <loc>https://burnishedgracestudio.com/articles/cleanreach_app/find-commercial-cleaning-clients.html</loc>
+    <lastmod>2026-11-13</lastmod>
+  </url>
+  <url>
+    <loc>https://burnishedgracestudio.com/articles/real_estate_income_app/five-year-rental-forecast.html</loc>
+    <lastmod>2026-11-13</lastmod>
+  </url>
+  <url>
+    <loc>https://burnishedgracestudio.com/articles/real_estate_income_app/read-owner-statement.html</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://burnishedgracestudio.com/articles/real_estate_income_app/rental-property-expense-categories.html</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://burnishedgracestudio.com/articles/real_estate_income_app/rental-property-records.html</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://burnishedgracestudio.com/articles/real_estate_income_app/vacation-rental-cash-flow.html</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://burnishedgracestudio.com/articles/real_estate_income_app/vacation-rental-costs.html</loc>
+    <lastmod>2026-11-10</lastmod>
+  </url>
+  <url>
+    <loc>https://burnishedgracestudio.com/articles/real_estate_income_app/vacation-rental-off-season-checklist.html</loc>
+    <lastmod>2026-11-10</lastmod>
   </url>
 </urlset>
