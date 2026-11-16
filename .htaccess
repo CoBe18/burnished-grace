@@ -1,4 +1,10 @@
 RewriteEngine On
+
+# Send www.burnishedgracestudio.com to the one main address, so Google
+# sees a single copy of each page instead of two.
+RewriteCond %{HTTP_HOST} ^www\.burnishedgracestudio\.com$ [NC]
+RewriteRule ^ https://burnishedgracestudio.com%{REQUEST_URI} [L,R=301]
+
 RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
