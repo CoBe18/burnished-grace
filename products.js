@@ -245,6 +245,8 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-kids",
+    page: "books/beatitudes/kids.html",
+    pageLabel: "See details and the walkthrough",
     video: { src: "videos/The_Beatitudes_Kids_Walkthrough_English.mp4", poster: "videos/beatitudes-kids-poster.jpg", length: "1:20" },
     images: [
       { src: "images/shop/beatitudes-kids-1.jpg", alt: "Coloring page: Jesus walking up the mountain path with a staff, in simple bold lines." },
@@ -265,6 +267,8 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-teen",
+    page: "books/beatitudes/teen.html",
+    pageLabel: "See details and the walkthrough",
     video: { src: "videos/The_Beatitudes_Walkthrough_English.mp4", poster: "videos/beatitudes-poster.jpg", length: "2:34" },
     images: [
       { src: "images/shop/beatitudes-teen-1.jpg", alt: "Coloring page: the blind beggar on the Jericho road, looking up." },
@@ -285,6 +289,8 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-adult",
+    page: "books/beatitudes/adult.html",
+    pageLabel: "See details and the walkthrough",
     video: { src: "videos/The_Beatitudes_Walkthrough_English.mp4", poster: "videos/beatitudes-poster.jpg", length: "2:34" },
     images: [
       { src: "images/shop/beatitudes-adult-1.jpg", alt: "Coloring page: The Tax Collector at the Temple, a man with his head bowed and a hand on his chest in the temple courtyard while a Pharisee prays in the background." },
@@ -305,6 +311,8 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-bundle",
+    page: "books/beatitudes/bundle.html",
+    pageLabel: "See details and the walkthrough",
     video: { src: "videos/The_Beatitudes_Walkthrough_English.mp4", poster: "videos/beatitudes-poster.jpg", length: "2:34" },
     images: [
       { src: "images/shop/beatitudes-bundle-1.jpg", alt: "Coloring page for The Merciful (Matthew 5:7): the Good Samaritan caring for a wounded man beside his donkey." },
@@ -333,6 +341,8 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-kids-es",
+    page: "books/beatitudes/kids-spanish.html",
+    pageLabel: "Ver detalles y el video",
     video: { src: "videos/The_Beatitudes_Kids_Walkthrough_Spanish.mp4", poster: "videos/beatitudes-kids-es-poster.jpg", length: "1:26" },
     images: [
       { src: "images/shop/beatitudes-kids-es-1.jpg", alt: "Página para colorear: Jesús sube por el camino del monte con un bastón, en trazos sencillos y gruesos." },
@@ -354,6 +364,8 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-teen-es",
+    page: "books/beatitudes/teen-spanish.html",
+    pageLabel: "Ver detalles y el video",
     video: { src: "videos/The_Beatitudes_Walkthrough_Spanish.mp4", poster: "videos/beatitudes-es-poster.jpg", length: "2:34" },
     images: [
       { src: "images/shop/beatitudes-teen-es-1.jpg", alt: "Página para colorear: el mendigo ciego en el camino de Jericó." },
@@ -374,6 +386,8 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-adult-es",
+    page: "books/beatitudes/adult-spanish.html",
+    pageLabel: "Ver detalles y el video",
     video: { src: "videos/The_Beatitudes_Walkthrough_Spanish.mp4", poster: "videos/beatitudes-es-poster.jpg", length: "2:34" },
     images: [
       { src: "images/shop/beatitudes-adult-es-1.jpg", alt: "Página para colorear: «El publicano en el templo», un hombre con la cabeza inclinada y la mano en el pecho en el patio del templo, mientras un fariseo ora al fondo." },
@@ -394,6 +408,8 @@ const PRODUCTS = [
 
   {
     id: "beatitudes-bundle-es",
+    page: "books/beatitudes/bundle-spanish.html",
+    pageLabel: "Ver detalles y el video",
     video: { src: "videos/The_Beatitudes_Walkthrough_Spanish.mp4", poster: "videos/beatitudes-es-poster.jpg", length: "2:34" },
     images: [
       { src: "images/shop/beatitudes-bundle-es-1.jpg", alt: "Página para colorear de «Los misericordiosos» (Mateo 5:7): el buen samaritano cuidando a un hombre herido." },
