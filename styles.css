@@ -206,3 +206,6 @@ footer .wrap:has(> .footer-tagline){text-align:center}
   .about-photo{float:none;display:block;margin:0 auto 1.25rem}
   .author-box{flex-direction:column;align-items:center;text-align:center}
 }
+
+/* Store policies link in the order box */
+.order .note a{color:var(--gold-light);text-decoration:underline}
