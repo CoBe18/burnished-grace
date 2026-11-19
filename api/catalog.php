@@ -17,7 +17,7 @@ if (count(get_included_files()) === 1) {
 return [
     'secret-family-recipes' => [
         'name'  => 'Secret Family Recipes',
-        'price' => 27.99,
+        'price' => 28.00,
         'file'  => 'Secret-Family-Recipes-Individual-Edition.zip',
     ],
     'plr-profit-check' => [
