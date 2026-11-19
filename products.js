@@ -45,7 +45,7 @@ const PRODUCTS = [
       "Downloadable app for personal and household use"
     ],
     desc: "Family sharing requires a hosted setup. Hosting is available on request and priced separately.",
-    price: 27.99,
+    price: 28.00,
     page: "apps/secret-family-recipes.html#overview",
     pageLabel: "Watch the video and see details"
   },
