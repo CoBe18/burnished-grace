@@ -259,7 +259,8 @@ const PRODUCTS = [
       "Jesus climbs the mountain and sits down to teach, then five pictures for each of the eight Beatitudes",
       "Each Beatitude opens with its verse (ESV)",
       "Best for ages 1 to 5",
-      "Printable PDF, 43 pages, 8.5 × 11 in"
+      "Printable PDF, 43 pages, 8.5 × 11 in",
+      "Optional color cover included at no additional cost"
     ],
     desc: "For personal and household use.",
     price: 4.99
